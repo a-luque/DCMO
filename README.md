@@ -7,9 +7,9 @@
 
 2. Controllers training:
    traincnn_turn.sh (train models which contains an extra embedding for turning info)
-   # It train_turn.py file can utilizes model architetucre from distance_cte_cnns_turn.py
-   # The saved model weights are under folder checkpoints/, please check Alvis-1298
+   It calls train_turn.py file and utilizes model architetucre from distance_cte_cnns_turn.py
+   The saved model weights are under folder checkpoints/, please check Alvis-1298
 
  4. Testing controller:
     test_cnn_controller.scenic
-    # the maneuver info has not been passed correctly yet
+    The maneuver info has not been passed correctly yet
