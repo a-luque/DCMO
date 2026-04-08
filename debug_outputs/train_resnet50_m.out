@@ -1,0 +1,23 @@
+This job can be monitored from: https://job.c3se.chalmers.se/alvis/6353306
+Device: cuda
+Split: 2250 train / 450 val / 300 test runs
+  [skip] data/2333 — missing dist.npz or cte.npz
+  [skip] data/2077 — missing dist.npz or cte.npz
+  [skip] data/2190 — missing dist.npz or cte.npz
+  [skip] data/2217 — missing dist.npz or cte.npz
+  [skip] data/2303 — missing dist.npz or cte.npz
+  [skip] data/2476 — missing dist.npz or cte.npz
+  [skip] data/2464 — missing dist.npz or cte.npz
+Dataset: 382943 samples from 2250 runs (medium granularity)
+  [skip] data/2278 — missing dist.npz or cte.npz
+  [skip] data/2416 — missing dist.npz or cte.npz
+  [skip] data/2445 — missing dist.npz or cte.npz
+Dataset: 76178 samples from 450 runs (medium granularity)
+  [skip] data/2369 — missing dist.npz or cte.npz
+  [skip] data/2400 — missing dist.npz or cte.npz
+Dataset: 50958 samples from 300 runs (medium granularity)
+
+Training resnet50 + medium granularity
+
+Epoch   1/20 | train loss=0.0851 (cte=0.0074, dist=0.0777) | val loss=0.0781 cte_mae=0.0710m dist_acc=0.855
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/resnet50_m/resnet50_medium_best.pt

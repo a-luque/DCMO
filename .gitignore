@@ -1,0 +1,15 @@
+data/
+simulation_results/
+checkpoints/
+test_controller_sim_results/
+
+*.pt
+*.pth
+
+__pycache__/
+*.pyc
+
+
+.ipynb_checkpoints/
+
+.DS_Store
