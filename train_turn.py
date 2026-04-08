@@ -96,7 +96,7 @@ class DrivingDataset(Dataset):
     def __getitem__(self, idx):
         img_path, cte, dist_label, maneuver = self.samples[idx]
 
-        image = Image.open(img_path).convert("RGB")
+        image = Image.open(img_path).convert("RGB") # the camera sensor from scenic saves img as BGR, somehow if we open img this way, it will be RGB again.
         if self.transform:
             image = self.transform(image)
 
