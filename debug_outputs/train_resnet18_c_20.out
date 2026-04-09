@@ -1,0 +1,45 @@
+This job can be monitored from: https://job.c3se.chalmers.se/alvis/6355660
+Device: cuda
+Split: 2250 train / 450 val / 300 test runs
+  [skip] data/2333 — missing dist.npz or cte.npz
+  [skip] data/2077 — missing dist.npz or cte.npz
+  [skip] data/2190 — missing dist.npz or cte.npz
+  [skip] data/2217 — missing dist.npz or cte.npz
+  [skip] data/2303 — missing dist.npz or cte.npz
+  [skip] data/2476 — missing dist.npz or cte.npz
+  [skip] data/2464 — missing dist.npz or cte.npz
+Dataset: 382943 samples from 2250 runs (coarse granularity)
+  [skip] data/2278 — missing dist.npz or cte.npz
+  [skip] data/2416 — missing dist.npz or cte.npz
+  [skip] data/2445 — missing dist.npz or cte.npz
+Dataset: 76178 samples from 450 runs (coarse granularity)
+  [skip] data/2369 — missing dist.npz or cte.npz
+  [skip] data/2400 — missing dist.npz or cte.npz
+Dataset: 50958 samples from 300 runs (coarse granularity)
+
+Training resnet18 + coarse granularity
+
+Epoch   1/10 | train loss=0.2038 (cte=0.0040, dist=0.1239) | val loss=0.1077 cte_mae=0.0327 dist_acc=0.905
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/resnet18_c_20/resnet18_coarse_best.pt
+Epoch   2/10 | train loss=0.0722 (cte=0.0014, dist=0.0449) | val loss=0.1032 cte_mae=0.0274 dist_acc=0.912
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/resnet18_c_20/resnet18_coarse_best.pt
+Epoch   3/10 | train loss=0.0525 (cte=0.0010, dist=0.0327) | val loss=0.1133 cte_mae=0.0275 dist_acc=0.909
+Epoch   4/10 | train loss=0.0421 (cte=0.0008, dist=0.0258) | val loss=0.1139 cte_mae=0.0204 dist_acc=0.911
+Epoch   5/10 | train loss=0.0359 (cte=0.0007, dist=0.0215) | val loss=0.1264 cte_mae=0.0216 dist_acc=0.909
+Epoch   6/10 | train loss=0.0313 (cte=0.0006, dist=0.0184) | val loss=0.1420 cte_mae=0.0210 dist_acc=0.909
+Epoch   7/10 | train loss=0.0278 (cte=0.0006, dist=0.0160) | val loss=0.1389 cte_mae=0.0192 dist_acc=0.910
+  Early stopping: no validation improvement for 5 epoch(s).
+
+=== Test set evaluation ===
+  loss_total : 0.1049
+  loss_cte   : 0.0013
+  loss_dist  : 0.0788
+  cte_mae    : 0.0304
+  dist_acc   : 0.9176
+  per-class accuracy:
+    (0,10]    : 0.973
+    (10,20]   : 0.910
+    (20,30]   : 0.897
+    (30,40]   : 0.854
+    (40,50]   : 0.909
+    100       : 0.952
