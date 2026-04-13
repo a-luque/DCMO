@@ -1,0 +1,58 @@
+This job can be monitored from: https://job.c3se.chalmers.se/alvis/6362274
+Device: cuda
+Split: 2250 train / 450 val / 300 test runs
+  [skip] data/2333 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2077 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2190 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2217 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2303 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2476 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2464 — missing dist.npz, cte.npz, or maneuver.npz
+Dataset: 382943 samples from 2250 runs (medium granularity)
+  [skip] data/2278 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2416 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2445 — missing dist.npz, cte.npz, or maneuver.npz
+Dataset: 76178 samples from 450 runs (medium granularity)
+  [skip] data/2369 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2400 — missing dist.npz, cte.npz, or maneuver.npz
+Dataset: 50958 samples from 300 runs (medium granularity)
+
+Training resnet18 + medium granularity
+
+Epoch   1/20 | train loss=0.5629 (cte=0.0035, dist=0.2128) | val loss=0.2174 cte_mae=0.0259 dist_acc=0.784
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/newest/turn_resnet18_m/resnet18_medium_best.pt
+Epoch   2/20 | train loss=0.1905 (cte=0.0010, dist=0.0871) | val loss=0.1590 cte_mae=0.0217 dist_acc=0.826
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/newest/turn_resnet18_m/resnet18_medium_best.pt
+Epoch   3/20 | train loss=0.1334 (cte=0.0007, dist=0.0588) | val loss=0.1339 cte_mae=0.0190 dist_acc=0.850
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/newest/turn_resnet18_m/resnet18_medium_best.pt
+Epoch   4/20 | train loss=0.1058 (cte=0.0006, dist=0.0443) | val loss=0.1277 cte_mae=0.0166 dist_acc=0.861
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/newest/turn_resnet18_m/resnet18_medium_best.pt
+Epoch   5/20 | train loss=0.0900 (cte=0.0005, dist=0.0361) | val loss=0.1276 cte_mae=0.0169 dist_acc=0.863
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/newest/turn_resnet18_m/resnet18_medium_best.pt
+Epoch   6/20 | train loss=0.0784 (cte=0.0005, dist=0.0304) | val loss=0.1226 cte_mae=0.0159 dist_acc=0.867
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/newest/turn_resnet18_m/resnet18_medium_best.pt
+Epoch   7/20 | train loss=0.0703 (cte=0.0004, dist=0.0266) | val loss=0.1313 cte_mae=0.0183 dist_acc=0.866
+Epoch   8/20 | train loss=0.0639 (cte=0.0004, dist=0.0235) | val loss=0.1309 cte_mae=0.0164 dist_acc=0.864
+Epoch   9/20 | train loss=0.0586 (cte=0.0004, dist=0.0210) | val loss=0.1295 cte_mae=0.0150 dist_acc=0.867
+Epoch  10/20 | train loss=0.0538 (cte=0.0004, dist=0.0188) | val loss=0.1420 cte_mae=0.0157 dist_acc=0.864
+Epoch  11/20 | train loss=0.0504 (cte=0.0003, dist=0.0171) | val loss=0.1395 cte_mae=0.0157 dist_acc=0.867
+  Early stopping: no validation improvement for 5 epoch(s).
+
+=== Test set evaluation ===
+  loss_total : 0.1398
+  loss_cte   : 0.0006
+  loss_dist  : 0.0827
+  cte_mae    : 0.0170
+  dist_acc   : 0.8657
+  per-class accuracy:
+    (0,5]     : 0.957
+    (5,10]    : 0.945
+    (10,15]   : 0.853
+    (15,20]   : 0.878
+    (20,25]   : 0.847
+    (25,30]   : 0.824
+    (30,35]   : 0.789
+    (35,40]   : 0.767
+    (40,45]   : 0.788
+    (45,50]   : 0.752
+    100       : 0.965

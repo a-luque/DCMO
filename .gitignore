@@ -1,7 +1,11 @@
 data/
-simulation_results/
+important_training_dataset/
 checkpoints/
 test_controller_sim_results/
+h5py_dataset/
+training_data/
+debug_outputs/
+
 
 *.pt
 *.pth

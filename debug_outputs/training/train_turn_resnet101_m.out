@@ -1,0 +1,52 @@
+This job can be monitored from: https://job.c3se.chalmers.se/alvis/6363109
+Device: cuda
+Split: 2250 train / 450 val / 300 test runs
+  [skip] data/2333 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2077 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2190 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2217 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2303 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2476 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2464 — missing dist.npz, cte.npz, or maneuver.npz
+Dataset: 382943 samples from 2250 runs (medium granularity)
+  [skip] data/2278 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2416 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2445 — missing dist.npz, cte.npz, or maneuver.npz
+Dataset: 76178 samples from 450 runs (medium granularity)
+  [skip] data/2369 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2400 — missing dist.npz, cte.npz, or maneuver.npz
+Dataset: 50958 samples from 300 runs (medium granularity)
+
+Training resnet101 + medium granularity
+
+Epoch   1/20 | train loss=0.4692 (cte=0.0029, dist=0.1761) | val loss=0.1803 cte_mae=0.0243 dist_acc=0.814
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/newest/turn_resnet101_m/resnet101_medium_best.pt
+Epoch   2/20 | train loss=0.1360 (cte=0.0008, dist=0.0552) | val loss=0.1399 cte_mae=0.0200 dist_acc=0.859
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/newest/turn_resnet101_m/resnet101_medium_best.pt
+Epoch   3/20 | train loss=0.0909 (cte=0.0006, dist=0.0351) | val loss=0.1287 cte_mae=0.0166 dist_acc=0.866
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/newest/turn_resnet101_m/resnet101_medium_best.pt
+Epoch   4/20 | train loss=0.0715 (cte=0.0004, dist=0.0265) | val loss=0.1303 cte_mae=0.0156 dist_acc=0.868
+Epoch   5/20 | train loss=0.0593 (cte=0.0004, dist=0.0212) | val loss=0.1403 cte_mae=0.0154 dist_acc=0.865
+Epoch   6/20 | train loss=0.0511 (cte=0.0003, dist=0.0174) | val loss=0.1373 cte_mae=0.0143 dist_acc=0.871
+Epoch   7/20 | train loss=0.0448 (cte=0.0003, dist=0.0147) | val loss=0.1415 cte_mae=0.0141 dist_acc=0.873
+Epoch   8/20 | train loss=0.0399 (cte=0.0003, dist=0.0125) | val loss=0.1457 cte_mae=0.0143 dist_acc=0.872
+  Early stopping: no validation improvement for 5 epoch(s).
+
+=== Test set evaluation ===
+  loss_total : 0.1352
+  loss_cte   : 0.0006
+  loss_dist  : 0.0764
+  cte_mae    : 0.0173
+  dist_acc   : 0.8661
+  per-class accuracy:
+    (0,5]     : 0.959
+    (5,10]    : 0.945
+    (10,15]   : 0.857
+    (15,20]   : 0.873
+    (20,25]   : 0.843
+    (25,30]   : 0.813
+    (30,35]   : 0.827
+    (35,40]   : 0.801
+    (40,45]   : 0.764
+    (45,50]   : 0.630
+    100       : 0.982

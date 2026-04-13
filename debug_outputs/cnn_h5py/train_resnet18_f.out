@@ -1,0 +1,10 @@
+This job can be monitored from: https://job.c3se.chalmers.se/alvis/6390265
+Device: cuda
+Split: 1,510,049 train / 302,009 val / 201,339 test samples
+Dataset: 1510049 samples (fine granularity) from /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/h5py_dataset/dataset_packed.h5
+Dataset: 302009 samples (fine granularity) from /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/h5py_dataset/dataset_packed.h5
+Dataset: 201339 samples (fine granularity) from /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/h5py_dataset/dataset_packed.h5
+torch.compile() enabled
+
+Training resnet18 + fine granularity
+

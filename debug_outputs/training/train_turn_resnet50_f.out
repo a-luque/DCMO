@@ -1,0 +1,74 @@
+This job can be monitored from: https://job.c3se.chalmers.se/alvis/6362342
+Device: cuda
+Split: 2250 train / 450 val / 300 test runs
+  [skip] data/2333 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2077 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2190 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2217 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2303 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2476 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2464 — missing dist.npz, cte.npz, or maneuver.npz
+Dataset: 382943 samples from 2250 runs (fine granularity)
+  [skip] data/2278 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2416 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2445 — missing dist.npz, cte.npz, or maneuver.npz
+Dataset: 76178 samples from 450 runs (fine granularity)
+  [skip] data/2369 — missing dist.npz, cte.npz, or maneuver.npz
+  [skip] data/2400 — missing dist.npz, cte.npz, or maneuver.npz
+Dataset: 50958 samples from 300 runs (fine granularity)
+
+Training resnet50 + fine granularity
+
+Epoch   1/20 | train loss=0.4447 (cte=0.0029, dist=0.1522) | val loss=0.2117 cte_mae=0.0256 dist_acc=0.587
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/newest/turn_resnet50_f/resnet50_fine_best.pt
+Epoch   2/20 | train loss=0.1570 (cte=0.0009, dist=0.0675) | val loss=0.1389 cte_mae=0.0192 dist_acc=0.696
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/newest/turn_resnet50_f/resnet50_fine_best.pt
+Epoch   3/20 | train loss=0.1073 (cte=0.0006, dist=0.0459) | val loss=0.1259 cte_mae=0.0183 dist_acc=0.724
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/newest/turn_resnet50_f/resnet50_fine_best.pt
+Epoch   4/20 | train loss=0.0847 (cte=0.0005, dist=0.0355) | val loss=0.1161 cte_mae=0.0183 dist_acc=0.741
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/newest/turn_resnet50_f/resnet50_fine_best.pt
+Epoch   5/20 | train loss=0.0709 (cte=0.0004, dist=0.0293) | val loss=0.1115 cte_mae=0.0179 dist_acc=0.752
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/newest/turn_resnet50_f/resnet50_fine_best.pt
+Epoch   6/20 | train loss=0.0618 (cte=0.0004, dist=0.0250) | val loss=0.1102 cte_mae=0.0170 dist_acc=0.753
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/newest/turn_resnet50_f/resnet50_fine_best.pt
+Epoch   7/20 | train loss=0.0547 (cte=0.0003, dist=0.0218) | val loss=0.1095 cte_mae=0.0141 dist_acc=0.761
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/newest/turn_resnet50_f/resnet50_fine_best.pt
+Epoch   8/20 | train loss=0.0493 (cte=0.0003, dist=0.0191) | val loss=0.1115 cte_mae=0.0152 dist_acc=0.755
+Epoch   9/20 | train loss=0.0452 (cte=0.0003, dist=0.0172) | val loss=0.1109 cte_mae=0.0146 dist_acc=0.759
+Epoch  10/20 | train loss=0.0415 (cte=0.0003, dist=0.0154) | val loss=0.1169 cte_mae=0.0146 dist_acc=0.754
+Epoch  11/20 | train loss=0.0383 (cte=0.0002, dist=0.0139) | val loss=0.1151 cte_mae=0.0134 dist_acc=0.760
+Epoch  12/20 | train loss=0.0356 (cte=0.0002, dist=0.0126) | val loss=0.1176 cte_mae=0.0139 dist_acc=0.760
+  Early stopping: no validation improvement for 5 epoch(s).
+
+=== Test set evaluation ===
+  loss_total : 0.1085
+  loss_cte   : 0.0005
+  loss_dist  : 0.0596
+  cte_mae    : 0.0147
+  dist_acc   : 0.7538
+  per-class accuracy:
+    (0,2]     : 0.988
+    (2,4]     : 0.965
+    (4,6]     : 0.963
+    (6,8]     : 0.925
+    (8,10]    : 0.877
+    (10,12]   : 0.866
+    (12,14]   : 0.760
+    (14,16]   : 0.797
+    (16,18]   : 0.776
+    (18,20]   : 0.695
+    (20,22]   : 0.815
+    (22,24]   : 0.758
+    (24,26]   : 0.709
+    (26,28]   : 0.605
+    (28,30]   : 0.552
+    (30,32]   : 0.598
+    (32,34]   : 0.533
+    (34,36]   : 0.491
+    (36,38]   : 0.574
+    (38,40]   : 0.613
+    (40,42]   : 0.465
+    (42,44]   : 0.510
+    (44,46]   : 0.468
+    (46,48]   : 0.578
+    100       : 0.987

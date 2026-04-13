@@ -1,0 +1,11 @@
+This job can be monitored from: https://job.c3se.chalmers.se/alvis/6389681
+Copying dataset to local scratch: /local/tmp.6389681
+Device: cuda
+Split: 1,510,049 train / 302,009 val / 201,339 test samples
+Dataset: 1510049 samples (coarse granularity) from /local/tmp.6389681/dataset_packed.h5
+Dataset: 302009 samples (coarse granularity) from /local/tmp.6389681/dataset_packed.h5
+Dataset: 201339 samples (coarse granularity) from /local/tmp.6389681/dataset_packed.h5
+torch.compile() enabled
+
+Training resnet50 + coarse granularity
+
