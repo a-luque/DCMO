@@ -2,9 +2,9 @@ import os
 import shutil
 import time
 
-num_of_simulations = 500
-data_dir = "simulation_results/515_noise"
-car_distance = -15 # pass lower bound
+num_of_simulations = 300
+data_dir = "training_data/5254"
+car_distance = -54 # pass lower bound
 
 last_folder = 0
 
@@ -21,7 +21,7 @@ for i in range(last_folder, num_of_simulations):
 
     print(f"Executing sim {i}")
 
-    cmd = f"scenic -S datagen.scenic --2d --count 1 --time 200 --param result_path {sim_dir} --param car_dist {car_distance}"
+    cmd = f"scenic -S datagen_far.scenic --2d --count 1 --time 300 --param result_path {sim_dir} --param car_dist {car_distance}"
 
     ret = os.system(cmd)
 

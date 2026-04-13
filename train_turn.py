@@ -11,7 +11,6 @@ import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader, random_split
 from torchvision import transforms
 
-# Import our model definitions
 from distance_cte_cnns_turn import (
     DistanceCTECNN,
     MultiTaskLoss,
@@ -22,7 +21,26 @@ from distance_cte_cnns_turn import (
 )
 
 class DrivingDataset(Dataset):
-
+    """
+    Loads aligned (image, cte, distance_label) triplets from all simulation
+    runs under `root_dir`.
+ 
+    Each run folder contains:
+        dist.npz     — array of shape (T,), real distances in meters
+        cte.npz      — array of shape (T,), real CTE values in meters
+        img/front_rgb_{t:.1f}.jpg — one image per timestep
+ 
+    The images and .npz arrays are aligned by index: index i in dist/cte
+    corresponds to front_rgb at the i-th recorded timestep.
+ 
+    Args:
+        root_dir:     path to simulation_results/
+        granularity:  "coarse" | "medium" | "fine"
+        transform:    torchvision transforms applied to each image
+        runs:         optional list of run indices to include (e.g. for
+                      train/val splitting at the run level — see below)
+    """
+ 
     def __init__(
         self,
         root_dir: str,
@@ -33,52 +51,50 @@ class DrivingDataset(Dataset):
         self.granularity = granularity
         self.transform   = transform
         self.samples     = []   # list of (img_path, cte, dist_label)
-
+ 
         root = Path(root_dir)
         run_dirs = sorted(root.glob("[0-9]*"), key=lambda p: int(p.name))
-
+ 
         if runs is not None:
             run_dirs = [root / str(r) for r in runs]
-
+ 
         for run_dir in run_dirs:
             dist_path     = run_dir / "dist.npz"
             cte_path      = run_dir / "cte.npz"
             maneuver_path = run_dir / "maneuver.npz"
             img_dir       = run_dir / "img"
-
+ 
             if not dist_path.exists() or not cte_path.exists() or not maneuver_path.exists():
                 print(f"  [skip] {run_dir} — missing dist.npz, cte.npz, or maneuver.npz")
                 continue
-
+ 
             # Recorded distance is center-to-center. Subtract 4.6m to get
             # bumper-to-bumper (tail of leading car to head of ego car).
             # Clip to 0 in case of simulation glitches where distance < 4.6m.
             raw = np.load(dist_path)["values"].astype(np.float32)
             distances = np.clip(raw - 4.6, a_min=0.0, a_max=None)
-
-
-            no_car_mask  = raw >= 100.0
-            far_car_mask = (~no_car_mask) & (distances > 50.0)
-            distances[no_car_mask] = 100.0      # restore no-car sentinel
-
+ 
+            # Treat anything beyond 50m (including the original no-car
+            # sentinel >= 100) as "no car" — the car is too far to be
+            # relevant and visually indistinguishable from an empty road.
+            distances[distances > 50.0] = 100.0
+ 
             ctes      = np.load(cte_path)["values"].astype(np.float32)
             maneuvers = np.load(maneuver_path)["values"].astype(np.int64)
-
+ 
             # Collect sorted image paths for this run
             img_paths = sorted(
                 img_dir.glob("front_rgb_*.jpg"),
                 key=lambda p: float(p.stem.replace("front_rgb_", ""))
             )
-
+ 
             # Align: use the minimum length across all arrays and images
             n = min(len(img_paths), len(distances), len(ctes), len(maneuvers))
             if n == 0:
                 print(f"  [skip] {run_dir} — no aligned samples found")
                 continue
-
+ 
             for i in range(n):
-                if far_car_mask[i]:
-                    continue        # discard: car present but beyond 50m
                 dist_label = distance_to_label(float(distances[i]), granularity)
                 self.samples.append((
                     str(img_paths[i]),
@@ -86,27 +102,28 @@ class DrivingDataset(Dataset):
                     dist_label,
                     int(maneuvers[i]),   # 1=straight, 2=left, 3=right
                 ))
-
+ 
         print(f"Dataset: {len(self.samples)} samples from {len(run_dirs)} runs "
               f"({granularity} granularity)")
-
+ 
     def __len__(self):
         return len(self.samples)
-
+ 
     def __getitem__(self, idx):
         img_path, cte, dist_label, maneuver = self.samples[idx]
-
-        image = Image.open(img_path).convert("RGB") # the camera sensor from scenic saves img as BGR, somehow if we open img this way, it will be RGB again.
+ 
+        image = Image.open(img_path).convert("RGB")
         if self.transform:
             image = self.transform(image)
-
+ 
         return (
             image,
             torch.tensor(cte,        dtype=torch.float32),
             torch.tensor(dist_label, dtype=torch.long),
             torch.tensor(maneuver,   dtype=torch.long),
         )
-
+ 
+ 
 
 def get_transforms(train: bool, img_height: int = 112, img_width: int = 224):
     """
@@ -293,6 +310,7 @@ def train(
             break
 
     return history
+
 
 
 

@@ -61,6 +61,11 @@ def load_model(checkpoint_path: str, device: torch.device) -> tuple[DistanceCTEC
 
     checkpoint = torch.load(checkpoint_path, map_location=device)
 
+    state = {
+        k.replace("_orig_mod.", "", 1): v
+        for k, v in checkpoint["model_state"].items()
+    }
+
     # Infer backbone and granularity from the checkpoint filename if not stored
     # e.g. "resnet18_coarse_best.pt" → backbone=resnet18, granularity=coarse
     granularity  = checkpoint.get("granularity")
@@ -79,7 +84,8 @@ def load_model(checkpoint_path: str, device: torch.device) -> tuple[DistanceCTEC
         pretrained=False,          # weights come from checkpoint, not ImageNet
     ).to(device)
 
-    model.load_state_dict(checkpoint["model_state"])
+    #model.load_state_dict(checkpoint["model_state"])
+    model.load_state_dict(state)
     model.eval()
 
     print(f"Loaded checkpoint: {checkpoint_path}")

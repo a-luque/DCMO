@@ -1,0 +1,4 @@
+W0412 23:56:03.868000 2885165 torch/_inductor/utils.py:1731] [0/0] Not enough SMs to use max_autotune_gemm mode
+slurmstepd: error: *** JOB 6389688 ON alvis2-01 CANCELLED AT 2026-04-13T01:51:47 ***
+srun: Job step aborted: Waiting up to 122 seconds for job step to finish.
+slurmstepd: error: *** STEP 6389688.0 ON alvis2-01 CANCELLED AT 2026-04-13T01:51:47 ***

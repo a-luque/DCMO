@@ -55,11 +55,10 @@ else:
 
 EGO_SPEED = 5
 THROTTLE_ACTION = 0.5
-MAX_SPEED = 8
 BRAKE_ACTION = 1.0
 EGO_TO_LEADER = Range(-15, -10)
 EGO_BRAKING_THRESHOLD = 6
-EGO_ACCELERATION_THRESHOLD = OUT_REACH_DIST
+EGO_ACCELERATION_THRESHOLD = 10
 
 CONTROLLER_PATH = globalParameters.controller_dir
 
@@ -95,9 +94,8 @@ behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_opp
     original_target_speed = target_speed
     TARGET_SPEED_FOR_TURNING = 3 # KM/H
     TRIGGER_DISTANCE_TO_SLOWDOWN = 10 # FOR TURNING AT INTERSECTIONS
-    maneuvers = current_lane.maneuvers
-    
-    if len(maneuvers) > 0:
+
+    if current_lane.maneuvers != ():
         self.select_maneuver = Uniform(*maneuvers)
         nearby_intersection = current_lane.maneuvers[0].intersection
         if nearby_intersection == None:
@@ -125,17 +123,21 @@ behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_opp
                     maneuvers = current_lane.maneuvers
                     select_maneuver = Uniform(*maneuvers)
                     self.select_maneuver = select_maneuver
+                    #self.selected_maneuver = select_maneuver.type.value
                     #print(self.select_maneuver)
                 else:
                     select_maneuver = leaderCar.select_maneuver
-                    #self.select_maneuver = select_maneuver
+                    #self.selected_maneuver = select_maneuver.type.value
 
             elif len(current_lane.maneuvers) > 0:
                 select_maneuver = Uniform(*current_lane.maneuvers)
-                # print(select_maneuver)
-            # else:
-            #     take SetBrakeAction(1.0)
-            #     break
+                #self.select_maneuver = select_maneuver
+                #self.selected_maneuver = select_maneuver.type.value
+                #print(select_maneuver)
+            else:
+                take SetBrakeAction(1.0)
+                break
+            self.select_maneuver = select_maneuver
             # print(select_maneuver.type)
 
             # assumption: there always will be a maneuver
@@ -156,11 +158,13 @@ behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_opp
                 nearby_intersection = current_lane.centerline[-1]
 
             if select_maneuver.type != ManeuverType.STRAIGHT:
-                #self.select_maneuver = select_maneuver
+                #self.selected_maneuver = select_maneuver.type.value
                 in_turning_lane = True
                 target_speed = TARGET_SPEED_FOR_TURNING
 
+                # do TurnBehavior(trajectory = current_centerline, target_speed=target_speed)
                 trajectory = current_centerline
+                target_speed = target_speed
                 if isinstance(trajectory, PolylineRegion):
                     trajectory_centerline = trajectory
                 else:
@@ -194,7 +198,7 @@ behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_opp
 
 
         if (end_lane is not None) and (self.position in end_lane) and not intersection_passed:
-            # self.select_maneuver = 1 # out of intersection and straight road again
+            self.selected_maneuver = 1 # out of intersection and straight road again
             intersection_passed = True
             in_turning_lane = False
             entering_intersection = False 
@@ -231,7 +235,6 @@ behavior ControllerBehavior(target_speed = 10, controller_path = CONTROLLER_PATH
     past_speed = 0 # making an assumption here that the agent starts from zero speed
 
     original_target_speed = target_speed
-    TARGET_SPEED_FOR_TURNING = 3 # KM/H
 
     current_lane = self.lane
 
@@ -254,7 +257,7 @@ behavior ControllerBehavior(target_speed = 10, controller_path = CONTROLLER_PATH
     controller, _ = load_model(controller_path, device)
     transform = get_test_transform(112, 224)
 
-    # self.select_maneuver = 1
+    self.selected_maneuver = 1
 
     while True:
 
@@ -265,29 +268,23 @@ behavior ControllerBehavior(target_speed = 10, controller_path = CONTROLLER_PATH
                 select_maneuver = Uniform(*maneuvers)
             else:
                 select_maneuver = leaderCar.select_maneuver
-            self.select_maneuver = select_maneuver
+            self.selected_maneuver = select_maneuver.type.value
         else:
-            self.select_maneuver = 1
+            self.selected_maneuver = 1
         """
-        if distance from self to intersection < TRIGGER_DISTANCE_TO_SLOWDOWN:
-            if leaderCar is not None:
-                select_maneuver = leaderCar.select_maneuver
-                if select_maneuver is not None:
-                    self.select_maneuver = select_maneuver
-                else:
-                    self.select_maneuver = 1
-        else:
-            self.select_maneuver = 1
-        
-        if not isinstance(self.select_maneuver, int):
-            self.select_maneuver = self.select_maneuver.type.value
-
+        #if distance from self to intersection < TRIGGER_DISTANCE_TO_SLOWDOWN:
+        if leaderCar is not None:
+            select_maneuver = leaderCar.select_maneuver
+            if select_maneuver is not None:
+                self.selected_maneuver = select_maneuver.type.value
+            else:
+                self.selected_maneuver = 1
 
         front_img = self.sensors["front_rgb"]._lastObservation
         if isinstance(front_img, np.ndarray):
 
             input_img = Image.fromarray(front_img)
-            result = predict_single(controller, input_img, self.select_maneuver, device, transform, 100.0)
+            result = predict_single(controller, input_img, self.selected_maneuver, device, transform, 100.0)
             cte_pred = result['cte']
             dist_pred = result['distance_m']
 
@@ -299,39 +296,28 @@ behavior ControllerBehavior(target_speed = 10, controller_path = CONTROLLER_PATH
         else:
             current_speed = past_speed
 
+        speed_error = target_speed - current_speed
+
+
+        # compute throttle : Longitudinal Control
+        throttle = _lon_controller.run_step(speed_error)
+        self.acc = throttle
 
         # compute steering : Lateral Control
         if abs(cte_pred) > 0.5: 
-            take SetBrakeAction(0.4)
-            target_speed = TARGET_SPEED_FOR_TURNING
             _lat_controller = _lat_controller_turn
-            # compute throttle : Longitudinal Control
-            speed_error = target_speed - current_speed
-            throttle = _lon_controller.run_step(speed_error)
-            self.acc = throttle
         else:
-            target_speed = original_target_speed
             _lat_controller = _lat_controller_straight
-            if dist_pred > EGO_ACCELERATION_THRESHOLD and current_speed < MAX_SPEED:
-                throttle = THROTTLE_ACTION
-                self.acc = throttle
-            else:
-                # compute throttle : Longitudinal Control
-                speed_error = target_speed - current_speed
-                throttle = _lon_controller.run_step(speed_error)
-                self.acc = throttle
         current_steer_angle = _lat_controller.run_step(cte_pred) 
 
-
-
-
-        
+        if dist_pred > EGO_ACCELERATION_THRESHOLD:
+            throttle = THROTTLE_ACTION
+            self.acc = throttle
         if dist_pred < EGO_BRAKING_THRESHOLD:
             self.acc = -1
             take SetBrakeAction(1.0)
         else:
             take RegulatedControlAction(throttle, current_steer_angle, past_steer_angle)
-
         past_steer_angle = current_steer_angle
         past_speed = current_speed
 
@@ -358,25 +344,25 @@ else:
 if DIST_CAR1 <= 50:
     
     car1 = new Car at start,
-            with select_maneuver 1,
-            with behavior FollowLaneBehaviorModified(8)
+            with behavior FollowLaneBehaviorModified(8),
+            with select_maneuver 1
 
     ego = new Car following roadDirection from car1.position for -1*DIST_CAR1,
         with blueprint EGO_MODEL,
         with behavior ControllerBehavior(target_speed=EGO_SPEED, leaderCar=car1),
         with cte 0,
         with acc 0,
-        with select_maneuver 1,
+        with selected_maneuver 1,
         with sensors {"front_rgb": RGBSensor(offset=(0, 2, 1), width=640, height=320),
                     "aerial_rgb": RGBSensor(offset=(0, -10, 4), width=1280, height=640)
                     },    
 else:
     ego = new Car at start,
         with blueprint EGO_MODEL,
-        with behavior ControllerBehavior(target_speed=EGO_SPEED),
+        with behavior ControllerBehavior(EGO_SPEED),
         with cte 0,
         with acc 0,
-        with select_maneuver 1,
+        with selected_maneuver 1,
         with sensors {"front_rgb": RGBSensor(offset=(0, 2, 1), width=640, height=320),
                     "aerial_rgb": RGBSensor(offset=(0, -10, 4), width=1280, height=640)
                     },  
@@ -413,7 +399,7 @@ else:
 
 record ego.speed every 0.1 seconds after 3 seconds to RESULTS_PATH+"/speed.npz"
 record ego.acc every 0.1 seconds after 3 seconds to RESULTS_PATH+"/acc.npz"
-record ego.select_maneuver every 0.1 seconds after 3 seconds to RESULTS_PATH+"/maneuver.npz"
+record ego.selected_maneuver every 0.1 seconds after 3 seconds to RESULTS_PATH+"/maneuver.npz"
 #record ego.distanceToClosest(Car) every time_step seconds after 3 seconds to RESULTS_PATH+"/dist.npz"
 
 """

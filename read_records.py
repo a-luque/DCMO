@@ -1,8 +1,8 @@
 import numpy as np
 
-
-path = "test_controller_sim_results/0/maneuver.npz"
-
+"""
+path = "training_data/no_car_noise/2/dist.npz"
+#path = "data/extra_data/turn_left/6/maneuver.npz"
 data = np.load(path)
 
 for key in data.files:
@@ -11,6 +11,7 @@ for key in data.files:
     print(min(data[key]))
 
 
+"""
 
 """
 #copy dist.npz to all no_car folders
@@ -46,17 +47,21 @@ for i in range(100):
         #print(f"Copied to {folder_path}")
     else:
         print(f"{i}, Skipped {folder_path}")
+
 """
+
 """
 # change folder index
 import os
 
-base_dir = "simulation_results/3545"
-s_index = 1500
+base_dir = "training_data/no_car_noise"
+#s_index = 10
 
-for i in range(78, 500):
+for i in range(0, 500):
     old_path = os.path.join(base_dir, str(i))
-    new_path = os.path.join(base_dir, str(i + s_index))
+    #new_path = os.path.join(base_dir, str(i + 500*s_index))
+    new_index = 7600 + i
+    new_path = os.path.join(base_dir, str(new_index))
 
     if not os.path.exists(old_path):
         print(f"Skip {old_path} (not found)")
@@ -67,20 +72,21 @@ for i in range(78, 500):
         continue
 
     os.rename(old_path, new_path)
-    print(f"Renamed {i} -> {i+s_index}")
+    print(f"Renamed {i} -> {new_index}")
+"""
 
-"""
-"""
+
 # move folders
 import os
 import shutil
 
-src_base = "simulation_results/no_car"
-dst_base = "data"
+src_base = "training_data/no_car_noise"
+dst_base = "important_training_dataset"
 
-num = 6
+#num = 10
 
-for i in range(500*(num-1), 500*num):
+#for i in range(500*(num-1), 500*num):
+for i in range(7600, 8100):
     src_path = os.path.join(src_base, str(i))
     dst_path = os.path.join(dst_base, str(i))
 
@@ -95,4 +101,30 @@ for i in range(500*(num-1), 500*num):
     shutil.move(src_path, dst_path)
     #print(f"Moved {src_path} -> {dst_path}")
 print("done")
+
+
+"""
+import os
+path = 'data'
+
+existing = {d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))}
+
+
+missing = [i for i in range(7448) if str(i) not in existing]
+
+
+if missing:
+    print(f"missing file{missing}")
+else:
+    print("all good")
+
+"""
+"""
+import shutil
+import os
+
+path = "/mimer/NOBACKUP/groups/naiss2025-22-1298/containers"
+
+if os.path.exists(path):
+    shutil.rmtree(path)
 """

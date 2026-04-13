@@ -3,8 +3,8 @@
 #SBATCH -N 1 --gpus-per-node=T4:1
 #SBATCH -n 1
 #SBATCH -t 1-00:00:00
-#SBATCH --output=/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/debug_outputs/train_turn_resnet18_c_20.out
-#SBATCH --error=/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/debug_outputs/train_turn_resnet18_c_20.err
+#SBATCH --output=/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/debug_outputs/cnn_turn/train_resnet18_c.out
+#SBATCH --error=/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/debug_outputs/cnn_turn/train_resnet18_c.err
 
 cd /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/
 
@@ -13,16 +13,16 @@ srun -n1 --overlap apptainer exec --nv \
     python3 train_turn.py \
         --backbone      resnet18 \
         --granularity   coarse \
-        --root_dir      data \
-        --epochs        10 \
-        --batch_size    32 \
-        --lr            1e-4 \
-        --lambda_cte    20.0 \
+        --root_dir      important_training_dataset \
+        --epochs        30 \
+        --batch_size    256 \
+        --lr            8e-4 \
+        --lambda_cte    100.0 \
         --lambda_dist   1.0 \
         --img_height    112 \
         --img_width     224 \
-        --total_runs    3000 \
-        --num_workers   2 \
-        --output_dir    /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/turn_resnet18_c_20
+        --total_runs    8100 \
+        --num_workers   8 \
+        --output_dir    /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/cnn_turn/resnet18_c
 
 wait

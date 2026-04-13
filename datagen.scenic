@@ -12,7 +12,7 @@ from scenic.domains.driving.controllers import (
 param timeout = 30
 param map = localPath('carla_map/Town01.xodr')
 param carla_map = 'Town01'
-param render = 0
+param render = 1
 
 model scenic.simulators.carla.model
 
@@ -23,7 +23,7 @@ CAR_DISTANCE = globalParameters.car_dist
 #CONSTANTS
 EGO_MODEL = "vehicle.tesla.model3"
 EGO_SPEED = 5
-EGO_TO_LEADER = Range(CAR_DISTANCE, CAR_DISTANCE+10)
+EGO_TO_LEADER = Range(CAR_DISTANCE, CAR_DISTANCE+5)
 
 behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_oppositeTraffic=False, leaderCar=None):
     """ 
@@ -91,9 +91,9 @@ behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_opp
                 select_maneuver = Uniform(*current_lane.maneuvers)
                 #self.selected_maneuver = select_maneuver.type.value
                 #print(select_maneuver)
-            else:
-                take SetBrakeAction(1.0)
-                break
+            #else:
+            #    take SetBrakeAction(1.0)
+            #    break
 
             # print(select_maneuver.type)
 
@@ -179,8 +179,8 @@ behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_opp
         current_steer_angle = _lat_controller.run_step(self.cte) 
 
         if leaderCar:
-            current_steer_angle += 1/2 * random.randrange(-1,2) * random.random()
-            if distance from self to leaderCar > ((-1*CAR_DISTANCE)+2):
+            # current_steer_angle += 1/3 * random.randrange(-2,2) * random.random()
+            if distance from self to leaderCar > ((-1*CAR_DISTANCE)+1):
                 throttle = 0.5
             if distance from self to leaderCar < 5:
                 take SetBrakeAction(1.0)
@@ -201,6 +201,7 @@ attrs = {"image_size_x": 640,
 start = new OrientedPoint on lane.centerline
 leader = new Car at start,
             with blueprint EGO_MODEL,
+            with select_maneuver 1,
             with behavior FollowLaneBehaviorModified(target_speed=EGO_SPEED),
             with color Color(0,0,0) 
 
@@ -208,6 +209,7 @@ ego = new Car following roadDirection from leader.position for EGO_TO_LEADER,
             with blueprint EGO_MODEL,
             with behavior FollowLaneBehaviorModified(target_speed=EGO_SPEED, leaderCar=leader),
             with cte 0,
+            #with select_maneuver 1,
             with selected_maneuver 1,
             with sensors {"front_rgb": RGBSensor(offset=(0, 2, 1), attributes=attrs)
                         } 
@@ -215,7 +217,7 @@ ego = new Car following roadDirection from leader.position for EGO_TO_LEADER,
 
 time_step = 0.1
 
-require distance to intersection > 10 and distance from leader to intersection > 10 and ego can see leader
+require distance from leader to intersection < 30 and ego can see leader
 
 
 #record ego.position.x every time_step seconds after 3 seconds to RESULT_PATH+"/ego_pos.npz"
@@ -225,4 +227,4 @@ record ego.selected_maneuver every time_step seconds after 3 seconds to RESULT_P
 record ego.observations["front_rgb"] every time_step seconds after 3 seconds to RESULT_PATH+"/img/front_rgb_{time:.1f}.jpg"
 
 
-terminate when ((distance from ego to leader > ((-1*CAR_DISTANCE)+5)) or ((distance from ego to leader < 4.7) )) 
+terminate when ((distance from ego to leader > ((-1*CAR_DISTANCE)+10)) or ((distance from ego to leader < 4.7) ))

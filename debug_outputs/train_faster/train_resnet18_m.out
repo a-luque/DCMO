@@ -1,0 +1,48 @@
+This job can be monitored from: https://job.c3se.chalmers.se/alvis/6390583
+Copying dataset to local scratch: /local/tmp.6390583
+Device: cuda
+Split: 1,510,049 train / 302,009 val / 201,339 test samples
+Dataset: 1510049 samples (medium granularity) from /local/tmp.6390583/dataset_packed.h5
+Dataset: 302009 samples (medium granularity) from /local/tmp.6390583/dataset_packed.h5
+Dataset: 201339 samples (medium granularity) from /local/tmp.6390583/dataset_packed.h5
+torch.compile() enabled
+
+Training resnet18 + medium granularity
+
+Mixed precision (AMP) enabled
+Epoch   1/30 | train loss=0.2122 (cte=0.0008, dist=0.1329) | val loss=0.1078 cte_mae=0.0111 dist_acc=0.814
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster/resnet18_m/resnet18_medium_best.pt
+Epoch   2/30 | train loss=0.1050 (cte=0.0003, dist=0.0736) | val loss=0.0886 cte_mae=0.0104 dist_acc=0.851
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster/resnet18_m/resnet18_medium_best.pt
+Epoch   3/30 | train loss=0.0873 (cte=0.0003, dist=0.0610) | val loss=0.0773 cte_mae=0.0101 dist_acc=0.866
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster/resnet18_m/resnet18_medium_best.pt
+Epoch   4/30 | train loss=0.0766 (cte=0.0002, dist=0.0541) | val loss=0.0732 cte_mae=0.0116 dist_acc=0.879
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster/resnet18_m/resnet18_medium_best.pt
+Epoch   5/30 | train loss=0.0696 (cte=0.0002, dist=0.0492) | val loss=0.0676 cte_mae=0.0078 dist_acc=0.883
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster/resnet18_m/resnet18_medium_best.pt
+Epoch   6/30 | train loss=0.0641 (cte=0.0002, dist=0.0456) | val loss=0.0626 cte_mae=0.0077 dist_acc=0.891
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster/resnet18_m/resnet18_medium_best.pt
+Epoch   7/30 | train loss=0.0594 (cte=0.0002, dist=0.0425) | val loss=0.0601 cte_mae=0.0067 dist_acc=0.896
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster/resnet18_m/resnet18_medium_best.pt
+Epoch   8/30 | train loss=0.0555 (cte=0.0002, dist=0.0398) | val loss=0.0625 cte_mae=0.0076 dist_acc=0.891
+Epoch   9/30 | train loss=0.0519 (cte=0.0001, dist=0.0375) | val loss=0.0570 cte_mae=0.0079 dist_acc=0.902
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster/resnet18_m/resnet18_medium_best.pt
+Epoch  10/30 | train loss=0.0489 (cte=0.0001, dist=0.0355) | val loss=0.0551 cte_mae=0.0069 dist_acc=0.904
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster/resnet18_m/resnet18_medium_best.pt
+Epoch  11/30 | train loss=0.0461 (cte=0.0001, dist=0.0337) | val loss=0.0559 cte_mae=0.0077 dist_acc=0.905
+Epoch  12/30 | train loss=0.0431 (cte=0.0001, dist=0.0318) | val loss=0.0525 cte_mae=0.0065 dist_acc=0.909
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster/resnet18_m/resnet18_medium_best.pt
+Epoch  13/30 | train loss=0.0413 (cte=0.0001, dist=0.0302) | val loss=0.0538 cte_mae=0.0062 dist_acc=0.909
+Epoch  14/30 | train loss=0.0390 (cte=0.0001, dist=0.0286) | val loss=0.0520 cte_mae=0.0057 dist_acc=0.909
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster/resnet18_m/resnet18_medium_best.pt
+Epoch  15/30 | train loss=0.0369 (cte=0.0001, dist=0.0270) | val loss=0.0538 cte_mae=0.0060 dist_acc=0.911
+Epoch  16/30 | train loss=0.0348 (cte=0.0001, dist=0.0257) | val loss=0.0513 cte_mae=0.0056 dist_acc=0.913
+  ✓ Saved best model → /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster/resnet18_m/resnet18_medium_best.pt
+Epoch  17/30 | train loss=0.0331 (cte=0.0001, dist=0.0244) | val loss=0.0517 cte_mae=0.0055 dist_acc=0.912
+Epoch  18/30 | train loss=0.0314 (cte=0.0001, dist=0.0231) | val loss=0.0518 cte_mae=0.0057 dist_acc=0.915
+Epoch  19/30 | train loss=0.0297 (cte=0.0001, dist=0.0220) | val loss=0.0548 cte_mae=0.0058 dist_acc=0.911
+Epoch  20/30 | train loss=0.0280 (cte=0.0001, dist=0.0208) | val loss=0.0533 cte_mae=0.0060 dist_acc=0.914
+Epoch  21/30 | train loss=0.0200 (cte=0.0001, dist=0.0146) | val loss=0.0550 cte_mae=0.0053 dist_acc=0.921
+  Early stopping after 5 epoch(s) without improvement.
+
+=== Test set evaluation ===

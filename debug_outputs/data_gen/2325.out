@@ -1,0 +1,2813 @@
+This job can be monitored from: https://job.c3se.chalmers.se/alvis/6385232
+4.26.2-0+++UE4+Release-4.26 522 0
+Disabling core dumps.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.956e-05 seconds.
+Scenario constructed in 1.50 seconds.
+  Connecting to CARLA on port 2000
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.12 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.408e-05 seconds.
+Scenario constructed in 1.32 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01898 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.57 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.337e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0104 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.29 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.551e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01031 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.09 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.527e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01001 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 9.944 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.623e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01031 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.27 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.009924 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.33 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.48e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01026 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.72 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.718e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01047 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.16 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.599e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01044 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.84 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.742e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01032 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.52 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.551e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0104 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.2 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.694e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01023 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.24 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.742e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01055 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.26 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.48e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01034 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.39 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.694e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01017 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.45 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.551e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01032 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.3 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.527e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01041 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.62 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.718e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01034 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 13.6 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.45 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0102 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 9.517 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.14 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.456e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01045 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.2 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.14 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.813e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01021 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.35 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.67e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.009933 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.53 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.551e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01055 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.1 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.551e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01028 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.8 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.48e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0107 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.92 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.14 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.909e-05 seconds.
+Scenario constructed in 1.45 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01029 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.43 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.909e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01035 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 13.05 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.48e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01041 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.18 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.694e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01035 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.88 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.14 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.48e-05 seconds.
+Scenario constructed in 1.45 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01035 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.503e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01034 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.24 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.67e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0104 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.01 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.076e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01029 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.28 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.766e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01039 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.68 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.527e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01028 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.69 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 4.077e-05 seconds.
+Scenario constructed in 1.52 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01053 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.31 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.503e-05 seconds.
+Scenario constructed in 1.45 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01071 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.19 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.766e-05 seconds.
+Scenario constructed in 1.47 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0104 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.44 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.837e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01017 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.27 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.575e-05 seconds.
+Scenario constructed in 1.45 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01043 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 9.536 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.694e-05 seconds.
+Scenario constructed in 1.45 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01039 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.5 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.694e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01053 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.31 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.14 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.933e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01029 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.46 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.195e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01037 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.28 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.14 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.004e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01033 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.37 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.503e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01066 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.73 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.48e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01026 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.26 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.527e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.009786 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.86 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.599e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01031 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.5 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.481e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01026 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.19 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.503e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01025 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.21 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.242e-05 seconds.
+Scenario constructed in 1.45 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01039 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.48 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.14 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.742e-05 seconds.
+Scenario constructed in 1.45 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01034 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.2 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.14 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.623e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01028 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.11 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.67e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01039 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 13.45 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.575e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01018 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.16 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01036 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 9.686 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01031 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.29 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.14 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.67e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0104 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 9.6 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.789e-05 seconds.
+Scenario constructed in 1.46 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01047 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.57 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.14 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.742e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01037 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.67 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.14 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.123e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01064 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.72 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.933e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01023 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.8 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.909e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01031 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.11 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.028e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01067 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.97 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.503e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.009995 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.91 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.623e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01052 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.16 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.742e-05 seconds.
+Scenario constructed in 1.45 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01057 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.49 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.14 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.599e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01024 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.88 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.456e-05 seconds.
+Scenario constructed in 1.46 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0105 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.5 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.409e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01025 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.28 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.789e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01051 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.63 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01058 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.38 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.36e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01045 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.88 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.456e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.009923 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 13.16 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01037 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 13.01 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.004e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01044 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.62 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.456e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01037 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.26 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.67e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01037 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.87 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.527e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01036 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.46 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.432e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01024 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.67 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.48e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01021 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.37 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.432e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01022 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.73 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.14 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.052e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01037 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.42 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.575e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01064 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.28 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.123e-05 seconds.
+Scenario constructed in 1.52 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01019 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.07 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.813e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0103 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 13.02 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.456e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01043 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.76 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.623e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0104 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.49 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.575e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01023 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.83 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01061 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 13.21 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.48e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01042 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.24 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.599e-05 seconds.
+Scenario constructed in 1.40 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0106 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.07 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.432e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01038 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 14.2 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.48e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01019 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.12 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.14 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.432e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01017 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.65 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.48e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01016 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.42 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01039 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.64 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.575e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01027 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 10.1 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.36e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0105 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.88 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.14 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01032 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.83 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.599e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01068 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 11.02 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.551e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01057 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 13.9 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.456e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01034 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.51 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.623e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01052 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.11 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.623e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01091 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 12.01 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.766e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0107 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 18.21 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.599e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01069 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 23.22 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.742e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01074 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 25.29 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.861e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01078 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.73 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.885e-05 seconds.
+Scenario constructed in 1.40 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01073 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 25.74 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.98e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01073 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.62 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.623e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01087 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.36 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.503e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01066 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.19 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.933e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01098 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.49 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.36e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01083 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 29.92 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.48e-05 seconds.
+Scenario constructed in 1.40 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01077 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.75 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.40 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01068 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.98 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.362e-05 seconds.
+Scenario constructed in 1.40 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01085 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.6 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.885e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01085 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.38 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.813e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01072 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.82 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.503e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01026 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.99 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.766e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01083 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.62 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.861e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01086 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 24.9 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.766e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0107 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.29 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.432e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01066 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.94 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.599e-05 seconds.
+Scenario constructed in 1.48 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01074 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 29.58 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.694e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01072 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.88 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.789e-05 seconds.
+Scenario constructed in 1.40 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01065 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.02 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.742e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01075 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 29.41 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.551e-05 seconds.
+Scenario constructed in 1.40 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01073 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.71 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.742e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01075 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.35 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.742e-05 seconds.
+Scenario constructed in 1.40 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01059 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.99 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.766e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.011 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 25.93 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.48e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.011 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.08 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.766e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01064 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.2 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.004e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01102 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.12 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01073 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 28.69 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.98e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01082 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.51 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.956e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01075 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.43 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.599e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01076 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.57 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.909e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01097 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.33 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.766e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01063 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 28.54 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.289e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01082 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.22 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.67e-05 seconds.
+Scenario constructed in 1.40 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01081 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.66 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.718e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01077 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.62 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.40 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01082 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.99 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01068 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 25.34 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.599e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01077 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 28.69 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.718e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01076 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 25.77 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.813e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01077 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 25.86 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.266e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01088 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.04 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.813e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01075 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 28.34 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.503e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01082 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.21 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.837e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01092 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 25.68 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.718e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01067 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.58 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.623e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01066 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.96 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.527e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01091 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.44 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.813e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01082 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.68 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.527e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0108 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.18 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.861e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01102 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 29.06 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.718e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01085 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 25.44 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.719e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01091 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 28.4 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01067 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.35 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.742e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01091 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.78 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01089 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.99 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.718e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01062 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.6 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.837e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01092 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.11 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.98e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01076 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.54 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.909e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01082 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 28.54 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.171e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01061 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.55 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.909e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01068 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 25.51 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.575e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01072 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 28.73 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01087 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.68 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.837e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01066 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.65 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.718e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0109 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.53 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 3.433e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01078 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 28.27 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.837e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01078 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 28.34 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.789e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01079 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 28.18 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.14 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.503e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01084 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 28.01 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.933e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01097 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.93 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.885e-05 seconds.
+Scenario constructed in 1.44 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01087 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 29.85 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.67e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01073 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 25.91 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.909e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01091 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 29.32 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.885e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01092 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.27 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.789e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01071 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 28.22 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.909e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01114 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 28.9 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.527e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01068 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 29 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01079 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 28.7 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.67e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0111 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 28.09 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.503e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01082 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 29.24 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.909e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01103 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.3 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01096 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.78 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.837e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01072 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.86 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.933e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01103 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.68 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.432e-05 seconds.
+Scenario constructed in 1.43 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.0107 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 26.26 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.813e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01076 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.66 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.861e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01093 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.27 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.67e-05 seconds.
+Scenario constructed in 1.41 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01111 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 29.26 seconds.
+Beginning scenario construction...
+pygame 2.6.1 (SDL 2.28.4, Python 3.10.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Loading cached version of road network...
+  Loaded cached network in 0.13 seconds.
+  Pruning scenario...
+  Pruned scenario in 2.646e-05 seconds.
+Scenario constructed in 1.42 seconds.
+  Connecting to CARLA on port 2000
+  Map loaded in simulator.
+  Generated scene in 1 iterations, 0.01094 seconds.
+  Beginning simulation of top-level scenario...
+  Ran simulation in 27.12 seconds.
+Executing sim 0
+Simulation 0 failed. Retrying...
+Executing sim 1
+Executing sim 2
+Executing sim 3
+Executing sim 4
+Executing sim 5
+Executing sim 6
+Executing sim 7
+Executing sim 8
+Executing sim 9
+Executing sim 10
+Executing sim 11
+Executing sim 12
+Executing sim 13
+Executing sim 14
+Executing sim 15
+Executing sim 16
+Executing sim 17
+Executing sim 18
+Executing sim 19
+Executing sim 20
+Executing sim 21
+Executing sim 22
+Executing sim 23
+Executing sim 24
+Executing sim 25
+Executing sim 26
+Executing sim 27
+Executing sim 28
+Executing sim 29
+Executing sim 30
+Executing sim 31
+Executing sim 32
+Executing sim 33
+Executing sim 34
+Executing sim 35
+Executing sim 36
+Executing sim 37
+Executing sim 38
+Executing sim 39
+Executing sim 40
+Executing sim 41
+Executing sim 42
+Executing sim 43
+Executing sim 44
+Executing sim 45
+Executing sim 46
+Executing sim 47
+Executing sim 48
+Executing sim 49
+Executing sim 50
+Executing sim 51
+Executing sim 52
+Executing sim 53
+Executing sim 54
+Executing sim 55
+Executing sim 56
+Executing sim 57
+Executing sim 58
+Executing sim 59
+Executing sim 60
+Executing sim 61
+Executing sim 62
+Executing sim 63
+Executing sim 64
+Executing sim 65
+Executing sim 66
+Executing sim 67
+Executing sim 68
+Executing sim 69
+Executing sim 70
+Executing sim 71
+Executing sim 72
+Executing sim 73
+Executing sim 74
+Executing sim 75
+Executing sim 76
+Executing sim 77
+Executing sim 78
+Executing sim 79
+Executing sim 80
+Executing sim 81
+Executing sim 82
+Executing sim 83
+Executing sim 84
+Executing sim 85
+Executing sim 86
+Executing sim 87
+Executing sim 88
+Executing sim 89
+Executing sim 90
+Executing sim 91
+Executing sim 92
+Executing sim 93
+Executing sim 94
+Executing sim 95
+Executing sim 96
+Executing sim 97
+Executing sim 98
+Executing sim 99
+Executing sim 100
+Executing sim 101
+Executing sim 102
+Executing sim 103
+Executing sim 104
+Executing sim 105
+Executing sim 106
+Executing sim 107
+Executing sim 108
+Executing sim 109
+Executing sim 110
+Executing sim 111
+Executing sim 112
+Executing sim 113
+Executing sim 114
+Executing sim 115
+Executing sim 116
+Executing sim 117
+Executing sim 118
+Executing sim 119
+Executing sim 120
+Executing sim 121
+Executing sim 122
+Executing sim 123
+Executing sim 124
+Executing sim 125
+Executing sim 126
+Executing sim 127
+Executing sim 128
+Executing sim 129
+Executing sim 130
+Executing sim 131
+Executing sim 132
+Executing sim 133
+Executing sim 134
+Executing sim 135
+Executing sim 136
+Executing sim 137
+Executing sim 138
+Executing sim 139
+Executing sim 140
+Executing sim 141
+Executing sim 142
+Executing sim 143
+Executing sim 144
+Executing sim 145
+Executing sim 146
+Executing sim 147
+Executing sim 148
+Executing sim 149
+Executing sim 150
+Executing sim 151
+Executing sim 152
+Executing sim 153
+Executing sim 154
+Executing sim 155
+Executing sim 156
+Executing sim 157
+Executing sim 158
+Executing sim 159
+Executing sim 160
+Executing sim 161
+Executing sim 162
+Executing sim 163
+Executing sim 164
+Executing sim 165
+Executing sim 166
+Executing sim 167
+Executing sim 168
+Executing sim 169
+Executing sim 170
+Executing sim 171
+Executing sim 172
+Executing sim 173
+Executing sim 174
+Executing sim 175
+Executing sim 176
+Executing sim 177
+Executing sim 178
+Executing sim 179
+Executing sim 180
+Executing sim 181
+Executing sim 182
+Executing sim 183
+Executing sim 184
+Executing sim 185
+Executing sim 186
+Executing sim 187
+Executing sim 188
+Executing sim 189
+Executing sim 190
+Executing sim 191
+Executing sim 192
+Executing sim 193
+Executing sim 194
+Executing sim 195
+Executing sim 196
+Executing sim 197
+Executing sim 198
+Executing sim 199
