@@ -15,7 +15,6 @@ import torch
 import carla
 import torch.nn.functional as F
 from torchvision import transforms
-from collision_sensor import CarlaCollisionSensor
 
 from model_utils import (
     build_midpoint_table,
