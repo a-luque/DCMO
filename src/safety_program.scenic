@@ -1,7 +1,10 @@
-# os.system(f"scenic -S test_cnn_controller.scenic --count 1 --time 500 --2d --param controller_dir "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/turn_resnet18_c/resnet18_coarse_best.pt" --param weather 'ClearNoon' --param results_path "test_controller_sim_results/0" --param dist_car 30 --param intersec 0")
+# os.system(f"scenic -S safety_program.scenic --count 1 --time 500 --2d --param controller_dir "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster/resnet50_f/resnet50_fine_best.pt" --param weather 'ClearNoon' --param results_path "test_controller_sim_results/0" --param dist_car 30 --param intersec 0 --param speed_car 4")
 
 import warnings
 warnings.filterwarnings("ignore") 
+
+import sys
+sys.path.append("..")
 
 import numpy as np 
 import random
@@ -9,8 +12,10 @@ import os
 from PIL import Image
 
 import torch
+import carla
 import torch.nn.functional as F
 from torchvision import transforms
+from collision_sensor import CarlaCollisionSensor
 
 from model_utils import (
     build_midpoint_table,
@@ -29,7 +34,7 @@ from scenic.domains.driving.controllers import (
 torch.set_default_device('cuda')
 
 param timeout = 180
-param map = localPath('carla_map/Town01.xodr')
+param map = localPath('../carla_map/Town01.xodr')
 param carla_map = 'Town01'
 param timeBound = 300
 
@@ -54,13 +59,15 @@ else:
 
 
 EGO_SPEED = 5
+LEADER_SPEED = int(globalParameters.speed_car)
 THROTTLE_ACTION = 0.5
 MAX_SPEED = 8
 BRAKE_ACTION = 1.0
 EGO_TO_LEADER = Range(-15, -10)
-EGO_BRAKING_THRESHOLD = 6
+EGO_BRAKING_THRESHOLD = 7
 EGO_ACCELERATION_THRESHOLD = OUT_REACH_DIST
-
+TARGET_SPEED_FOR_TURNING = 3 # KM/H
+TRIGGER_DISTANCE_TO_SLOWDOWN = 6 # FOR TURNING AT INTERSECTIONS
 CONTROLLER_PATH = globalParameters.controller_dir
 
 RESULTS_PATH = globalParameters.results_path
@@ -82,8 +89,10 @@ behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_opp
 
     past_steer_angle = 0
     past_speed = 0 # making an assumption here that the agent starts from zero speed
+    current_lane = None
+
     if laneToFollow is None:
-        current_lane = self.lane
+        current_lane = self._lane
     else:
         current_lane = laneToFollow
 
@@ -93,23 +102,29 @@ behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_opp
     entering_intersection = False # assumption that the agent is not instantiated within an intersection
     end_lane = None
     original_target_speed = target_speed
-    TARGET_SPEED_FOR_TURNING = 3 # KM/H
-    TRIGGER_DISTANCE_TO_SLOWDOWN = 10 # FOR TURNING AT INTERSECTIONS
-    maneuvers = current_lane.maneuvers
     
-    if len(maneuvers) > 0:
-        self.select_maneuver = Uniform(*maneuvers)
+    if current_lane.maneuvers != ():
         nearby_intersection = current_lane.maneuvers[0].intersection
         if nearby_intersection == None:
             nearby_intersection = current_lane.centerline[-1]
     else:
         nearby_intersection = current_lane.centerline[-1]
-        self.select_maneuver = None
     
     # instantiate longitudinal and lateral controllers
     _lon_controller, _lat_controller = simulation().getLaneFollowingControllers(self)    
 
+
+    if leaderCar is None:
+        # only leading car registers its initial position
+        self.initialPos = self.position
+
+    egoFollow = False
+
+
     while True:
+        if leaderCar is not None:
+            if distance from self.position to leaderCar.initialPos < 20:
+                egoFollow = True
 
         if self.speed is not None:
             current_speed = self.speed
@@ -126,9 +141,18 @@ behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_opp
                     select_maneuver = Uniform(*maneuvers)
                     self.select_maneuver = select_maneuver
                     #print(self.select_maneuver)
-                else:
+                if egoFollow:
                     select_maneuver = leaderCar.select_maneuver
-                    #self.select_maneuver = select_maneuver
+
+                elif leaderCar is not None:
+                    # before ego car follows leading car maneuver, it just goes straight
+                    all_maneuvers = current_lane.maneuvers
+                    straight_maneuver = filter(lambda i: i.type == ManeuverType.STRAIGHT, all_maneuvers)
+
+                    if straight_maneuver is not None:
+                        select_maneuver = Uniform(*straight_maneuver)
+                    else:
+                        select_maneuver = Uniform(*maneuvers)
 
             elif len(current_lane.maneuvers) > 0:
                 select_maneuver = Uniform(*current_lane.maneuvers)
@@ -217,6 +241,13 @@ behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_opp
 
         current_steer_angle = _lat_controller.run_step(self.cte) 
         
+        if leaderCar:
+            # current_steer_angle += 1/3 * random.randrange(-2,2) * random.random()
+            if distance from self to leaderCar > ((-1*CAR_DISTANCE)+1):
+                throttle = 0.6
+            if distance from self to leaderCar < 5:
+                take SetBrakeAction(1.0)
+        
 
         take RegulatedControlAction(throttle, current_steer_angle, past_steer_angle)
         past_steer_angle = current_steer_angle
@@ -226,16 +257,28 @@ behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_opp
 
 
 
+
 behavior ControllerBehavior(target_speed = 10, controller_path = CONTROLLER_PATH, leaderCar = None):
+
+    collision_bp = self.carlaActor.get_world().get_blueprint_library().find('sensor.other.collision')
+    collision_sensor = self.carlaActor.get_world().spawn_actor(collision_bp, carla.Transform(),
+        attach_to=self.carlaActor,
+        attachment_type=carla.AttachmentType.Rigid)
+    collision_sensor.listen(lambda col: _collision_callback(self,col))
+
+    self.collision_sensor = collision_sensor
+
+
     past_steer_angle = 0
     past_speed = 0 # making an assumption here that the agent starts from zero speed
 
     original_target_speed = target_speed
     TARGET_SPEED_FOR_TURNING = 3 # KM/H
 
-    current_lane = self.lane
 
     TRIGGER_DISTANCE_TO_SLOWDOWN = 10 
+    current_lane = self._lane
+
     if current_lane.maneuvers != ():
         nearby_intersection = current_lane.maneuvers[0].intersection
         if nearby_intersection == None:
@@ -257,9 +300,12 @@ behavior ControllerBehavior(target_speed = 10, controller_path = CONTROLLER_PATH
     # self.select_maneuver = 1
 
     while True:
+        current_lane = self._lane
+        if current_lane:
+            current_centerline = current_lane.centerline
 
         """
-        if distance from self to intersection < TRIGGER_DISTANCE_TO_SLOWDOWN:
+        if self in network.intersectionRegion:
             if leaderCar is None:
                 maneuvers = current_lane.maneuvers
                 select_maneuver = Uniform(*maneuvers)
@@ -269,15 +315,23 @@ behavior ControllerBehavior(target_speed = 10, controller_path = CONTROLLER_PATH
         else:
             self.select_maneuver = 1
         """
-        if distance from self to intersection < TRIGGER_DISTANCE_TO_SLOWDOWN:
+        intersection_flag = True
+        if distance from self to intersection < TRIGGER_DISTANCE_TO_SLOWDOWN and intersection_flag:
+            intersection_flag = False
             if leaderCar is not None:
                 select_maneuver = leaderCar.select_maneuver
                 if select_maneuver is not None:
                     self.select_maneuver = select_maneuver
                 else:
                     self.select_maneuver = 1
+            else: 
+                maneuvers = current_lane.maneuvers
+                self.select_maneuver = Uniform(*maneuvers)
         else:
-            self.select_maneuver = 1
+            if intersection_flag: 
+                self.select_maneuver = 1
+        if distance from self to intersection > TRIGGER_DISTANCE_TO_SLOWDOWN:
+            intersection_flag = True
         
         if not isinstance(self.select_maneuver, int):
             self.select_maneuver = self.select_maneuver.type.value
@@ -289,7 +343,13 @@ behavior ControllerBehavior(target_speed = 10, controller_path = CONTROLLER_PATH
             input_img = Image.fromarray(front_img)
             result = predict_single(controller, input_img, self.select_maneuver, device, transform, 100.0)
             cte_pred = result['cte']
+            if distance from self to intersection < TRIGGER_DISTANCE_TO_SLOWDOWN:
+                if self.select_maneuver == 2:
+                    cte_pred -= 0.25
+                if self.select_maneuver == 3:
+                    cte_pred += 0.25
             dist_pred = result['distance_m']
+            # print(self.select_maneuver, cte_pred, dist_pred)
 
         else:
             cte_pred, dist_pred = 0, 0
@@ -299,10 +359,15 @@ behavior ControllerBehavior(target_speed = 10, controller_path = CONTROLLER_PATH
         else:
             current_speed = past_speed
 
+        
+        if current_lane:
+            self.cte = current_centerline.signedDistanceTo(self.position)
+        # print(self.select_maneuver, self.cte)
 
         # compute steering : Lateral Control
         if abs(cte_pred) > 0.5: 
-            take SetBrakeAction(0.4)
+            if current_speed > TARGET_SPEED_FOR_TURNING:
+                take SetBrakeAction(0.4)
             target_speed = TARGET_SPEED_FOR_TURNING
             _lat_controller = _lat_controller_turn
             # compute throttle : Longitudinal Control
@@ -327,13 +392,13 @@ behavior ControllerBehavior(target_speed = 10, controller_path = CONTROLLER_PATH
 
         
         if dist_pred < EGO_BRAKING_THRESHOLD:
-            self.acc = -1
             take SetBrakeAction(1.0)
+            self.acc = (self.speed - past_speed) / 0.1
         else:
             take RegulatedControlAction(throttle, current_steer_angle, past_steer_angle)
 
         past_steer_angle = current_steer_angle
-        past_speed = current_speed
+        past_speed = self.speed
 
 
 # so the context does not change
@@ -355,20 +420,23 @@ else:
     lane = Uniform(*network.lanes)
     start = new OrientedPoint on lane.centerline
 
+
+
 if DIST_CAR1 <= 50:
     
     car1 = new Car at start,
             with select_maneuver 1,
-            with behavior FollowLaneBehaviorModified(8)
+            with behavior FollowLaneBehaviorModified(target_speed=LEADER_SPEED)
 
     ego = new Car following roadDirection from car1.position for -1*DIST_CAR1,
         with blueprint EGO_MODEL,
         with behavior ControllerBehavior(target_speed=EGO_SPEED, leaderCar=car1),
         with cte 0,
         with acc 0,
+        with collision 0,
         with select_maneuver 1,
         with sensors {"front_rgb": RGBSensor(offset=(0, 2, 1), width=640, height=320),
-                    "aerial_rgb": RGBSensor(offset=(0, -10, 4), width=1280, height=640)
+                    "aerial_rgb": RGBSensor(offset=(0, -10, 4), width=1280, height=640),
                     },    
 else:
     ego = new Car at start,
@@ -376,10 +444,15 @@ else:
         with behavior ControllerBehavior(target_speed=EGO_SPEED),
         with cte 0,
         with acc 0,
+        with collision 0,
         with select_maneuver 1,
         with sensors {"front_rgb": RGBSensor(offset=(0, 2, 1), width=640, height=320),
-                    "aerial_rgb": RGBSensor(offset=(0, -10, 4), width=1280, height=640)
+                    "aerial_rgb": RGBSensor(offset=(0, -10, 4), width=1280, height=640),
                     },  
+    
+
+def _collision_callback(_car,collision):
+    _car.collision = 1
 
 
 
@@ -392,6 +465,9 @@ elif DIST_CAR1 == 10 or DIST_CAR1 == 20:
 elif DIST_CAR1 == 30:
     require distance to car1 > DIST_CAR1 and distance to car1 < DIST_CAR1+20 
 """
+
+
+
 if DIST_CAR1 <= 50:
     require ego can see car1
 
@@ -399,6 +475,9 @@ if INTERSEC:
     require (distance from start to intersection) < 10 and (distance from start to intersection) > 3 
 else:
     require (distance from start to intersection) > 10  
+
+
+
 
 """
 if DIST_CAR1 == 5:
@@ -411,10 +490,17 @@ else:
     terminate when ego.collision > 0 and (ego.speed < 0.1 and (distance to start) > 1)
 """
 
+
+
 record ego.speed every 0.1 seconds after 3 seconds to RESULTS_PATH+"/speed.npz"
 record ego.acc every 0.1 seconds after 3 seconds to RESULTS_PATH+"/acc.npz"
 record ego.select_maneuver every 0.1 seconds after 3 seconds to RESULTS_PATH+"/maneuver.npz"
-record ego.distanceToClosest(Car) every time_step seconds after 3 seconds to RESULTS_PATH+"/dist.npz"
+record ego.distanceToClosest(Car) every 0.1 seconds after 3 seconds to RESULTS_PATH+"/dist.npz"
+record ego.cte every 0.1 seconds after 3 seconds to RESULTS_PATH+"/true_cte.npz"
+record ego.collision every 0.1 seconds after 3 seconds to RESULTS_PATH+"/collision.npz"
+# record ego.speed
+
+
 
 """
 if INTERSEC:

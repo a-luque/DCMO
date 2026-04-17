@@ -20,7 +20,11 @@ from scenic.simulators.newtonian import NewtonianSimulator
 from scenic.simulators.carla.simulator import CarlaSimulator
 
 
-
+def remove_empty_folders(path_abs):
+    walk = list(os.walk(path_abs))
+    for path, _, _ in walk[::-1]:
+        if len(os.listdir(path)) == 0:
+            os.rmdir(path)
 
 class Weather(Enum):
     ClearNoon = [5.0, 0.0, 0.0, 10.0, -1.0, 45.0, 2.0, 0.75, 0.1, 0.0, 1.0, 0.03, 0.0331, 0.0] #
@@ -55,6 +59,7 @@ class BasicSystem(System):
         """
         if t_step is None:
             [weather, intersection, dist, speed] = context
+            dist += 4.6
             print(self.controllers[index], weather, intersection, dist, speed)
         
         results_dir = self.results_dir
@@ -70,7 +75,6 @@ class BasicSystem(System):
                 if id>current_modd:
                     current_modd=id
             modd_dir = f"{results_dir}modd_{current_modd+1}"
-            sim_dir = f"{modd_dir}/simulation_data/sim_0"
 
             if t_step is not None:
                 random.seed(t_step)
@@ -78,49 +82,61 @@ class BasicSystem(System):
                 print(f"Seed: {seed}")
                 # TODO: Generate parameters for a given seed so that they can be fed to the scenic program
 
-                # os.system(f"scenic -S test_cnn_controller.scenic --count 1 --time {NUM_STEPS} --2d --param controller_dir {self.controllers_folder_path} --param weather {weather} --param results_path {results_dir} --param dist_car {dist} --param intersec {intersection} --param render 0 -s {seed}")
-                # os.system(f"scenic -S follow_lane_car_testing_ensemble.scenic --count 1 --time {NUM_STEPS} --2d --param global_folder {results_dir} --param controller_path {self.controllers_folder_path} -s {seed} --param render 0")
+                # os.system(f"scenic -S test_cnn_controller.scenic --count 1 --time {NUM_STEPS} --2d --param controller_dir {self.controllers} --param weather {weather} --param results_path {modd_dir} --param dist_car {dist} --param intersec {intersection} --param render 0 -s {seed}")
+                # os.system(f"scenic -S follow_lane_car_testing_ensemble.scenic --count 1 --time {NUM_STEPS} --2d --param global_folder {modd_dir} --param controller_path {self.controllers} -s {seed} --param render 0")
             else:
-                # os.system(f"scenic -S follow_lane_car_generic.scenic --count 1 --time {NUM_STEPS} --2d --param global_folder {results_dir} --param weather {weather} --param controller_path {self.controllers[index]} --param dist_car {dist} --param intersec {intersection} --param render 0")
-                os.system(f"scenic -S test_cnn_controller.scenic --count 1 --time {NUM_STEPS} --2d --param controller_dir {self.controllers_folder_path} --param weather {weather} --param results_path {results_dir} --param dist_car {dist} --param intersec {intersection} --param render 0")  
+                # os.system(f"scenic -S follow_lane_car_generic.scenic --count 1 --time {NUM_STEPS} --2d --param global_folder {modd_dir} --param weather {weather} --param controller_path {self.controllers[index]} --param dist_car {dist} --param intersec {intersection} --param render 0")
+                os.system(f"scenic -S safety_program.scenic --count 1 --time {NUM_STEPS} --2d --param controller_dir {self.controllers[index]} --param weather {weather} --param results_path {modd_dir} --param dist_car {dist} --param speed_car {speed} --param intersec {intersection} --param render 0")  
 
 
-            df_path = f"{modd_dir}/simulation_data/sim_0/agent.vehicle.tesla.model3/sim_log.csv"
-            df = pd.read_csv(df_path)
-            print("Total number of images: ", df.shape[0])
-            if t_step is None:
-                if df.shape[0] < 30 and intersection:
-                    raise Exception("Wrong direction")
-                
-                if not intersection:
-                    if df["lane_invasion"].sum() > 30 or df["collision"].max() > 0:
-                        return 0
-                    else:
-                        return 1
-                else:
-                    if df["lane_invasion"].sum() > 10 or df["collision"].max() > 0:
-                        return 0
-                    else:
-                        return 1
-            if df["lane_invasion"].sum() > 30 or df["collision"].max() > 0:
+            dist_vals = np.load(f"{modd_dir}/dist.npz")
+            cte_vals = np.load(f"{modd_dir}/true_cte.npz")
+            collision_vals = np.load(f"{modd_dir}/collision.npz")
+
+            min_dist = float(dist_vals["values"].min())-4.6
+            lane_invasion = int((np.absolute(cte_vals["values"])>0.7).sum())
+            collision_happened = int(collision_vals["values"].max())
+
+            print(f"-- Min. dist: {min_dist}")
+            print(f"-- Lane invasion: {lane_invasion}")
+            print(f"-- Collision happened?: {collision_happened}")
+
+            # TODO: Change safe distance value to something proportional to the speed?
+            if min_dist < 2 or lane_invasion > 30 or collision_happened:
                 return 0
-            else:
+            else: 
                 return 1
+
         except: 
             print(f"Simulation failed.")
-            # time.sleep(3)
-            return self.step(index, context, t_step=t_step)
+            time.sleep(10)
+            if os.path.isdir(modd_dir):
+                if len(os.listdir(modd_dir)) > 0:
+                    dist_vals = np.load(f"{modd_dir}/dist.npz")
+                    cte_vals = np.load(f"{modd_dir}/true_cte.npz")
+                    collision_vals = np.load(f"{modd_dir}/collision.npz")
+
+                    min_dist = float(dist_vals["values"].min())
+                    lane_invasion = int((np.absolute(cte_vals["values"])>0.7).sum())
+                    collision_happened = int(collision_vals["values"].max())
+                    
+                    print(f"-- Min. dist: {min_dist}")
+                    print(f"-- Lane invasion: {lane_invasion}")
+                    print(collision_vals["values"])
+                    print(f"-- Collision happened?: {collision_happened}")
+
+                    # TODO: Change safe distance value to something proportional to the speed?
+                    if min_dist-4.6 < 1 or lane_invasion > 30 or collision_happened:
+                        return 0
+                    else: 
+                        return 1
+                else:
+                    return self.step(index, context, t_step=t_step)
+            else:
+                return self.step(index, context, t_step=t_step)
         
 
-    def generateScenes(self, n):
-        for i in range(n):
-            print(f"-- Scene {i}")
-            scenario = scenic.scenarioFromFile(self.scenic, mode2D=True, params={"global_folder": RESULTS_DIR, "weather": self.contexts[i % len(self.contexts)], "controller_path": self.controllers[0]})
-            scene, _ = scenario.generate()
-            data = scenario.sceneToBytes(scene)
-            with open(f"/mimer/NOBACKUP/groups/naiss2024-22-1336/scenes/test_{i}.scene", 'wb') as f:
-                f.write(data)
-            print(f'ego car position = {scene.egoObject.position}')
+
 
 
     def sample_context(self):
@@ -132,17 +148,21 @@ class BasicSystem(System):
         Returns:
         - The context for the system.
         """
-        dists = [5,10,20,30,100]
-        contexts_product = list(itertools.product(system.contexts, [0], dists)) + list(itertools.product(system.contexts, [1], [5,100]))
-        # weather = random.choice(self.contexts)
-        # intersection = random.randint(0,1)
-        [weather, intersection, dist] = random.choice(contexts_product)
-        return [weather, intersection, dist]
+        dists = [5,10,20,30,50]
+        # TODO: Speeds?
+        speeds = [4,6,8]
+        contexts_product = list(itertools.product(system.contexts, [0], dists, speeds)) + \
+                        list(itertools.product(system.contexts, [1], [5], speeds)) + \
+                        list(itertools.product(system.contexts, [0], [100], [0])) + \
+                        list(itertools.product(system.contexts, [1], [100], [0])) 
+
+        [weather, intersection, dist, speed] = random.choice(contexts_product)
+        return [weather, intersection, dist, speed]
     
 
 class BasicTrainer(Trainer):
 
-    def train(self, n_steps, logger=None):
+    def train(self, n_steps, last_folder, logger=None):
         """
         Train the system for n_steps.
 
@@ -150,9 +170,10 @@ class BasicTrainer(Trainer):
         - n_steps: The number of steps to train the system.
         """
         dists = [5,10,20,30,100]
-        contexts_product = list(itertools.product(system.contexts, [0], dists)) + list(itertools.product(system.contexts, [1], [5,100]))
+        # TODO: Speeds?
+        speeds = [4,6,8]
+        contexts_product = list(itertools.product(system.contexts, [0], dists, speeds)) + list(itertools.product(system.contexts, [1], [5,100], speeds))
         results_dir = self.results_dir
-        last_folder = 0
         
         for t_step in range(last_folder,last_folder+n_steps):
             # Initialize logger folder structure
@@ -160,29 +181,29 @@ class BasicTrainer(Trainer):
                 if os.path.exists(results_dir):
                     shutil.rmtree(results_dir)
                 os.makedirs(results_dir)
-            [context, intersection, dist] = self.system.sample_context()
-            # intersection = random.randint(0,1)
+            [context, intersection, dist, speed] = self.system.sample_context()
 
-            x = np.concatenate([np.array(Weather[context].value), np.array([intersection]), np.array([dist]), np.array([1.])])
+            x = np.concatenate([np.array(Weather[context].value), np.array([intersection]), np.array([dist]), np.array([speed]), np.array([1.])])
             index = self.bandit_alg.act(x)
             uncertainties = []
             product_contexts = []
             if not all(self.bandit_alg.logistic_models.values()):
-                (c,i,d) = random.choice(contexts_product)
+                (c,i,d,s) = random.choice(contexts_product)
             else: 
-                for [c, i, d] in contexts_product:
-                    product_contexts += [(c,i,d)]
-                    X = np.concatenate([np.array(Weather[c].value), np.array([i]), np.array([d]), np.array([1.])])
+                for [c, i, d, s] in contexts_product:
+                    product_contexts += [(c,i,d,s)]
+                    X = np.concatenate([np.array(Weather[c].value), np.array([i]), np.array([d]), np.array([s]), np.array([1.])])
 
                     uncertainties += [
                         np.sqrt(np.dot(np.dot(X, self.bandit_alg.arm_hessians_inv[index]), X.T))
                     ]
                 index_context = random.choice([i for i in range(len(uncertainties)) if uncertainties[i] == max(uncertainties)])
                 # index_context = np.argmax(uncertainties)
-                (c,i,d) = product_contexts[index_context]
-            x = np.concatenate([np.array(Weather[c].value), np.array([i]), np.array([d]), np.array([1.])])
+                (c,i,d,s) = product_contexts[index_context]
+            x = np.concatenate([np.array(Weather[c].value), np.array([i]), np.array([d]), np.array([s]), np.array([1.])])
 
-            reward = self.system.step(index, [c, i, d])
+            reward = self.system.step(index, [c, i, d, s])
+            print(f"Reward! {reward}")
             self.bandit_alg.update(index, x, reward)
             if t_step % self.bandit_alg.recompute_every == 0 and t_step > 0: 
                 with open(f"{results_dir}/weights_{t_step}.npy", "wb") as f:
@@ -267,11 +288,13 @@ if __name__ == "__main__":
     parser.add_argument("--results_dir", type=str, default="/mimer/NOBACKUP/groups/naiss2024-22-1336/simulation_data_system_main")
     parser.add_argument("--log_path", type=str, default="../../log.csv")
     parser.add_argument("--controllers_folder", type=str, default="../../controllers_models/")
-    parser.add_argument('--n_steps', help='number of steps per simulation',type=int,default=1001)
+    parser.add_argument('--n_steps', help='number of monitor algorithm steps',type=int,default=1001)
     parser.add_argument('--i_init', help='log data initial simulation for seed',type=int,default=0)
     parser.add_argument('--log_samples', help='number of steps per simulation',type=int,default=25)
     parser.add_argument('--log_at', help='number of steps per simulation',type=int,default=25)
     parser.add_argument('--recompute_every', help='number of steps per simulation',type=int,default=25)
+
+    # python3 safety_monitor_training.py --results_dir /mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/test_monitor_training --log_path /mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/test_monitor_training/log.csv --controllers_folder /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster --num_steps 300 --recompute_every 25
 
     args = parser.parse_args()
 
@@ -295,17 +318,30 @@ if __name__ == "__main__":
 
 
     # controllers = [CONTROLLERS_FOLDER + e for e in os.listdir(CONTROLLERS_FOLDER)]
-    controllers = [CONTROLLERS_FOLDER + f"/adamodel_v2_{i}.pth" for i in range(15)]
-    f = open("./controllers_order_e3.txt", "w")
-    f.write(str(controllers))
-    f.close()
+    controllers = [os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser(f"{CONTROLLERS_FOLDER}")) for f in fn]
+    controllers.sort()
+    print(f"Controllers list: {controllers}")
+    # controllers = [CONTROLLERS_FOLDER + f"/adamodel_v2_{i}.pth" for i in range(15)]
     contexts = ['ClearNoon','CloudyNoon','WetNoon','WetCloudyNoon','MidRainyNoon', 'HardRainNoon', 'SoftRainNoon', 'ClearSunset', 'CloudySunset', 'WetSunset', 'WetCloudySunset', 'MidRainSunset', 'HardRainSunset', 'SoftRainSunset']
     # contexts = ['ClearNoon','CloudyNoon','WetNoon','WetCloudyNoon','MidRainyNoon', 'HardRainNoon', 'SoftRainNoon', 'ClearSunset', 'CloudySunset', 'WetSunset', 'WetCloudySunset', 'MidRainSunset', 'HardRainSunset', 'SoftRainSunset']
     # controllers = ["./controllers/monitor0.sav", "./controllers/monitor1.sav", "./controllers/monitor4.sav", "./controllers/monitor6.sav"]
-    system = BasicSystem(controllers=controllers, scenic=['follow_lane.scenic', 'follow_lane_car.scenic'], contexts=contexts)
+    system = BasicSystem(controllers=controllers, scenic=['safety_program.scenic', 'safety_program.scenic'], contexts=contexts)
     # system = BasicSystem(controllers=controllers, scenic=['crossing_collision.scenic','crossing_collision.scenic'], contexts=contexts)
     logger = BasicLogger(log_samples=log_samples)
-    explorer = LogisticExplorer(n_arms=len(controllers), feature_dim=17, recompute_every=recompute_every)
+    explorer = LogisticExplorer(n_arms=len(controllers), feature_dim=18, recompute_every=recompute_every)
+
+    if i_init > 0:
+        remove_empty_folders(RESULTS_DIR)
+        with open(f"{RESULTS_DIR}/weights_{i_init}.npy", "rb") as f:
+            explorer.weights = np.load(f)
+        with open(f"{RESULTS_DIR}/arm_hessians_inv_{i_init}.pkl", "rb") as f:
+            explorer.arm_hessians_inv = pickle.load(f)
+        with open(f"{RESULTS_DIR}/arm_data_{i_init}.pkl", "rb") as f:
+            explorer.arm_data = pickle.load(f)
+        with open(f"{RESULTS_DIR}/logistic_models_{i_init}.pkl", "rb") as f:
+            explorer.logistic_models = pickle.load(f)
+
+
     trainer = BasicTrainer(system=system, bandit_alg=explorer, log_at=log_at)
     system.results_dir = RESULTS_DIR
     trainer.results_dir = RESULTS_DIR
@@ -316,7 +352,7 @@ if __name__ == "__main__":
     
     training = True
     if training:
-        _, log = trainer.train(logger=None, n_steps=n_steps)
+        _, log = trainer.train(logger=None, last_folder=i_init, n_steps=n_steps)
         if log is not None:
             pd.DataFrame.from_dict(log).to_csv(LOG_PATH)
     else:
