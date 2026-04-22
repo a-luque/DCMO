@@ -44,6 +44,8 @@ class Weather(Enum):
 
 
 class BasicSystem(System):
+
+
     def step(self, index, context, t_step=None):
         """
         Execute the controller corresponding index in the system with context x.
@@ -58,13 +60,13 @@ class BasicSystem(System):
         - The reward for the executed index.
         """
         if t_step is None:
-            [weather, intersection, dist, speed] = context
-            dist += 4.6
-            print(self.controllers[index], weather, intersection, dist, speed)
+            [weather, dist, speed] = context
+            print(self.controllers[index], weather, dist, speed)
         
         results_dir = self.results_dir
         if results_dir[-1] != "/":
             results_dir += "/"
+        print(results_dir)
         # Initialize logger folder structure
         os.makedirs(results_dir, exist_ok=True)
 
@@ -81,12 +83,27 @@ class BasicSystem(System):
                 seed = int("".join(["{}".format(random.randint(0,9)) for num in range(5)]))
                 print(f"Seed: {seed}")
                 # TODO: Generate parameters for a given seed so that they can be fed to the scenic program
+                weathers = ['ClearNoon','CloudyNoon','WetNoon','WetCloudyNoon','MidRainyNoon', 'HardRainNoon', 'SoftRainNoon', 'ClearSunset', 'CloudySunset', 'WetSunset', 'WetCloudySunset', 'MidRainSunset', 'HardRainSunset', 'SoftRainSunset']
+                dists = [5,10,20,30,50]
+                # TODO: Speeds?
+                speeds = [4,6,8]
+                contexts_product = list(itertools.product(weathers, [0], dists, speeds)) + \
+                        list(itertools.product(weathers, [1], [5], speeds)) + \
+                        list(itertools.product(weathers, [0], [100], [0])) + \
+                        list(itertools.product(weathers, [1], [100], [0])) 
+                [weather, intersection, dist, speed] = random.choice(contexts_product)
 
+                # print(self.sample_context())
+                # [weather, intersection, dist, speed] = self.sample_context()
+                print(weather, intersection, dist, speed, MONITOR_PATH)
+                print(f"scenic -S {self.scenic['testing']} --count 1 --time {NUM_STEPS} --2d -s {seed} --param weather {weather} --param results_path {modd_dir} --param dist_car {dist} --param speed_car {speed} --param monitor {MONITOR_PATH} --param render 0")
                 # os.system(f"scenic -S test_cnn_controller.scenic --count 1 --time {NUM_STEPS} --2d --param controller_dir {self.controllers} --param weather {weather} --param results_path {modd_dir} --param dist_car {dist} --param intersec {intersection} --param render 0 -s {seed}")
                 # os.system(f"scenic -S follow_lane_car_testing_ensemble.scenic --count 1 --time {NUM_STEPS} --2d --param global_folder {modd_dir} --param controller_path {self.controllers} -s {seed} --param render 0")
+                os.system(f"scenic -S {self.scenic['testing']} --count 1 --time {NUM_STEPS} --2d --param controllers_dir {CONTROLLERS_FOLDER} -s {seed} --param weather {weather} --param results_path {modd_dir} --param intersec {intersection} --param dist_car {dist} --param speed_car {speed} --param monitor {MONITOR_PATH} --param render 0")  
+
             else:
                 # os.system(f"scenic -S follow_lane_car_generic.scenic --count 1 --time {NUM_STEPS} --2d --param global_folder {modd_dir} --param weather {weather} --param controller_path {self.controllers[index]} --param dist_car {dist} --param intersec {intersection} --param render 0")
-                os.system(f"scenic -S safety_program.scenic --count 1 --time {NUM_STEPS} --2d --param controller_dir {self.controllers[index]} --param weather {weather} --param results_path {modd_dir} --param dist_car {dist} --param speed_car {speed} --param intersec {intersection} --param render 0")  
+                os.system(f"scenic -S {self.scenic['training']} --count 1 --time {NUM_STEPS} --2d --param controller_path {self.controllers[index]} --param weather {weather} --param results_path {modd_dir} --param dist_car {dist} --param speed_car {speed} --param render 0")  
 
 
             dist_vals = np.load(f"{modd_dir}/dist.npz")
@@ -102,7 +119,7 @@ class BasicSystem(System):
             print(f"-- Collision happened?: {collision_happened}")
 
             # TODO: Change safe distance value to something proportional to the speed?
-            if min_dist < 2 or lane_invasion > 30 or collision_happened:
+            if min_dist-4.6 < 1 or lane_invasion > 30 or collision_happened:
                 return 0
             else: 
                 return 1
@@ -148,16 +165,15 @@ class BasicSystem(System):
         Returns:
         - The context for the system.
         """
-        dists = [5,10,20,30,50]
-        # TODO: Speeds?
-        speeds = [4,6,8]
-        contexts_product = list(itertools.product(system.contexts, [0], dists, speeds)) + \
-                        list(itertools.product(system.contexts, [1], [5], speeds)) + \
-                        list(itertools.product(system.contexts, [0], [100], [0])) + \
-                        list(itertools.product(system.contexts, [1], [100], [0])) 
+        # dists = [5,10,15,100] # [0,7]; [8,12]; [13,20]; [21+]
+        # speeds = [4,6,8]
+        # contexts_product = list(itertools.product(system.contexts, dists, speeds)) + \
+        #                 list(itertools.product(system.contexts, [5], speeds)) + \
+        #                 list(itertools.product(system.contexts, [100], [0])) + \
+        #                 list(itertools.product(system.contexts, [100], [0])) 
 
-        [weather, intersection, dist, speed] = random.choice(contexts_product)
-        return [weather, intersection, dist, speed]
+        [weather, dist, speed] = random.choice(self.contexts)
+        return [weather, dist, speed]
     
 
 class BasicTrainer(Trainer):
@@ -169,10 +185,12 @@ class BasicTrainer(Trainer):
         Parameters:
         - n_steps: The number of steps to train the system.
         """
-        dists = [5,10,20,30,100]
-        # TODO: Speeds?
-        speeds = [4,6,8]
-        contexts_product = list(itertools.product(system.contexts, [0], dists, speeds)) + list(itertools.product(system.contexts, [1], [5,100], speeds))
+        # dists = [5,10,15,100] # [0,7]; [8,12]; [13,20]; [21+]
+        # speeds = [4,6,8]
+        # contexts_product = list(itertools.product(system.contexts, dists, speeds)) + \
+        #                 list(itertools.product(system.contexts, [5], speeds)) + \
+        #                 list(itertools.product(system.contexts, [100], [0])) + \
+        #                 list(itertools.product(system.contexts, [100], [0])) 
         results_dir = self.results_dir
         
         for t_step in range(last_folder,last_folder+n_steps):
@@ -181,28 +199,28 @@ class BasicTrainer(Trainer):
                 if os.path.exists(results_dir):
                     shutil.rmtree(results_dir)
                 os.makedirs(results_dir)
-            [context, intersection, dist, speed] = self.system.sample_context()
+            [weather, dist, speed] = self.system.sample_context()
 
-            x = np.concatenate([np.array(Weather[context].value), np.array([intersection]), np.array([dist]), np.array([speed]), np.array([1.])])
+            x = np.concatenate([np.array(Weather[weather].value), np.array([dist]), np.array([speed]), np.array([1.])])
             index = self.bandit_alg.act(x)
             uncertainties = []
             product_contexts = []
             if not all(self.bandit_alg.logistic_models.values()):
-                (c,i,d,s) = random.choice(contexts_product)
+                (w,d,s) = random.choice(self.system.contexts)
             else: 
-                for [c, i, d, s] in contexts_product:
-                    product_contexts += [(c,i,d,s)]
-                    X = np.concatenate([np.array(Weather[c].value), np.array([i]), np.array([d]), np.array([s]), np.array([1.])])
+                for [w,  d, s] in self.system.contexts:
+                    product_contexts += [(w,d,s)]
+                    X = np.concatenate([np.array(Weather[w].value), np.array([d]), np.array([s]), np.array([1.])])
 
                     uncertainties += [
                         np.sqrt(np.dot(np.dot(X, self.bandit_alg.arm_hessians_inv[index]), X.T))
                     ]
                 index_context = random.choice([i for i in range(len(uncertainties)) if uncertainties[i] == max(uncertainties)])
                 # index_context = np.argmax(uncertainties)
-                (c,i,d,s) = product_contexts[index_context]
-            x = np.concatenate([np.array(Weather[c].value), np.array([i]), np.array([d]), np.array([s]), np.array([1.])])
+                (w,d,s) = product_contexts[index_context]
+            x = np.concatenate([np.array(Weather[w].value), np.array([d]), np.array([s]), np.array([1.])])
 
-            reward = self.system.step(index, [c, i, d, s])
+            reward = self.system.step(index, [w, d, s])
             print(f"Reward! {reward}")
             self.bandit_alg.update(index, x, reward)
             if t_step % self.bandit_alg.recompute_every == 0 and t_step > 0: 
@@ -240,34 +258,11 @@ class BasicLogger(Logger):
             i_init = 0
         res_reward = 0
         self.log["t"].append(0)
-        # self.log["expected_reward"].append(0)
         for i in range(i_init, i_init + self.log_samples):
-            # context = system.sample_context()
-            # if f"probs_{i}" not in self.log.keys():
-            #     self.log[f"probs_{i}"] = []
             if f"rew_{i}" not in self.log.keys():
                 self.log[f"rew_{i}"] = []
-            # [context, intersection, dist] = contexts_product[i % len(contexts_product)]
-            # x = np.concatenate([np.array(Weather[context].value), np.array([float(intersection), float(dist), 1.])])
-            # expected_rewards = bandit_alg._compute_probabilities(x)
-            # self.log[f"probs_{i}"].append(expected_rewards)
-
-            # if all(bandit_alg.logistic_models.values()):
-            #     index = np.argmax(expected_rewards)
-            # else:
-            #     index = bandit_alg.act(x)
-            # index = bandit_alg.argmax(x)
-            # index = np.argmax(expected_rewards)
             reward = system.step(None, None, t_step=i)
             self.log[f"rew_{i}"].append(reward)
-            # print(f"Context: {context.lower()}; Controller: {system.controllers[index]}")
-            # if context.lower() in system.controllers[index]: 
-            #     reward = 1
-            # else: 
-            #     reward = 0
-            # print(f"Reward: {reward}")
-            # if os.path.exists(LOG_PATH):
-            #     os.remove(LOG_PATH)
             print(self.log)
             if i == 0 or i % 50 == 0 or i == (self.log_samples - 1):
                 pd.DataFrame.from_dict(self.log).to_csv(f"{LOG_PATH[:-4]}_{i}.csv")
@@ -276,7 +271,6 @@ class BasicLogger(Logger):
         res_reward /= self.log_samples
 
         self.log["t"].append(t)
-        # self.log["expected_reward"].append(res_reward)
 
 
 if __name__ == "__main__":
@@ -290,9 +284,11 @@ if __name__ == "__main__":
     parser.add_argument("--controllers_folder", type=str, default="../../controllers_models/")
     parser.add_argument('--n_steps', help='number of monitor algorithm steps',type=int,default=1001)
     parser.add_argument('--i_init', help='log data initial simulation for seed',type=int,default=0)
-    parser.add_argument('--log_samples', help='number of steps per simulation',type=int,default=25)
+    parser.add_argument('--log_samples', help='number of simulations to evaluate',type=int,default=500)
     parser.add_argument('--log_at', help='number of steps per simulation',type=int,default=25)
     parser.add_argument('--recompute_every', help='number of steps per simulation',type=int,default=25)
+    parser.add_argument('--monitor', help='path to monitor', type=str, default="")
+    parser.add_argument('--training', help='training?', type=int, default=1)
 
     # python3 safety_monitor_training.py --results_dir /mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/test_monitor_training --log_path /mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/test_monitor_training/log.csv --controllers_folder /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster --num_steps 300 --recompute_every 25
 
@@ -303,6 +299,7 @@ if __name__ == "__main__":
     global RESULTS_DIR 
     global LOG_PATH 
     global CONTROLLERS_FOLDER
+    global MONITOR_PATH
 
 
     THRESHOLD_INVASIONS = args.threshold_invasions
@@ -315,6 +312,9 @@ if __name__ == "__main__":
     log_samples = args.log_samples
     recompute_every = args.recompute_every
     i_init = args.i_init
+    MONITOR_PATH = args.monitor
+    training = int(args.training)
+    print(f"Training {training}")
 
 
     # controllers = [CONTROLLERS_FOLDER + e for e in os.listdir(CONTROLLERS_FOLDER)]
@@ -322,13 +322,24 @@ if __name__ == "__main__":
     controllers.sort()
     print(f"Controllers list: {controllers}")
     # controllers = [CONTROLLERS_FOLDER + f"/adamodel_v2_{i}.pth" for i in range(15)]
-    contexts = ['ClearNoon','CloudyNoon','WetNoon','WetCloudyNoon','MidRainyNoon', 'HardRainNoon', 'SoftRainNoon', 'ClearSunset', 'CloudySunset', 'WetSunset', 'WetCloudySunset', 'MidRainSunset', 'HardRainSunset', 'SoftRainSunset']
+    weathers = ['ClearNoon', 'HardRainNoon', 'ClearSunset']
+    dists = [5,10,15,100] # [0,7]; [8,12]; [13,20]; [21+]
+    speeds = [4,6,8]
+    contexts = list(itertools.product(weathers, dists, speeds)) + \
+                    list(itertools.product(weathers, [5], speeds)) + \
+                    list(itertools.product(weathers, [100], [0])) + \
+                    list(itertools.product(weathers, [100], [0])) 
+
+    scenic_progs = {}
+    scenic_progs["training"] = "safety_program.scenic"
+    scenic_progs["testing"] = "safety_program_testing.scenic"
+
     # contexts = ['ClearNoon','CloudyNoon','WetNoon','WetCloudyNoon','MidRainyNoon', 'HardRainNoon', 'SoftRainNoon', 'ClearSunset', 'CloudySunset', 'WetSunset', 'WetCloudySunset', 'MidRainSunset', 'HardRainSunset', 'SoftRainSunset']
     # controllers = ["./controllers/monitor0.sav", "./controllers/monitor1.sav", "./controllers/monitor4.sav", "./controllers/monitor6.sav"]
-    system = BasicSystem(controllers=controllers, scenic=['safety_program.scenic', 'safety_program.scenic'], contexts=contexts)
+    system = BasicSystem(controllers=controllers, scenic=scenic_progs, contexts=contexts)
     # system = BasicSystem(controllers=controllers, scenic=['crossing_collision.scenic','crossing_collision.scenic'], contexts=contexts)
     logger = BasicLogger(log_samples=log_samples)
-    explorer = LogisticExplorer(n_arms=len(controllers), feature_dim=18, recompute_every=recompute_every)
+    explorer = LogisticExplorer(n_arms=len(controllers), feature_dim=17, recompute_every=recompute_every)
 
     if i_init > 0:
         remove_empty_folders(RESULTS_DIR)
@@ -350,17 +361,16 @@ if __name__ == "__main__":
     system.controllers_folder_path = CONTROLLERS_FOLDER
     system.weights_file = ""
     
-    training = True
     if training:
         _, log = trainer.train(logger=None, last_folder=i_init, n_steps=n_steps)
         if log is not None:
             pd.DataFrame.from_dict(log).to_csv(LOG_PATH)
     else:
-        to_remove = [e for e in os.listdir(RESULTS_DIR) if "npy" not in e]
-        for e in to_remove:
-            shutil.rmtree(f"{RESULTS_DIR}/{e}")
+        print("-- Testing")
+        if os.path.exists(RESULTS_DIR):
+            shutil.rmtree(RESULTS_DIR)
+        os.makedirs(RESULTS_DIR)
         for t in range(log_at,log_at+1, 100):
-            if t > 0:
-                system.weights_file = f"{RESULTS_DIR}/weights_{t}.npy"
+            system.weights_file = f"{MONITOR_PATH}"
             logger.log_data(t, explorer, system, i_init=i_init)
 
