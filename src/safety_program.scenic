@@ -274,7 +274,7 @@ behavior ControllerBehavior(target_speed = 10, controller_path = CONTROLLER_PATH
     TRIGGER_DISTANCE_TO_SLOWDOWN = 10 
     current_lane = self._lane
 
-    if current_lane.maneuvers != ():
+    if len(current_lane.maneuvers) > 0:
         nearby_intersection = current_lane.maneuvers[0].intersection
         if nearby_intersection == None:
             nearby_intersection = current_lane.centerline[-1]
@@ -358,13 +358,6 @@ behavior ControllerBehavior(target_speed = 10, controller_path = CONTROLLER_PATH
         past_steer_angle = current_steer_angle
         past_speed = self.speed
 
-
-# so the context does not change
-behavior KeepDistance(speed=10):
-    try: 
-        do FollowLaneBehavior(speed)
-    interrupt when self.distanceToClosest(Object) > OUT_REACH_DIST:
-        take SetBrakeAction(0.8), SetThrottleAction(0)
 
 
 behavior EgoBehavior(target_speed = 10, leaderCar=None):

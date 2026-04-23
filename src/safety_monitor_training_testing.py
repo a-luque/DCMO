@@ -82,24 +82,13 @@ class BasicSystem(System):
                 random.seed(t_step)
                 seed = int("".join(["{}".format(random.randint(0,9)) for num in range(5)]))
                 print(f"Seed: {seed}")
-                # TODO: Generate parameters for a given seed so that they can be fed to the scenic program
-                weathers = ['ClearNoon','CloudyNoon','WetNoon','WetCloudyNoon','MidRainyNoon', 'HardRainNoon', 'SoftRainNoon', 'ClearSunset', 'CloudySunset', 'WetSunset', 'WetCloudySunset', 'MidRainSunset', 'HardRainSunset', 'SoftRainSunset']
-                dists = [5,10,20,30,50]
-                # TODO: Speeds?
-                speeds = [4,6,8]
-                contexts_product = list(itertools.product(weathers, [0], dists, speeds)) + \
-                        list(itertools.product(weathers, [1], [5], speeds)) + \
-                        list(itertools.product(weathers, [0], [100], [0])) + \
-                        list(itertools.product(weathers, [1], [100], [0])) 
-                [weather, intersection, dist, speed] = random.choice(contexts_product)
+                [weather, dist, speed] = self.sample_context()
 
-                # print(self.sample_context())
-                # [weather, intersection, dist, speed] = self.sample_context()
-                print(weather, intersection, dist, speed, MONITOR_PATH)
+                print(weather, dist, speed, MONITOR_PATH)
                 print(f"scenic -S {self.scenic['testing']} --count 1 --time {NUM_STEPS} --2d -s {seed} --param weather {weather} --param results_path {modd_dir} --param dist_car {dist} --param speed_car {speed} --param monitor {MONITOR_PATH} --param render 0")
                 # os.system(f"scenic -S test_cnn_controller.scenic --count 1 --time {NUM_STEPS} --2d --param controller_dir {self.controllers} --param weather {weather} --param results_path {modd_dir} --param dist_car {dist} --param intersec {intersection} --param render 0 -s {seed}")
                 # os.system(f"scenic -S follow_lane_car_testing_ensemble.scenic --count 1 --time {NUM_STEPS} --2d --param global_folder {modd_dir} --param controller_path {self.controllers} -s {seed} --param render 0")
-                os.system(f"scenic -S {self.scenic['testing']} --count 1 --time {NUM_STEPS} --2d --param controllers_dir {CONTROLLERS_FOLDER} -s {seed} --param weather {weather} --param results_path {modd_dir} --param intersec {intersection} --param dist_car {dist} --param speed_car {speed} --param monitor {MONITOR_PATH} --param render 0")  
+                os.system(f"scenic -S {self.scenic['testing']} --count 1 --time {NUM_STEPS} --2d --param controllers_dir {CONTROLLERS_FOLDER} -s {seed} --param weather {weather} --param results_path {modd_dir} --param dist_car {dist} --param speed_car {speed} --param monitor {MONITOR_PATH} --param render 1")  
 
             else:
                 # os.system(f"scenic -S follow_lane_car_generic.scenic --count 1 --time {NUM_STEPS} --2d --param global_folder {modd_dir} --param weather {weather} --param controller_path {self.controllers[index]} --param dist_car {dist} --param intersec {intersection} --param render 0")
@@ -119,7 +108,7 @@ class BasicSystem(System):
             print(f"-- Collision happened?: {collision_happened}")
 
             # TODO: Change safe distance value to something proportional to the speed?
-            if min_dist-4.6 < 1 or lane_invasion > 30 or collision_happened:
+            if min_dist < 1 or lane_invasion > 30 or collision_happened:
                 return 0
             else: 
                 return 1
@@ -165,13 +154,6 @@ class BasicSystem(System):
         Returns:
         - The context for the system.
         """
-        # dists = [5,10,15,100] # [0,7]; [8,12]; [13,20]; [21+]
-        # speeds = [4,6,8]
-        # contexts_product = list(itertools.product(system.contexts, dists, speeds)) + \
-        #                 list(itertools.product(system.contexts, [5], speeds)) + \
-        #                 list(itertools.product(system.contexts, [100], [0])) + \
-        #                 list(itertools.product(system.contexts, [100], [0])) 
-
         [weather, dist, speed] = random.choice(self.contexts)
         return [weather, dist, speed]
     
@@ -185,12 +167,6 @@ class BasicTrainer(Trainer):
         Parameters:
         - n_steps: The number of steps to train the system.
         """
-        # dists = [5,10,15,100] # [0,7]; [8,12]; [13,20]; [21+]
-        # speeds = [4,6,8]
-        # contexts_product = list(itertools.product(system.contexts, dists, speeds)) + \
-        #                 list(itertools.product(system.contexts, [5], speeds)) + \
-        #                 list(itertools.product(system.contexts, [100], [0])) + \
-        #                 list(itertools.product(system.contexts, [100], [0])) 
         results_dir = self.results_dir
         
         for t_step in range(last_folder,last_folder+n_steps):

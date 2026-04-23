@@ -5,6 +5,7 @@ test_controller_sim_results/
 h5py_dataset/
 training_data/
 debug_outputs/
+test/
 
 
 *.pt
