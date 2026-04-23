@@ -299,12 +299,10 @@ if __name__ == "__main__":
     print(f"Controllers list: {controllers}")
     # controllers = [CONTROLLERS_FOLDER + f"/adamodel_v2_{i}.pth" for i in range(15)]
     weathers = ['ClearNoon', 'HardRainNoon', 'ClearSunset']
-    dists = [5,10,15,100] # [0,7]; [8,12]; [13,20]; [21+]
+    dists = [5,10,15] # [0,7]; [8,12]; [13,20]; [21+]
     speeds = [4,6,8]
-    contexts = list(itertools.product(weathers, dists, speeds)) + \
-                    list(itertools.product(weathers, [5], speeds)) + \
-                    list(itertools.product(weathers, [100], [0])) + \
-                    list(itertools.product(weathers, [100], [0])) 
+    contexts = list(itertools.product(weathers, dists, speeds))
+                    list(itertools.product(weathers, [100], [0]))
 
     scenic_progs = {}
     scenic_progs["training"] = "safety_program.scenic"
