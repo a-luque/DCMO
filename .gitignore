@@ -5,9 +5,13 @@ test_controller_sim_results/
 h5py_dataset/
 training_data/
 debug_outputs/
+controllers/
+sim_results/
+stage2/sim_results/
+stage2/sim_results_se/
 test/
 
-
+*.npz
 *.pt
 *.pth
 
