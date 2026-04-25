@@ -1,7 +1,7 @@
 import numpy as np
 
-"""
-path = "training_data/no_car_noise/2/dist.npz"
+
+path = "important_training_dataset/2000/dist.npz"
 #path = "data/extra_data/turn_left/6/maneuver.npz"
 data = np.load(path)
 
@@ -11,7 +11,6 @@ for key in data.files:
     print(min(data[key]))
 
 
-"""
 
 """
 #copy dist.npz to all no_car folders
@@ -75,7 +74,7 @@ for i in range(0, 500):
     print(f"Renamed {i} -> {new_index}")
 """
 
-
+"""
 # move folders
 import os
 import shutil
@@ -101,7 +100,7 @@ for i in range(7600, 8100):
     shutil.move(src_path, dst_path)
     #print(f"Moved {src_path} -> {dst_path}")
 print("done")
-
+"""
 
 """
 import os
