@@ -2,6 +2,7 @@
 The ego car follows the leader car maintaining a normal distance while lane keeping.
 """
 import random
+import numpy as np
 
 from scenic.domains.driving.controllers import (
     PIDLateralController,
@@ -12,6 +13,7 @@ param timeout = 30
 param map = localPath('carla_map/Town01.xodr')
 param carla_map = 'Town01'
 param render = 0
+param weather = globalParameters.weather
 
 model scenic.simulators.carla.model
 
@@ -36,6 +38,22 @@ behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_opp
     :param target_speed: Its unit is in m/s. By default, it is set to 10 m/s
     :param laneToFollow: If the lane to follow is different from the lane that the vehicle is on, this parameter can be used to specify that lane. By default, this variable will be set to None, which means that the vehicle will follow the lane that it is currently on.
     """
+    self.weather = np.array([
+            self.carlaActor.get_world().get_weather().cloudiness,
+            self.carlaActor.get_world().get_weather().precipitation,
+            self.carlaActor.get_world().get_weather().precipitation_deposits,
+            self.carlaActor.get_world().get_weather().wind_intensity,
+            self.carlaActor.get_world().get_weather().sun_azimuth_angle,
+            self.carlaActor.get_world().get_weather().sun_altitude_angle,
+            self.carlaActor.get_world().get_weather().fog_density,
+            self.carlaActor.get_world().get_weather().fog_distance,
+            self.carlaActor.get_world().get_weather().wetness,
+            self.carlaActor.get_world().get_weather().fog_falloff,
+            self.carlaActor.get_world().get_weather().scattering_intensity,
+            self.carlaActor.get_world().get_weather().mie_scattering_scale,
+            self.carlaActor.get_world().get_weather().rayleigh_scattering_scale,
+            self.carlaActor.get_world().get_weather().dust_storm  
+        ])
 
     past_steer_angle = 0
     past_speed = 0 # making an assumption here that the agent starts from zero speed
@@ -213,6 +231,8 @@ ego = new Car following roadDirection from start for -5,
             with cte 0,
             with selected_maneuver 1,
             with dist 100,
+            with leader_speed 0,
+            with weather np.zeros(14), 
             with sensors {"front_rgb": RGBSensor(offset=(0, 2, 1), attributes=attrs)
                         } 
 
@@ -226,4 +246,6 @@ time_step = 0.1
 record ego.cte every time_step seconds after 3 seconds to RESULT_PATH+"/cte.npz"
 record ego.dist every time_step seconds after 3 seconds to RESULT_PATH+"/dist.npz"
 record ego.selected_maneuver every time_step seconds after 3 seconds to RESULT_PATH+"/maneuver.npz"
+record ego.weather every time_step seconds after 3 seconds to RESULT_PATH+"/weather.npz"
+record ego.leader_speed every time_step seconds after 3 seconds to RESULT_PATH+"/leader_speed.npz"
 record ego.observations["front_rgb"] every time_step seconds after 3 seconds to RESULT_PATH+"/img/front_rgb_{time:.1f}.jpg"

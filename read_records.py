@@ -1,15 +1,16 @@
+"""
 import numpy as np
 
-
-path = "important_training_dataset/2000/dist.npz"
+#path = "important_training_dataset/2000/dist.npz"
 #path = "data/extra_data/turn_left/6/maneuver.npz"
+path = "training_data/79/1/weather.npz"
 data = np.load(path)
 
 for key in data.files:
     print(key, data[key])
     print(len(data[key]))
     print(min(data[key]))
-
+"""
 
 
 """
@@ -53,14 +54,14 @@ for i in range(100):
 # change folder index
 import os
 
-base_dir = "training_data/no_car_noise"
-#s_index = 10
+base_dir = "training_data/2325"
+s_index = 1
 
-for i in range(0, 500):
+for i in range(3640, 4095):
     old_path = os.path.join(base_dir, str(i))
-    #new_path = os.path.join(base_dir, str(i + 500*s_index))
-    new_index = 7600 + i
-    new_path = os.path.join(base_dir, str(new_index))
+    new_path = os.path.join(base_dir, str(i + 455*s_index))
+    #new_index = 7600 + i
+    #new_path = os.path.join(base_dir, str(new_index))
 
     if not os.path.exists(old_path):
         print(f"Skip {old_path} (not found)")
@@ -71,21 +72,21 @@ for i in range(0, 500):
         continue
 
     os.rename(old_path, new_path)
-    print(f"Renamed {i} -> {new_index}")
+    #print(f"Renamed {i} -> {new_index}")
+print("done")
 """
 
-"""
 # move folders
 import os
 import shutil
 
-src_base = "training_data/no_car_noise"
-dst_base = "important_training_dataset"
+dst_base = "moe_data/57"
+src_base = "training_data"
 
-#num = 10
+num = 1
 
-#for i in range(500*(num-1), 500*num):
-for i in range(7600, 8100):
+#for i in range(455*(num-1), 455*num):
+for i in range(57, 58):
     src_path = os.path.join(src_base, str(i))
     dst_path = os.path.join(dst_base, str(i))
 
@@ -100,7 +101,7 @@ for i in range(7600, 8100):
     shutil.move(src_path, dst_path)
     #print(f"Moved {src_path} -> {dst_path}")
 print("done")
-"""
+
 
 """
 import os

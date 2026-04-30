@@ -21,6 +21,8 @@ def process_single_run(run_info):
     distances[distances > 50.0] = 100.0
     ctes      = np.load(run_dir / "cte.npz")["values"].astype(np.float32)
     maneuvers = np.load(run_dir / "maneuver.npz")["values"].astype(np.int64)
+    weather = np.load(run_dir / "weather.npz")["values"].astype(np.float32)
+    leader_speed      = np.load(run_dir / "leader_speed.npz")["values"].astype(np.float32)
 
     img_paths = sorted(
         (run_dir / "img").glob("front_rgb_*.jpg"),
@@ -42,6 +44,8 @@ def process_single_run(run_info):
         "cte":      ctes[:n],
         "dist":     distances[:n],
         "maneuver": maneuvers[:n],
+        "weather": weather[:n],
+        "leader_speed":      leader_speed[:n],
         "count":    n,
     }
 
@@ -70,6 +74,9 @@ def main():
         cte_path      = run_dir / "cte.npz"
         maneuver_path = run_dir / "maneuver.npz"
         img_dir       = run_dir / "img"
+        weather_dir = run_dir / "weather.npz"
+        leader_speed_dir = run_dir / "leader_speed.npz"
+
 
         if not (dist_path.exists() and cte_path.exists()
                 and maneuver_path.exists() and img_dir.exists()):
@@ -79,7 +86,10 @@ def main():
         n_dist = len(np.load(dist_path)["values"])
         n_cte  = len(np.load(cte_path)["values"])
         n_man  = len(np.load(maneuver_path)["values"])
-        n = min(n_imgs, n_dist, n_cte, n_man)
+        n_weather = len(np.load(weather_dir)["values"])
+        n_leader_speed = len(np.load(leader_speed_dir)["values"])
+
+        n = min(n_imgs, n_dist, n_cte, n_man, n_weather, n_leader_speed)
 
         if n == 0:
             continue
@@ -98,6 +108,10 @@ def main():
         ds_cte      = f.create_dataset("cte",      shape=(total_samples,), dtype=np.float32)
         ds_dist     = f.create_dataset("dist",     shape=(total_samples,), dtype=np.float32)
         ds_maneuver = f.create_dataset("maneuver", shape=(total_samples,), dtype=np.int64)
+        ds_weather = f.create_dataset("weather", shape=(total_samples, 14), dtype=np.float32)
+        ds_leader_speed = f.create_dataset("leader_speed", shape=(total_samples,), dtype=np.float32)
+
+
 
         f.attrs["img_height"] = args.img_height
         f.attrs["img_width"]  = args.img_width
@@ -135,6 +149,9 @@ def main():
                     ds_cte[idx:idx + n]      = result["cte"]
                     ds_dist[idx:idx + n]     = result["dist"]
                     ds_maneuver[idx:idx + n] = result["maneuver"]
+                    ds_weather[idx:idx + n]      = result["weather"]
+                    ds_leader_speed[idx:idx + n]      = result["leader_speed"]
+
 
                     idx += n
                     next_to_write += 1
