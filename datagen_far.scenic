@@ -3,6 +3,7 @@ The ego car follows the leader car maintaining a normal distance while lane keep
 """
 
 import random
+import numpy as np
 
 from scenic.domains.driving.controllers import (
     PIDLateralController,
@@ -13,12 +14,14 @@ param timeout = 30
 param map = localPath('carla_map/Town01.xodr')
 param carla_map = 'Town01'
 param render = 0
+param weather = globalParameters.weather
 
 model scenic.simulators.carla.model
 
 #Passing parameters
 RESULT_PATH = globalParameters.result_path
 CAR_DISTANCE = globalParameters.car_dist
+LEADER_SPEED = globalParameters.leader_speed
 
 #CONSTANTS
 EGO_MODEL = "vehicle.tesla.model3"
@@ -68,6 +71,23 @@ behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_opp
     if leaderCar is None:
         # only leading car registers its initial position
         self.initialPos = self.position
+    else:
+        self.weather = np.array([
+            self.carlaActor.get_world().get_weather().cloudiness,
+            self.carlaActor.get_world().get_weather().precipitation,
+            self.carlaActor.get_world().get_weather().precipitation_deposits,
+            self.carlaActor.get_world().get_weather().wind_intensity,
+            self.carlaActor.get_world().get_weather().sun_azimuth_angle,
+            self.carlaActor.get_world().get_weather().sun_altitude_angle,
+            self.carlaActor.get_world().get_weather().fog_density,
+            self.carlaActor.get_world().get_weather().fog_distance,
+            self.carlaActor.get_world().get_weather().wetness,
+            self.carlaActor.get_world().get_weather().fog_falloff,
+            self.carlaActor.get_world().get_weather().scattering_intensity,
+            self.carlaActor.get_world().get_weather().mie_scattering_scale,
+            self.carlaActor.get_world().get_weather().rayleigh_scattering_scale,
+            self.carlaActor.get_world().get_weather().dust_storm  
+        ])
     
     egoFollow = False
 
@@ -199,7 +219,7 @@ behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_opp
 
         if leaderCar:
             # current_steer_angle += 1/3 * random.randrange(-2,2) * random.random()
-            if distance from self to leaderCar > ((-1*CAR_DISTANCE)+1):
+            if distance from self to leaderCar > ((-1*CAR_DISTANCE)+2):
                 throttle = 0.6
             if distance from self to leaderCar < 5:
                 take SetBrakeAction(1.0)
@@ -211,25 +231,25 @@ behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_opp
 
 
 
-
 lane = Uniform(*network.lanes)
 
 attrs = {"image_size_x": 640,
          "image_size_y": 320}
 
-#start = new OrientedPoint on lane.centerline
+start = new OrientedPoint on lane.centerline
 
-intersec = Uniform(*network.intersections)
-turn_maneuvers = filter(lambda i: i.type == ManeuverType.RIGHT_TURN, intersec.maneuvers)
-turn_maneuver = Uniform(*turn_maneuvers)
-startLane = turn_maneuver.startLane 
-start = startLane.centerline[-1]
+#intersec = Uniform(*network.intersections)
+#turn_maneuvers = filter(lambda i: i.type == ManeuverType.RIGHT_TURN, intersec.maneuvers)
+#turn_maneuver = Uniform(*turn_maneuvers)
+#startLane = turn_maneuver.startLane 
+#start = startLane.centerline[-1]
 
-leader = new Car following roadDirection from start for -5,
+#leader = new Car following roadDirection from start for -5,
+leader = new Car at start,
             with blueprint EGO_MODEL,
             with select_maneuver 1,
             with initialPos (0,0,0),
-            with behavior FollowLaneBehaviorModified(target_speed=EGO_SPEED),
+            with behavior FollowLaneBehaviorModified(target_speed=LEADER_SPEED),
             with color Color(0,0,0) 
 
 ego = new Car following roadDirection from leader.position for EGO_TO_LEADER,
@@ -238,6 +258,7 @@ ego = new Car following roadDirection from leader.position for EGO_TO_LEADER,
             with cte 0,
             with visibleDistance 60,
             with selected_maneuver 1,
+            with weather np.zeros(14),
             with sensors {"front_rgb": RGBSensor(offset=(0, 2, 1), attributes=attrs)
                         } 
 
@@ -251,7 +272,8 @@ require ego can see leader
 record ego.distanceToClosest(Car) every time_step seconds after 3 seconds to RESULT_PATH+"/dist.npz"
 record ego.cte every time_step seconds after 3 seconds to RESULT_PATH+"/cte.npz"
 record ego.selected_maneuver every time_step seconds after 3 seconds to RESULT_PATH+"/maneuver.npz"
+record ego.weather every time_step seconds after 3 seconds to RESULT_PATH+"/weather.npz"
+record leader.speed every time_step seconds after 3 seconds to RESULT_PATH+"/leader_speed.npz"
 record ego.observations["front_rgb"] every time_step seconds after 3 seconds to RESULT_PATH+"/img/front_rgb_{time:.1f}.jpg"
-
 
 terminate when ((distance from ego to leader > ((-1*CAR_DISTANCE)+10)) or ((distance from ego to leader < 4.7) ))

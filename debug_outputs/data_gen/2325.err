@@ -45,6 +45,550 @@ Traceback (most recent call last; use -b to show Scenic internals):
   File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 50, in __init__
     raise RuntimeError(f"CARLA could not load world '{carla_map}'") from e
 RuntimeError: CARLA could not load world 'Town01'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 48, in __init__
+    self.world = self.client.load_world(carla_map)
+RuntimeError: time-out of 30000ms while waiting for the simulator, make sure the simulator is ready and connected to 127.0.0.1:2000
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/model.scenic", line 107, in <lambda>
+    simulator CarlaSimulator(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 50, in __init__
+    raise RuntimeError(f"CARLA could not load world '{carla_map}'") from e
+RuntimeError: CARLA could not load world 'Town01'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 177
+    while self in network.intersectionRegion:
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ScenicSyntaxError: invalid syntax. Perhaps you forgot 'new'?
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+ValueError: not enough values to unpack (expected 2, got 0)
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+ValueError: not enough values to unpack (expected 2, got 0)
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+ValueError: not enough values to unpack (expected 2, got 0)
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+ValueError: not enough values to unpack (expected 2, got 0)
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+ValueError: not enough values to unpack (expected 2, got 0)
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+ValueError: not enough values to unpack (expected 2, got 0)
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+ValueError: not enough values to unpack (expected 2, got 0)
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+ValueError: not enough values to unpack (expected 2, got 0)
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+ValueError: not enough values to unpack (expected 2, got 0)
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+ValueError: not enough values to unpack (expected 2, got 0)
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+ValueError: not enough values to unpack (expected 2, got 0)
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+ValueError: not enough values to unpack (expected 2, got 0)
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+Traceback (most recent call last; use -b to show Scenic internals):
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 83, in createSimulation
+    return CarlaSimulation(
+  File "/mimer/NOBACKUP/groups/naiss2024-22-404/Scenic/src/scenic/simulators/carla/simulator.py", line 116, in __init__
+    super().__init__(scene, **kwargs)
+  File "/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/datagen_far.scenic", line 140, in makeGenerator
+    if select_maneuver.connectingLane != None:
+AttributeError: 'int' object has no attribute 'connectingLane'
+slurmstepd: error: *** JOB 6521705 ON alvis2-18 CANCELLED AT 2026-04-29T02:15:55 ***
 srun: Job step aborted: Waiting up to 122 seconds for job step to finish.
-slurmstepd: error: *** JOB 6385232 ON alvis2-13 CANCELLED AT 2026-04-12T14:53:33 ***
-slurmstepd: error: *** STEP 6385232.0 ON alvis2-13 CANCELLED AT 2026-04-12T14:53:33 ***
+slurmstepd: error: *** STEP 6521705.0 ON alvis2-18 CANCELLED AT 2026-04-29T02:15:55 ***
