@@ -352,18 +352,20 @@ def main():
     if args.amp:
         print("Mixed precision (AMP) enabled", flush=True)
 
-    history = train(
-        model, criterion,
-        train_loader, val_loader,
-        optimizer, scheduler,
-        device, args.epochs, save_path,
-        scaler=scaler,
-    )
+    # history = train(
+    #     model, criterion,
+    #     train_loader, val_loader,
+    #     optimizer, scheduler,
+    #     device, args.epochs, save_path,
+    #     scaler=scaler,
+    # )
 
     print("\n=== Test set evaluation ===", flush=True)
     checkpoint = torch.load(save_path, map_location=device)
+    # TODO: Check this with Mengyuan
     model_to_load = model._orig_mod if hasattr(model, "_orig_mod") else model
-    model_to_load.load_state_dict(checkpoint["model_state"])
+    model.load_state_dict(checkpoint["model_state"])
+    # model_to_load.load_state_dict(checkpoint["model_state"])
 
     test_metrics = evaluate(model, test_loader, criterion, device)
     print(f"  loss_total : {test_metrics['loss_total']:.4f}", flush=True)
