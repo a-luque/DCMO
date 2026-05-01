@@ -4,6 +4,11 @@ import networkx as nx
 import numpy as np
 import itertools
 from typing import List, Tuple, Dict
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from stage2.alg_log_es import ContextSpace
 
 @dataclass
 class Rule:
@@ -212,6 +217,7 @@ def build_objective_weight_table(
     return table
 
 
+"""
 # --- Build contexts ---
 weather = ['ClearNoon', 'HardRainNoon', 'ClearSunset']
 dists   = [5, 10, 15]
@@ -220,11 +226,17 @@ contexts = (
     list(itertools.product(weather, dists, speeds)) +
     list(itertools.product(weather, [100], [0]))
 )
+"""
+ctx = ContextSpace()
+all_ctx = ctx.cells
 
 # --- Build table ---
 obj_weight_table = build_objective_weight_table(
-    contexts, RULE_NAMES, RULE_AFFINITY
+    all_ctx, RULE_NAMES, RULE_AFFINITY
 )
+
+# print(all_ctx)
+# print(obj_weight_table)
 
 """
 # --- Print ---
@@ -253,9 +265,6 @@ print_weight_table(obj_weight_table)
 
 
 def sanity_check(table: dict):
-    """
-    These should all pass given the domain semantics.
-    """
     checks = [
         # (context, expected, reason)
         (('HardRainNoon',  5, 4), "stability",
