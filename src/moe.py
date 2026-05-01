@@ -1,6 +1,8 @@
 import os
+import numpy as np
 import torch
 import torch.nn as nn
+from PIL import Image
 import torch.nn.functional as F
 from torchvision import models
 from torchvision.models import (
@@ -125,6 +127,32 @@ class MoE(nn.Module):
         return {
             "cte":            cte_pred.squeeze(1),
             "distance": dist_pred.squeeze(1),
+        }
+
+    @torch.no_grad()
+    def predict_single(
+        self,
+        input_img:   Image.Image,
+        maneuver:    int,               # 1=straight, 2=left, 3=right
+        w:           np.array,
+        d:           int,
+        s:           int,  
+        device:      torch.device,
+        transform,
+        nocar_value: float | None = None,
+    ) -> dict:
+
+        #image = Image.open(image_path).convert("RGB")
+        x     = transform(input_img).unsqueeze(0).to(device)          # (1, 3, H, W)
+        m     = torch.tensor([maneuver], dtype=torch.long).to(device)
+        c     = torch.cat([torch.tensor(w).unsqueeze(0), torch.tensor([d]).unsqueeze(0), torch.tensor([s]).unsqueeze(0)], dim=1).to(device)
+
+        cte_pred, dist_pred = self(x, m, c.to(torch.float32))
+
+
+        return {
+            "cte_pred":            cte_pred.squeeze().item(),
+            "dist_pred":      dist_pred.squeeze().item(),
         }
 
 

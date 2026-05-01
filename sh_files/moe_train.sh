@@ -3,8 +3,8 @@
 #SBATCH -N 1 --gpus-per-node=A40:1        # T4 -> A100 for ~6x speedup
 #SBATCH -n 1
 #SBATCH -t 1-00:00:00                    # 8h is plenty for 30 epochs on A100
-#SBATCH --output=/mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/moe_train.out
-#SBATCH --error=/mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/moe_train.err
+#SBATCH --output=/mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/moe_test.out
+#SBATCH --error=/mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/moe_test.err
 
 H5_FILENAME="moe.h5"
 REMOTE_H5="/mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/$H5_FILENAME"
