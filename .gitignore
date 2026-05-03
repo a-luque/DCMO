@@ -16,6 +16,7 @@ stage2/sim_results_es_safe
 stage2/sim_results_se_safe
 stage2/plots
 stage2/plots_se
+stage2/plots_es
 moe_data/
 
 test/
