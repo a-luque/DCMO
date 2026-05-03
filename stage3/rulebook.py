@@ -236,7 +236,7 @@ obj_weight_table = build_objective_weight_table(
 )
 
 # print(all_ctx)
-# print(obj_weight_table)
+print(obj_weight_table)
 
 """
 # --- Print ---

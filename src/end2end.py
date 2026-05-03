@@ -30,6 +30,8 @@ class End2End(torch.nn.Module):
     def __init__(self, context_dim,
                  num_experts, num_objectives, dropout_rate=0.1):
         super(End2End, self).__init__()
+        self.num_experts = num_experts
+        self.context_dim = context_dim
 
         # Layers
         self.layer1 = torch.nn.Linear(context_dim + num_experts, 128)
@@ -51,8 +53,8 @@ class End2End(torch.nn.Module):
         controller,  # (batch, 9)
         context      # (batch, 16)
     ):
-        assert controller.size()[1] == 9
-        assert context.size()[1] == 16
+        assert controller.size()[1] == self.num_experts
+        assert context.size()[1] == self.context_dim
         x = torch.cat([controller, context], axis=1)
         x = self.layer1(x)
         x = self.leaky_relu1(x)
@@ -69,6 +71,34 @@ class End2End(torch.nn.Module):
         # x = x.unsqueeze(0)
         x = torch.softmax(self.layer4(x), dim=1)
         return x
+
+    @torch.no_grad()
+    def predict_single(
+        self,
+        controller:  int,               # 1=straight, 2=left, 3=right
+        w:           np.array,
+        d:           int,
+        s:           int,  
+        device:      torch.device,
+    ) -> dict:
+
+        #image = Image.open(image_path).convert("RGB")
+        controller_onehot = np.zeros(self.num_experts)
+        controller_onehot[controller] = 1
+        controller_tensor = torch.from_numpy(controller_onehot).unsqueeze(0).to(device)
+        context     = torch.cat([torch.tensor(w).unsqueeze(0), torch.tensor([d]).unsqueeze(0), torch.tensor([s]).unsqueeze(0)], dim=1).to(device)
+
+        out = self(controller_tensor.to(torch.float32), context.to(torch.float32)).squeeze()
+
+        rew_sta, rew_eff, rew_safe = out[0], out[1], out[2]
+
+        return {
+            "rew_sta":      rew_sta.item(),
+            "rew_eff":      rew_eff.item(),
+            "rew_safe":     rew_safe.item()
+        }
+
+
 
 
 def train_E2E(
@@ -219,4 +249,4 @@ if __name__ == "__main__":
     train_dataset, val_dataset = load_empirical_validation_df()
     print("-- Training", flush=True)
     model = train_E2E(train_dataset, val_dataset, RESULTS_DIR)
-    torch.save(model.state_dict(), os.path.join(save_path, "final.pth"))
+    torch.save(model.state_dict(), os.path.join(RESULTS_DIR, "final.pth"))
