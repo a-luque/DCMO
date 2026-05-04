@@ -84,6 +84,7 @@ TARGET_SPEED_FOR_TURNING = 3 # KM/H
 TRIGGER_DISTANCE_TO_SLOWDOWN = 6 # FOR TURNING AT INTERSECTIONS
 CONTROLLERS_FOLDER = globalParameters.controllers_dir
 END2END_PATH = globalParameters.end2end_path
+PI_SAFE_PATH = globalParameters.pi_safe_path
 RULEBOOK = globalParameters.rulebook_path
 
 controllers_paths = [os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser(f"{CONTROLLERS_FOLDER}")) for f in fn]
@@ -100,7 +101,7 @@ RESULTS_PATH = globalParameters.results_path
     
     
         
-behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_oppositeTraffic=False, leaderCar=None):
+behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_oppositeTraffic=False, leaderCar=None, monitor=False):
     """ 
     Follow's the lane on which the vehicle is at, unless the laneToFollow is specified.
     Once the vehicle reaches an intersection, by default, the vehicle will take the straight route.
@@ -273,6 +274,47 @@ behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_opp
         if leaderCar and (distance from self to intersection > TRIGGER_DISTANCE_TO_SLOWDOWN+3):
             self.closeIntersection = 0
 
+        # Safe monitor filtering
+        # Monitor prediction
+        if monitor:
+            if not leaderCar is None:
+                dist = distance to leaderCar
+                speed = leaderCar.speed
+            else:
+                dist = 100
+                speed = 0
+
+            distance_bucket = 0
+            if dist < 9.6:
+                distance_bucket = 5
+            elif dist < 14.6:
+                distance_bucket = 10
+            elif dist < 24.6:
+                distance_bucket = 15
+            else: 
+                distance_bucket = 100
+                speed_bucket = 0
+
+            speed_bucket = 0
+            if distance_bucket < 100:
+                if speed > 7:
+                    speed_bucket = 8
+                elif speed > 5:
+                    speed_bucket = 6
+                else:
+                    speed_bucket = 4
+
+            
+            current_lane = self._lane
+            if current_lane:
+                current_centerline = current_lane.centerline
+            context = np.concatenate([self.weather, np.array([distance_bucket]), np.array([speed_bucket]), np.array([1.])])
+            controller_probs = expit(np.dot(context, self.safe_monitor.T))
+            safe_controllers = np.where(controller_probs >= 0.7)[0]
+
+            if len(safe_controllers) > 0:
+                self.isSafe = 1
+
 
 
 
@@ -341,7 +383,16 @@ behavior ControllerBehavior(target_speed = 10, controller_path = None, leaderCar
             preds = []
             self.best_controller = 0
             best_reward = -1
-            for c_index in range(len(self.controllers)):
+
+            # Safe monitor filtering
+            context = np.concatenate([self.weather, np.array([distance_bucket]), np.array([speed_bucket]), np.array([1.])])
+            controller_probs = expit(np.dot(context, self.safe_monitor.T))
+            safe_controllers = np.where(controller_probs >= 0.7)[0]
+
+            if len(safe_controllers) == 0:
+                self.isSafe = 0
+
+            for c_index in safe_controllers:
                 prediction = self.end2end.predict_single(c_index, self.weather, distance_bucket, speed, "cuda") 
       
                 preds += [prediction]
@@ -460,19 +511,22 @@ behavior EgoBehavior(target_speed = 10, leaderCar=None):
         self.end2end.cuda()
 
         self.end2end.load_state_dict(torch.load(END2END_PATH, weights_only=True))
+
+        with open(PI_SAFE_PATH, "rb") as f:
+            self.safe_monitor = np.load(f)
         
 
         self.sensor_created_flag = False                
 
     try:
         do ControllerBehavior(target_speed=target_speed, leaderCar=leaderCar)
-    interrupt when self.closeIntersection:
+    interrupt when self.closeIntersection or not self.isSafe:
         do EgoBehavior2(target_speed = target_speed, leaderCar=leaderCar)
 
 behavior EgoBehavior2(target_speed = 10, leaderCar=None):
     try:
-        do FollowLaneBehaviorModified(target_speed=target_speed, leaderCar=leaderCar)
-    interrupt when not self.closeIntersection:
+        do FollowLaneBehaviorModified(target_speed=target_speed, leaderCar=leaderCar, monitor=True)
+    interrupt when (not self.closeIntersection) and self.isSafe:
         do EgoBehavior(target_speed=target_speed, leaderCar=leaderCar)
 
 
@@ -500,6 +554,7 @@ if dist_to_leader <= 15:
         with sensor_created_flag 1,
         with closeIntersection 0,
         with end2end None,
+        with safe_monitor None,
         with weather np.zeros(14),
         with controllers None,
         with best_controller -1,
@@ -518,6 +573,7 @@ else:
         with sensor_created_flag 1,
         with closeIntersection 0,
         with end2end None, 
+        with safe_monitor None,
         with weather np.zeros(14),
         with controllers None,
         with best_controller -1,
@@ -544,4 +600,5 @@ record ego.distanceToClosest(Car) every 0.1 seconds after 3 seconds to RESULTS_P
 record ego.cte every 0.1 seconds after 3 seconds to RESULTS_PATH+"/true_cte.npz"
 record ego.collision every 0.1 seconds after 3 seconds to RESULTS_PATH+"/collision.npz"
 record ego.best_controller every 0.1 seconds after 3 seconds to RESULTS_PATH+"/best_controller.npz"
+record ego.isSafe every 0.1 seconds after 3 seconds to RESULTS_PATH+"/isSafe.npz"
 # record ego.speed

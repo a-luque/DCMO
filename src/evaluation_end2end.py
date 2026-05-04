@@ -112,6 +112,7 @@ if __name__ == "__main__":
     parser.add_argument("--results_dir", type=str, default="")
     parser.add_argument("--end2end_path", type=str, default="")
     parser.add_argument("--rulebook_path", type=str, default="")
+    parser.add_argument("--pi_safe_path", type=str, default="")
     parser.add_argument("--controllers_folder", type=str, default="")
     parser.add_argument('--scenic', help='scenic program',type=str,default="")
 
@@ -124,6 +125,7 @@ if __name__ == "__main__":
     SCENIC = args.scenic
     END2END_PATH = args.end2end_path
     RULEBOOK_PATH = args.rulebook_path
+    PI_SAFE_PATH = args.pi_safe_path
 
     # Contexts and controllers
     weathers = ['ClearNoon', 'HardRainNoon', 'ClearSunset']
@@ -166,7 +168,7 @@ if __name__ == "__main__":
                 modd_dir = f"{results_dir}modd_{current_modd+1}/"
 
                 # print("Loading scenic", flush=True)
-                os.system(f"scenic -S {SCENIC} --count 1 --time {NUM_STEPS} --2d -s {seed} --param controllers_dir {CONTROLLERS_FOLDER} --param end2end_path {END2END_PATH} --param rulebook_path {RULEBOOK_PATH} --param weather {weather} --param results_path {modd_dir} --param dist_car {dist} --param speed_car {speed} --param render 0")  
+                os.system(f"scenic -S {SCENIC} --count 1 --time {NUM_STEPS} --2d -s {seed} --param controllers_dir {CONTROLLERS_FOLDER} --param end2end_path {END2END_PATH} --param rulebook_path {RULEBOOK_PATH} --param pi_safe_path {PI_SAFE_PATH} --param weather {weather} --param results_path {modd_dir} --param dist_car {dist} --param speed_car {speed} --param render 0")  
                 # print("Simulation worked", flush=True)
 
                 r_sta, r_eff, r_safe, _ = get_reward(results_path=modd_dir)

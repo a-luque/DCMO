@@ -6,13 +6,13 @@
 #SBATCH -n 2 # NEW
 #SBATCH -t 1-00:00:00
 
-#SBATCH --output=/mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/end2end_testing_half.out
-#SBATCH --error=/mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/end2end_testing_half.err
+#SBATCH --output=/mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/end2end_testing_safe_half.out
+#SBATCH --error=/mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/end2end_testing_safe_half.err
 
 cd /mimer/NOBACKUP/groups/naiss2024-22-404/MODD/experiments/contextual_MODD/carla/lane_keeping/
 
 srun -n1 --overlap apptainer exec --nv ../../../../carla_container.sif ./CarlaUE4_restart.sh &
 sleep 20 
 cd /cephyr/users/luque/Alvis/DCMO/src
-srun -n1 --overlap apptainer exec --nv /mimer/NOBACKUP/groups/naiss2024-22-404/my_container_verifai3.sif python3 /cephyr/users/luque/Alvis/DCMO/src/evaluation_end2end.py --scenic /cephyr/users/luque/Alvis/DCMO/src/evaluation_end2end.scenic --num_steps 300 --num_sim 500 --results_dir /mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/testing_end2end_half --controllers_folder /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster --end2end_path /mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/training_end2end_half/end2end_39.pth --rulebook_path /mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/rulebook_preferences.pkl &
+srun -n1 --overlap apptainer exec --nv /mimer/NOBACKUP/groups/naiss2024-22-404/my_container_verifai3.sif python3 /cephyr/users/luque/Alvis/DCMO/src/evaluation_end2end.py --scenic /cephyr/users/luque/Alvis/DCMO/src/evaluation_end2end.scenic --num_steps 300 --num_sim 500 --results_dir /mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/testing_end2end_safe_half --controllers_folder /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/checkpoints/train_faster --end2end_path /mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/training_end2end_half/end2end_39.pth --pi_safe_path /mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/safety_monitor_reduced_1/weights_1000.npy --rulebook_path /mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/rulebook_preferences.pkl &
 wait
