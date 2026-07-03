@@ -4,11 +4,11 @@
 
 #SBATCH -N 1 --gpus-per-node=T4:1  # We're launching 1 node with 1 Nvidia T4 GPU
 #SBATCH -n 2 # NEW
-#SBATCH -t 1-00:00:00
+#SBATCH -t 4-00:00:00
 
-#SBATCH --output=/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/debug_outputs/stage2/run_sim_es_b3.out
+#SBATCH --output=/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/debug_outputs/stage2/run_sim_es.out
 
-#SBATCH --error=/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/debug_outputs/stage2/run_sim_es_b3.err
+#SBATCH --error=/mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/debug_outputs/stage2/run_sim_es.err
 
 cd /mimer/NOBACKUP/groups/naiss2025-22-1298/CMO/experiments/
 

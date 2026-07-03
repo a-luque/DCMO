@@ -12,7 +12,7 @@ from scenic.domains.driving.controllers import (
 param timeout = 30
 param map = localPath('carla_map/Town01.xodr')
 param carla_map = 'Town01'
-param render = 0
+param render = 1
 
 model scenic.simulators.carla.model
 
@@ -22,10 +22,10 @@ CAR_DISTANCE = globalParameters.car_dist
 
 #CONSTANTS
 EGO_MODEL = "vehicle.tesla.model3"
-EGO_SPEED = 5
+EGO_SPEED = 12
 EGO_TO_LEADER = Range(CAR_DISTANCE, CAR_DISTANCE+10) # -30, -20
 
-behavior FollowLaneBehaviorModified(target_speed = 10, laneToFollow=None, is_oppositeTraffic=False, leaderCar=None):
+behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_oppositeTraffic=False, leaderCar=None):
     """ 
     Follow's the lane on which the vehicle is at, unless the laneToFollow is specified.
     Once the vehicle reaches an intersection, by default, the vehicle will take the straight route.
