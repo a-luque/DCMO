@@ -506,7 +506,7 @@ def simulate(cell, controller_path: str, t: int) -> np.ndarray:
     current_file_dir = os.path.dirname(os.path.abspath(__file__))
 
     #results_dir = f"sim_results/{t}/"
-    results_dir = os.path.join(current_file_dir, f"sim_results_es_b3/{t}/") # for order: e,s
+    results_dir = os.path.join(current_file_dir, f"sim_results_es_45/{t}/") # for order: e,s
     # results_dir = os.path.join(current_file_dir, f"sim_results_se/{t}/") # for order: s, e
     if os.path.exists(results_dir):
         shutil.rmtree(results_dir)
@@ -557,8 +557,8 @@ if __name__ == "__main__":
     # print(f"First 5 cells: {ctx.cells[:5]}")
 
     T, K           = 5000, 2
-    # beta, eps      = 4.5, 0.3 # 4.5, 4.0, 3.0
-    beta, eps      = 3.0, 0.3
+    beta, eps      = 4.5, 0.3 # 4.5, 4.0, 3.0
+    # beta, eps      = 3.0, 0.3
     n_controllers  = 9
 
     pi_path = "/mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/safety_monitor_reduced_1/weights_1000.npy"
@@ -568,7 +568,7 @@ if __name__ == "__main__":
     bandit = ContextualKObjectiveBandit(
         T=T, ctx=ctx, beta=beta, eps=eps, K=K,
         n_controllers=n_controllers, pi_safe=pi,
-        checkpoint_path="bandit_checkpoint_e_s_b3.npz",
+        checkpoint_path="bandit_checkpoint_e_s_45.npz",
         checkpoint_every=10,         # rolling checkpoint: overwrites every 10 rounds
         snapshot_every=1000,         # permanent snapshot: new file every 1000 rounds
     )

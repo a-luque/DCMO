@@ -116,11 +116,12 @@ def plot_controller_performance(
 
 def main():
     # --- Config ---
-    npz_path = "../bandit_checkpoint_e_s.npz"
+    #npz_path = "../bandit_checkpoint_e_s.npz"
+    npz_path = "../bandit_scalar_lambda_1_0.npz"
     reward_order = "es"
     csv_path = "context_cells.csv"
     extracted_path = "_".join(Path(npz_path).stem.split("_")[-2:])
-    output_path = "exp3_plots/"+extracted_path+"_controller_rewards_plot.png"
+    output_path = "exp1_plots/"+extracted_path+"_scalarized.png"
     target_cell = ("ClearNoon", 5, 4)
 
     # --- Load ---

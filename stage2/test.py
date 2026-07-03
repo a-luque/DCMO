@@ -18,16 +18,17 @@ print(f"{controllers[0]}")
 import numpy as np
 
 
-#path = "../bandit_checkpoint_e_s.npz"
+path = "../bandit_checkpoint_s_e.npz"
 # path = "sim_results/1/speed.npz"
-path = "../bandit_checkpoint_e_s_snapshots/snapshot_t2000.npz"
+#path = "../bandit_checkpoint_e_s_snapshots/snapshot_t2000.npz"
 data = np.load(path, allow_pickle=True)
-
+"""
 for key in data.files:
     print(key, data[key])
     #print(len(data[key]))
     #print(min(data[key]))
-
+"""
+print(data["history"][-10:])
 
 
 """
