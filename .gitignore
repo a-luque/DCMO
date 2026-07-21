@@ -18,6 +18,10 @@ stage2/plots
 stage2/plots_se
 stage2/plots_es
 moe_data/
+test_alg/sim_results_es_45
+test_alg/sim7_results_es
+
+
 
 test/
 
@@ -25,6 +29,8 @@ test/
 *.pt
 *.pth
 *.h5
+*.png
+
 
 __pycache__/
 *.pyc
