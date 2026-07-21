@@ -43,8 +43,10 @@ class ContextSpace:
         weather = ['ClearNoon', 'HardRainNoon', 'CloudyNoon'] # TODO: foggy noon
         # dists  = [5, 10, 20, 30, 50]
         #dists = [5, 10, 15]
+        distance_between = 5.0
         dists  = [1, 10, 20, 40]
-        speeds = [4, 10, 18]
+        dists = [x + distance_between for x in dists]
+        speeds = [4, 8, 12]
         self.sampled_ctx = None
 
         """
@@ -104,7 +106,6 @@ class ContextSpace:
 
     def __repr__(self):
         return f"ContextSpace(n_cells={self.total_cells}, dims={self.DIM_NAMES})"
-
 
 
 class ControllerStats:
@@ -192,13 +193,15 @@ class ContextualKObjectiveBandit:
         # Collect all .pt files from ../controllers, sorted for stable indexing
         current_file_dir = os.path.dirname(os.path.abspath(__file__))
         controllers_path = os.path.join(current_file_dir, "..", "controllers")
-
+        """
         self.controllers_dir = sorted([
             os.path.join(dp, f)
             for dp, dn, fn in os.walk(controllers_path)
             for f in fn
             if f.endswith(".pt")
         ])
+        """
+        self.controllers_dir = ['sport', 'aggressive', 'dynamic', 'balanced', 'comfort', 'conservative', 'defensive']
         self.pi_safe = pi_safe
 
         # Per-controller storage: counts + estimated rewards
@@ -437,6 +440,7 @@ def get_reward(results_path: str, controller_path: str, timestep: float = 0.1,
     # --- efficiency reward: avg_speed / model_size ---
     # Extract model size (18, 50, or 101) from controller filename
     # e.g. "../controllers/resnet101_coarse_best.pt" -> 101
+    """
     controller_basename = os.path.basename(controller_path)
     model_size = None
     for candidate in [18, 50, 101]:
@@ -448,14 +452,18 @@ def get_reward(results_path: str, controller_path: str, timestep: float = 0.1,
             f"Cannot determine model size from controller path: {controller_path!r}. "
             f"Expected filename to contain 'resnet18', 'resnet50', or 'resnet101'."
         )
-
+    """
     speed_results = np.load(results_path + "speed.npz")
     acc_results   = np.load(results_path + "acc.npz")
+    lead_speed_results = np.load(results_path + "leader_speed.npz")
 
     avg_speed = np.mean(speed_results["values"])
+    avg_lead_speed = np.mean(lead_speed_results["values"])
     acc       = np.array(acc_results["values"])
     jerks     = np.diff(acc) / timestep
-    jerks_mean = np.mean(np.abs(jerks))
+    #jerks_mean = np.mean(np.abs(jerks))
+    jerk_rms = np.sqrt(np.mean(jerks**2))
+    reward_s = np.exp(-jerk_rms / tau)
 
     #print(f"Jerk Mean: {np.mean(np.abs(jerks))}, Max: {np.max(np.abs(jerks))}, Min: {np.min(np.abs(jerks))}")
 
@@ -463,7 +471,6 @@ def get_reward(results_path: str, controller_path: str, timestep: float = 0.1,
     # Max possible value: fastest speed (8) / smallest model (18)  -> 8/18
     # Min possible value: 0 (absolute minimum)
     #RAW_MAX = 8.0 / 18.0
-    MAX_SPEED = 18.0
     """
     RAW_MAX = 8.0 / np.log(19.0)
     RAW_MIN = 0.0
@@ -472,23 +479,25 @@ def get_reward(results_path: str, controller_path: str, timestep: float = 0.1,
     reward_e = (raw_e - RAW_MIN) / (RAW_MAX - RAW_MIN)     # efficiency (normalized)
     reward_e = float(np.clip(reward_e, 0.0, 1.0))          # guard against edge cases
     """
-    reward_e = avg_speed / MAX_SPEED  # efficiency (normalized)
+    reward_e = avg_speed / avg_lead_speed  # efficiency (normalized)
+    reward_e = float(np.clip(reward_e, 0.0, 1.0))
 
     # reward_c = np.mean(np.exp(-np.abs(jerks) / tau))       # comfort
     #reward_c = np.mean(np.exp(-(jerks / tau)**2))
-    reward_s = np.exp(- ( jerks_mean / tau))
+    #reward_s = np.exp(- ( jerks_mean / tau))
 
     #### logging safety violation info
     dist_vals = np.load(results_path + "dist.npz")
-    cte_vals = np.load(results_path + "true_cte.npz")
-    collision_vals = np.load(results_path + "collision.npz")
+    cte_vals = np.load(results_path + "cte.npz")
+    #collision_vals = np.load(results_path + "collision.npz")
 
     min_dist = float(dist_vals["values"].min())-4.6
     lane_invasion = int((np.absolute(cte_vals["values"])>0.7).sum())
-    collision_happened = int(collision_vals["values"].max())
+    #collision_happened = int(collision_vals["values"].max())
 
     # TODO: Change safe distance value to something proportional to the speed?
-    if min_dist < 1 or lane_invasion > 30 or collision_happened:
+    #if min_dist < 1.0 or lane_invasion > 30 or collision_happened:
+    if min_dist < 1.0 or lane_invasion > 30:
         safety_violation = 1
     else: 
         safety_violation = 0
@@ -496,9 +505,9 @@ def get_reward(results_path: str, controller_path: str, timestep: float = 0.1,
     safety_info = {
         "min_dist": min_dist,
         "avg_speed": avg_speed,
-        "avg_jerks": jerks_mean,
+        "avg_jerks": jerk_rms,
         "lane_invasion": lane_invasion,
-        "collision_happened": collision_happened,
+        #"collision_happened": collision_happened,
         "safety_violation": safety_violation
     }
 
@@ -511,7 +520,7 @@ def simulate(cell, controller_path: str, t: int) -> np.ndarray:
     current_file_dir = os.path.dirname(os.path.abspath(__file__))
 
     #results_dir = f"sim_results/{t}/"
-    results_dir = os.path.join(current_file_dir, f"sim_results_es_45/{t}/") # for order: e,s
+    results_dir = os.path.join(current_file_dir, f"sim7_results_es/{t}/") # for order: e,s
     # results_dir = os.path.join(current_file_dir, f"sim_results_se/{t}/") # for order: s, e
     if os.path.exists(results_dir):
         shutil.rmtree(results_dir)
@@ -519,7 +528,7 @@ def simulate(cell, controller_path: str, t: int) -> np.ndarray:
     # sampled_weather, sampled_intersect, sampled_distance, sampled_speed = cell
     sampled_weather, sampled_distance, sampled_speed = cell
     
-    scenic_file_path = os.path.join(current_file_dir, "gen_sim_reduced.scenic")
+    scenic_file_path = os.path.join(current_file_dir, "gen_sim_7.scenic")
     """
     cmd = [
         "scenic",
@@ -536,16 +545,19 @@ def simulate(cell, controller_path: str, t: int) -> np.ndarray:
     subprocess.run(cmd, check=True)
     """
 
+    #print(f"Simulated round {t} with controller {controller_path} at context {sampled_weather} {-1 * sampled_distance} {sampled_speed}. Results in {results_dir}")
     
     os.system(
-        f"scenic -S {scenic_file_path} --count 1 --time 200 --2d "
-        f"--param results_path {results_dir} "
-        f"--param controller_path {controller_path} "
+        f"scenic -S {scenic_file_path} --count 1 --time 300 --2d "
+        f"--param result_path {results_dir} "
+        #f"--param controller_path {controller_path} "
+        f"--param ego_idm {controller_path} "
         f"--param weather {sampled_weather} "
         #f"--param intersect {sampled_intersect} "
-        f"--param dist_car {sampled_distance} "
-        f"--param speed_car {sampled_speed}"
+        f"--param car_dist {sampled_distance} "
+        f"--param leader_speed {sampled_speed}"
     )
+    #print(f"Simulated round {t} with controller {controller_path} at context {sampled_weather} {-1 * sampled_distance} {sampled_speed}. Results in {results_dir}")
     
     
     #rewards = get_reward(results_dir, controller_path)
@@ -564,7 +576,8 @@ if __name__ == "__main__":
     T, K           = 5000, 2
     beta, eps      = 4.5, 0.3 # 4.5, 4.0, 3.0
     # beta, eps      = 3.0, 0.3
-    n_controllers  = 9
+    #n_controllers  = 9
+    n_controllers  = 7 #aggressive, smooth, conservative
 
     pi_path = "/mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/safety_monitor_reduced_1/weights_1000.npy"
     with open(pi_path, "rb") as f:
@@ -573,7 +586,7 @@ if __name__ == "__main__":
     bandit = ContextualKObjectiveBandit(
         T=T, ctx=ctx, beta=beta, eps=eps, K=K,
         n_controllers=n_controllers, pi_safe=pi,
-        checkpoint_path="bandit_checkpoint_e_s_45.npz",
+        checkpoint_path="bandit_checkpoint_sim7_es.npz",
         checkpoint_every=10,         # rolling checkpoint: overwrites every 10 rounds
         snapshot_every=1000,         # permanent snapshot: new file every 1000 rounds
     )
