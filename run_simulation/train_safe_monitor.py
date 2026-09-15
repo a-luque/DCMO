@@ -11,10 +11,13 @@ import re
 import time
 import itertools
 
+sys.path.append("../src")
+sys.path.append('..')
+sys.path.append('./')
 
-from ..src.system import System
-from ..src.trainer import Trainer, Logger
-from ..src.bandits import LinearExplorer, LogisticExplorer
+from src.system import System
+from src.trainer import Trainer, Logger
+from src.bandits import LinearExplorer, LogisticExplorer
 import scenic
 from scenic.simulators.newtonian import NewtonianSimulator
 from scenic.simulators.carla.simulator import CarlaSimulator
@@ -40,20 +43,21 @@ class BasicSystem(System):
         Returns:
         - The safety reward for the executed controller.
         """
-		(weather, dist_car, speed) = context
-		print(CONTROLLERS[index], weather, dist_car, speed)
+        (weather, dist_car, speed) = context
+        controller = CONTROLLERS[index]
+        print(controller, weather, dist_car, speed, flush=True)
 
-		save_path = os.path.join(SAVE_PATH, controller)
+        save_path = os.path.join(SAVE_PATH, controller)
         
-		while True:
-			try:
-				r, safety_info = simulate(context, CONTROLLERS[index], save_path, order="es", t=t_step)
-				break
-			except Exception as e:
-				print(f"Simulation failed for controller={controller}, run={i}: {e}")
-				time.sleep(5)
+        while True:
+            try:
+                r, safety_info = simulate(context, CONTROLLERS[index], save_path, order="es", t=t_step)
+                break
+            except Exception as e:
+                print(f"Simulation failed for controller={controller}, run={t_step}: {e}", flush=True)
+                time.sleep(5)
 
-		return 1-safety_info["safety_violation"]
+        return 1-safety_info["safety_violation"]
             
         
 
@@ -73,7 +77,7 @@ class BasicSystem(System):
 
 class BasicTrainer(Trainer):
 
-    def train(self, n_steps, logger=None):
+    def train(self, initial, n_steps, logger=None):
         """
         Train the system for n_steps.
 
@@ -82,13 +86,13 @@ class BasicTrainer(Trainer):
         """
         
         
-        for t_step in range(n_steps):
+        for t_step in range(initial, n_steps):
             (weather, dist_car, speed) = self.system.sample_context()
             # intersection = random.randint(0,1)
 
             x = np.concatenate([np.array(Weather[weather].value), np.array([dist_car]), np.array([speed]), np.array([1.])])
             index = self.bandit_alg.act(x)
-			
+            
             uncertainties = []
             product_contexts = []
 
@@ -96,7 +100,7 @@ class BasicTrainer(Trainer):
                 (w, dc, s) = self.system.sample_context()
             else: 
                 for ctx_i in range(len(self.system.contexts)):
-					(w, dc, s) = self.system.contexts.cell(ctx_i)
+                    (w, dc, s) = self.system.contexts.cell(ctx_i)
                     product_contexts += [(w, dc, s)]
                     X = np.concatenate([np.array(Weather[w].value), np.array([dc]), np.array([s]), np.array([1.])])
 
@@ -110,7 +114,7 @@ class BasicTrainer(Trainer):
             x = np.concatenate([np.array(Weather[w].value), np.array([dc]), np.array([s]), np.array([1.])])
             index = self.bandit_alg.act(x)
             # index = random.randrange(15)
-            reward = self.system.step(index, [w, dc, s])
+            reward = self.system.step(index, [w, dc, s], t_step)
             self.bandit_alg.update(index, x, reward)
             if t_step % self.bandit_alg.recompute_every == 0 and t_step > 0: 
                 with open(f"{self.results_dir}/weights_{t_step}.npy", "wb") as f:
@@ -147,16 +151,16 @@ class BasicLogger(Logger):
             i_init = 0
         res_reward = 0
         self.log["t"].append(0)
-		
+        
         for i in range(i_init, i_init + self.log_samples):
-			
+            
             if f"rew_{i}" not in self.log.keys():
                 self.log[f"rew_{i}"] = []
-				
+                
             reward = system.step(None, None, t_step=i)
             self.log[f"rew_{i}"].append(reward)
-			
-            print(self.log)
+            
+            print(self.log, flush=True)
             if i == 0 or i % 10 == 0 or i == (self.log_samples - 1):
                 pd.DataFrame.from_dict(self.log).to_csv(f"{LOG_PATH[:-4]}_{i}.csv")
             res_reward += reward
@@ -173,13 +177,14 @@ if __name__ == "__main__":
     ## arguments 
     parser.add_argument('--num_steps', help='number of steps per simulation',type=int,default=300)
     parser.add_argument('--threshold_invasions', help='number of steps per simulation',type=float,default=0.1)
-    parser.add_argument("--results_dir", type=str, default="/proj/berzelius-2026-227/users/x_alluq/CMO/safety_monitor_traning")
+    parser.add_argument("--results_dir", type=str, default="/proj/berzelius-2026-227/users/x_alluq/CMO/safety_monitor_training")
     parser.add_argument("--log_path", type=str, default="../../log.csv")
     parser.add_argument('--n_steps', help='number of steps per simulation',type=int,default=1001)
     parser.add_argument('--i_init', help='log data initial simulation for seed',type=int,default=0)
     parser.add_argument('--log_samples', help='number of steps per simulation',type=int,default=25)
     parser.add_argument('--log_at', help='number of steps per simulation',type=int,default=25)
     parser.add_argument('--recompute_every', help='number of steps per simulation',type=int,default=25)
+    parser.add_argument('--initial_step', help='index of initial simulation',type=int,default=0)
     
     args = parser.parse_args()
 
@@ -194,32 +199,32 @@ if __name__ == "__main__":
     NUM_STEPS= args.num_steps
     RESULTS_DIR = args.results_dir
     LOG_PATH = args.log_path
-    CONTROLLERS_FOLDER = args.controllers_folder
     n_steps = args.n_steps
     log_at = args.log_at
     log_samples = args.log_samples
     recompute_every = args.recompute_every
     i_init = args.i_init
-    SCENARIO = args.scenario
-    training = args.training
+    initial_step = args.initial_step
+    
 
 
     contexts = ContextSpace()
     
-	system = BasicSystem(controllers=CONTROLLERS, scenic=['follow_lane.scenic', 'follow_lane_car.scenic'], contexts=contexts)
+    system = BasicSystem(controllers=CONTROLLERS, scenic=['follow_lane.scenic', 'follow_lane_car.scenic'], contexts=contexts)
     
-	logger = BasicLogger(log_samples=log_samples)
+    logger = BasicLogger(log_samples=log_samples)
     explorer = LogisticExplorer(n_arms=len(CONTROLLERS), feature_dim=17, recompute_every=recompute_every)
     trainer = BasicTrainer(system=system, bandit_alg=explorer, log_at=log_at)
     
-	system.results_dir = RESULTS_DIR
+    
+    system.results_dir = RESULTS_DIR
     trainer.results_dir = RESULTS_DIR
     explorer.contexts = contexts
     trainer.contexts = contexts
     system.weights_file = ""
 
     
-	_, log = trainer.train(logger=None, n_steps=n_steps)
-	
-	if log is not None:
-		pd.DataFrame.from_dict(log).to_csv(LOG_PATH)
+    _, log = trainer.train(logger=None, initial=initial_step, n_steps=n_steps)
+    
+    if log is not None:
+        pd.DataFrame.from_dict(log).to_csv(LOG_PATH)
