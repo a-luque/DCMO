@@ -394,10 +394,10 @@ behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_opp
 lane = Uniform(*network.lanes)
 start = new OrientedPoint on lane.centerline
 
-
+"""
 attrs = {"image_size_x": 640,
          "image_size_y": 320}
-
+"""
 
 if CAR_DISTANCE <= 40:
 
@@ -414,8 +414,8 @@ if CAR_DISTANCE <= 40:
                 with cte 0,
                 with selected_maneuver 1,
                 with visibleDistance 60,
-                with record_acc 0.0,
-                with sensors {"front_rgb": RGBSensor(offset=(0, 2, 1), attributes=attrs)} 
+                with record_acc 0.0
+                #with sensors {"front_rgb": RGBSensor(offset=(0, 2, 1), attributes=attrs)} 
 else:
     ego = new Car following roadDirection from start for -5,
                 with blueprint EGO_MODEL,
@@ -423,8 +423,8 @@ else:
                 with cte 0,
                 with selected_maneuver 1,
                 with record_acc 0.0,
-                with leader_speed EGO_SPEED,
-                with sensors {"front_rgb": RGBSensor(offset=(0, 2, 1), attributes=attrs)} 
+                with leader_speed EGO_SPEED
+                #with sensors {"front_rgb": RGBSensor(offset=(0, 2, 1), attributes=attrs)} 
 
 time_step = 0.1
 
@@ -434,9 +434,10 @@ if CAR_DISTANCE <= 40:
 else:
     record ego.leader_speed every time_step seconds after 3 seconds to RESULT_PATH+"/leader_speed.npz"
 
-record EGO_TO_LEADER every time_step seconds after 3 seconds to RESULT_PATH+"/initial_dist.npz"
+#record ego.position.x every time_step seconds after 3 seconds to RESULT_PATH+"/ego_pos.npz"
 record ego.distanceToClosest(Car) every time_step seconds after 3 seconds to RESULT_PATH+"/dist.npz"
 record ego.cte every time_step seconds after 3 seconds to RESULT_PATH+"/cte.npz"
 record ego.record_acc every time_step seconds after 3 seconds to RESULT_PATH+"/acc.npz"
 record ego.selected_maneuver every time_step seconds after 3 seconds to RESULT_PATH+"/maneuver.npz"
 record ego.speed every time_step seconds after 3 seconds to RESULT_PATH+"/speed.npz"
+#record ego.observations["front_rgb"] every time_step seconds after 3 seconds to RESULT_PATH+"/img/front_rgb_{time:.1f}.jpg"

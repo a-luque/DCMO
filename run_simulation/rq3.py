@@ -472,12 +472,12 @@ if __name__ == "__main__":
 
     # Directory holding the per-controller, per-context ensemble reward
     # files, e.g. rq0_6_4_aggressive.npz, rq0_6_4_comfort.npz, ...
-    base_dir = "/proj/berzelius-2026-227/users/x_menwa/CMO_new/new_exp/run_simulations"
+    base_dir = "/cephyr/users/mengyuan/Alvis/Desktop/mimer_naiss2025-22-1298/CMO/new_exp/run_simulations"
     npz_dir = os.path.join(base_dir, "rq3_ensemble_rewards")
 
     weights = get_controller_weights(npz_dir, alphas)
 
-    alg_npz_path = "/proj/berzelius-2026-227/users/x_menwa/CMO_new/new_exp/main_alg_sim_es.npz"
+    alg_npz_path = "/cephyr/users/mengyuan/Alvis/Desktop/mimer_naiss2025-22-1298/CMO/new_exp/main_alg_sim_es.npz"
     ctx = ContextSpace()
     mu_hat, names = load_checkpoint(alg_npz_path)
     if names is None:
