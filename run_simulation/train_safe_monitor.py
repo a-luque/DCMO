@@ -177,7 +177,7 @@ if __name__ == "__main__":
     ## arguments 
     parser.add_argument('--num_steps', help='number of steps per simulation',type=int,default=300)
     parser.add_argument('--threshold_invasions', help='number of steps per simulation',type=float,default=0.1)
-    parser.add_argument("--results_dir", type=str, default="/proj/berzelius-2026-227/users/x_alluq/CMO/safety_monitor_training")
+    parser.add_argument("--results_dir", type=str, default="/home/luque/Documents/safety_monitor_training")
     parser.add_argument("--log_path", type=str, default="../../log.csv")
     parser.add_argument('--n_steps', help='number of steps per simulation',type=int,default=1001)
     parser.add_argument('--i_init', help='log data initial simulation for seed',type=int,default=0)
