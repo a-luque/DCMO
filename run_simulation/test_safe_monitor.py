@@ -31,7 +31,7 @@ SAVE_PATH =  f"safety_monitor_testing"
 
 
 
-def simulate(cell, controller_path: str, save_path: str, order: str, t: int, seed: int) -> np.ndarray:
+def simulate(cell, save_path: str, order: str, t: int, seed: int) -> np.ndarray:
     current_file_dir = os.path.dirname(os.path.abspath(__file__))
 
     #results_dir = f"sim_results/{t}/"
@@ -42,7 +42,7 @@ def simulate(cell, controller_path: str, save_path: str, order: str, t: int, see
     # sampled_weather, sampled_intersect, sampled_distance, sampled_speed = cell
     sampled_weather, sampled_distance, sampled_speed = cell
 
-    scenic_file_path = os.path.join(current_file_dir, "new_sim.scenic")
+    scenic_file_path = os.path.join(current_file_dir, "new_sim_testing.scenic")
 
     #print(f"Simulated round {t} with controller {controller_path} at context {sampled_weather} {-1 * sampled_distance} {sampled_speed}. Results in {results_dir}")
 
@@ -50,11 +50,14 @@ def simulate(cell, controller_path: str, save_path: str, order: str, t: int, see
         f"scenic -S {scenic_file_path} --count 1 --time 300 --2d --seed {int(seed)} "
         f"--param result_path {results_dir} "
         #f"--param controller_path {controller_path} "
-        f"--param ego_idm {controller_path} "
+        # f"--param ego_idm {controller_path} "
         f"--param weather {sampled_weather} "
         #f"--param intersect {sampled_intersect} "
         f"--param car_dist {sampled_distance} "
         f"--param leader_speed {sampled_speed}"
+        f"--param safety_monitor {MONITOR.safety_monitor_path}"
+        f"--param performance_monitor {MONITOR.performance_monitor_path}"
+        f"--param safety_threshold {MONITOR.safety_threshold}"
     )
 
     #rewards = get_reward(results_dir, controller_path)
@@ -83,25 +86,24 @@ class BasicSystem(System):
         seed = SEEDS["sim_seed"][t_step]
         context = SEEDS["cells"][t_step]
 
-        controller_index = MONITOR.optimal_controller(context, LOSS_WEIGHTS)
 
-        if controller_index is None:
-            print(f"No safe controller found for context {context} at step {t_step}. Skipping this step.", flush=True)
-            return 0, 0, 1
+        # if controller_index is None:
+        #     print(f"No safe controller found for context {context} at step {t_step}. Skipping this step.", flush=True)
+        #     return 0, 0, 1
 
         (weather, dist_car, speed) = context
-        controller = CONTROLLERS[controller_index]
+        # controller = CONTROLLERS[controller_index]
 
-        print(controller, weather, dist_car, speed, flush=True)
+        print(weather, dist_car, speed, flush=True)
 
-        save_path = os.path.join(SAVE_PATH, controller)
+        save_path = os.path.join(SAVE_PATH)
         
         while True:
             try:
-                re, rs, safety = simulate(context, CONTROLLERS[controller_index], save_path, order="es", t=t_step, seed=seed)
+                re, rs, safety = simulate(context, save_path, order="es", t=t_step, seed=seed)
                 break
             except Exception as e:
-                print(f"Simulation failed for controller={controller}, run={t_step}: {e}", flush=True)
+                print(f"Simulation failed, run={t_step}: {e}", flush=True)
                 time.sleep(5)
 
         return re,rs,safety
