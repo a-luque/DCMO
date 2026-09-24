@@ -21,7 +21,6 @@ cmd:
 scenic gen_sim.scenic --2d -S --count 1 --time 800  --param result_path "test_data" --param car_dist -30 --param leader_speed 8 --param weather "ClearNoon" --param ego_idm "smooth"
 """
 
-import random
 import carla
 
 from scenic.domains.driving.controllers import (
