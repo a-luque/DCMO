@@ -26,7 +26,7 @@ from scenic.simulators.carla.simulator import CarlaSimulator
 from alg_es import Weather, ContextSpace, get_reward
 
 CONTROLLERS = ['sport', 'aggressive', 'dynamic', 'balanced', 'comfort', 'conservative', 'defensive']
-SAVE_PATH =  f"safety_monitor_testing"
+SAVE_PATH =  f"safety_monitor_testing_03_07"
 
 
 
@@ -54,10 +54,10 @@ def simulate(cell, save_path: str, order: str, t: int, seed: int) -> np.ndarray:
         f"--param weather {sampled_weather} "
         #f"--param intersect {sampled_intersect} "
         f"--param car_dist {sampled_distance} "
-        f"--param leader_speed {sampled_speed}"
-        f"--param safety_monitor {MONITOR.safety_monitor_path}"
-        f"--param performance_monitor {MONITOR.performance_monitor_path}"
-        f"--param safety_threshold {MONITOR.safety_threshold}"
+        f"--param leader_speed {sampled_speed} "
+        f"--param safety_monitor {SAFETY_MONITOR_PATH} "
+        f"--param performance_monitor {PERFORMANCE_MONITOR_PATH} "
+        f"--param safety_threshold {SAFETY_THRESHOLD}"
     )
 
     #rewards = get_reward(results_dir, controller_path)
@@ -133,6 +133,11 @@ class BasicLogger(Logger):
         - bandit_alg: The bandit algorithm.
         - system: The system.
         """
+
+        if os.path.exists(LOG_PATH):
+            shutil.rmtree(LOG_PATH)
+        os.makedirs(LOG_PATH, exist_ok=True)
+
         if i_init is None:
             i_init = 0
         res_reward_e = 0
@@ -156,7 +161,7 @@ class BasicLogger(Logger):
             
             # print(self.log, flush=True)
             if i == 0 or i % 10 == 0 or i == (self.log_samples - 1):
-                pd.DataFrame.from_dict(self.log).to_csv(f"{LOG_PATH[:-4]}_{i}.csv")
+                pd.DataFrame.from_dict(self.log).to_csv(f"{LOG_PATH}_log_loss_{i}.csv")
             res_reward_e += reward_e
             res_reward_s += reward_s
             res_safety += safety
@@ -165,10 +170,9 @@ class BasicLogger(Logger):
         res_reward_s /= self.log_samples
         res_safety /= self.log_samples
 
-        self.log["t"].append(t)
-        if os.path.exists(LOG_PATH):
-            os.remove(LOG_PATH)
-        pd.DataFrame.from_dict(self.log).to_csv(LOG_PATH)
+        if os.path.exists(f"{LOG_PATH}_log_loss.csv"):
+            os.remove(f"{LOG_PATH}_log_loss.csv")
+        pd.DataFrame.from_dict(self.log).to_csv(f"{LOG_PATH}_log_loss.csv")
         # self.log["expected_reward"].append(res_reward)
 
 
@@ -181,7 +185,7 @@ if __name__ == "__main__":
     parser.add_argument('--num_steps', help='number of steps per simulation',type=int,default=300)
     parser.add_argument('--threshold_invasions', help='number of steps per simulation',type=float,default=0.1)
     parser.add_argument("--results_dir", type=str, default="/home/luque/Documents/safety_monitor_testing")
-    parser.add_argument("--log_path", type=str, default="../../log_loss_05_05.csv")
+    parser.add_argument("--log_path", type=str, default="../../testing_monitor_03_07/")
     parser.add_argument('--n_steps', help='number of rounds per simulation',type=int,default=1001)
     parser.add_argument('--i_init', help='log data initial simulation for seed',type=int,default=0)
     parser.add_argument('--log_samples', help='number of steps per simulation',type=int,default=1000)
@@ -200,8 +204,9 @@ if __name__ == "__main__":
     global NUM_STEPS 
     global RESULTS_DIR 
     global LOG_PATH 
-    global CONTROLLERS_FOLDER
-    global MONITOR
+    global SAFETY_MONITOR_PATH
+    global PERFORMANCE_MONITOR_PATH
+    global SAFETY_THRESHOLD
     global SEEDS
     global LOSS_WEIGHTS
 
@@ -217,7 +222,10 @@ if __name__ == "__main__":
     initial_step = args.initial_step
 
 
-    LOSS_WEIGHTS = np.array([0.5,0.5])
+    LOSS_WEIGHTS = np.array([0.7, 0.3])
+    SAFETY_MONITOR_PATH = args.safety_monitor
+    PERFORMANCE_MONITOR_PATH = args.performance_monitor
+    SAFETY_THRESHOLD = args.safety_threshold
     
 
 
@@ -225,7 +233,7 @@ if __name__ == "__main__":
 
     contexts = ContextSpace()
     
-    MONITOR = Monitor(args.safety_monitor, args.performance_monitor, args.safety_threshold, contexts)
+    # MONITOR = Monitor(args.safety_monitor, args.performance_monitor, args.safety_threshold, contexts)
     
     system = BasicSystem(controllers=CONTROLLERS, scenic=['follow_lane.scenic', 'follow_lane_car.scenic'], contexts=contexts)
     

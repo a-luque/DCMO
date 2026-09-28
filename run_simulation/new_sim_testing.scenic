@@ -20,6 +20,10 @@ IDM driving profiles (param ego_idm), ordered from most to least aggressive:
 cmd:
 scenic new_sim_testing.scenic --2d -S --seed seed --count 1 --time 800  --param result_path "test_data" --param car_dist -30 --param leader_speed 8 --param weather "ClearNoon" --param safety_monitor path --param safety_threshold 0.8 --param performance_monitor path
 """
+import sys
+sys.path.append("../src")
+sys.path.append('..')
+sys.path.append('./')
 
 import carla
 
@@ -29,9 +33,9 @@ from scenic.domains.driving.controllers import (
 )
 
 from src.utils import ContextSpace, Weather
-from src.monitor import Monitor
 
-contexts = ContextSpace()
+
+
 CONTROLLERS = ['sport', 'aggressive', 'dynamic', 'balanced', 'comfort', 'conservative', 'defensive']
 
 param timeout = 30
@@ -43,18 +47,25 @@ param weather = globalParameters.weather
 
 model scenic.simulators.carla.model
 
+from src.monitor import Monitor
+
+
 #Passing parameters
 RESULT_PATH = globalParameters.result_path
 CAR_DISTANCE = globalParameters.car_dist
 LEADER_SPEED = globalParameters.leader_speed
 # EGO_IDM = globalParameters.ego_idm
-MONITOR = Monitor(globalParameters.safety_monitor, globalParameters.performance_monitor, globalParameters.safety_threshold, contexts)
-LOSS_WEIGHTS = [0.5, 0.5]
+SAFETY_MONITOR = "/home/luque/Documents/safety_monitor_training/weights_1000.npy"
+SAFETY_THRESHOLD = 0.8
+PERFORMANCE_MONITOR = "/home/luque/Documents/DCMO/main_alg_sim_es.npz"
+contexts = ContextSpace()
+MONITOR = Monitor(SAFETY_MONITOR, PERFORMANCE_MONITOR, SAFETY_THRESHOLD, contexts)
+LOSS_WEIGHTS = [0.3, 0.7]
 
 #CONSTANTS
 EGO_MODEL = "vehicle.tesla.model3"
 EGO_SPEED = 18
-#GO_TO_LEADER = CAR_DISTANCE
+#GO_TO_LEADER = CAR_DISTANCE 
 if CAR_DISTANCE < 10:
     EGO_TO_LEADER = Range(CAR_DISTANCE, CAR_DISTANCE + 9)
 elif CAR_DISTANCE < 30:
@@ -313,13 +324,16 @@ behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_opp
 
         current_steer_angle = _lat_controller.run_step(self.cte) 
 
-        
-        controller_index = MONITOR.optimal_controller(context, LOSS_WEIGHTS)
-        if controller_index is None:
-            pass
+        self.distance_to_leader = distance to leaderCar if leaderCar is not None else 100
+        self.leader_speed = leaderCar.speed if leaderCar is not None else 0
+
+        context = (globalParameters.weather, self.distance_to_leader, self.leader_speed)
+        self.controller_index = MONITOR.optimal_controller(context, LOSS_WEIGHTS)
+        if self.controller_index is None:
+            self.controller_index=-1
 
         elif leaderCar or no_leader:
-            idm_profile = CONTROLLERS[controller_index]
+            idm_profile = CONTROLLERS[self.controller_index]
             _idm = IDM_PROFILES[idm_profile]
             # --- IDM Parameters ---
             IDM_V0      = target_speed   # desired speed (m/s)
@@ -392,6 +406,9 @@ if CAR_DISTANCE <= 40:
                 with blueprint EGO_MODEL,
                 with behavior FollowLaneBehaviorModified(target_speed=EGO_SPEED, leaderCar=leader),#, idm_profile=EGO_IDM),
                 with cte 0,
+                with distance_to_leader 0,
+                with leader_speed 0,
+                with controller_index None,
                 with selected_maneuver 1,
                 with visibleDistance 60,
                 with record_acc 0.0
@@ -401,6 +418,8 @@ else:
                 with blueprint EGO_MODEL,
                 with behavior FollowLaneBehaviorModified(target_speed=EGO_SPEED, no_leader=True),#, idm_profile=EGO_IDM),
                 with cte 0,
+                with distance_to_leader 0,
+                with controller_index None,
                 with selected_maneuver 1,
                 with record_acc 0.0,
                 with leader_speed EGO_SPEED
@@ -420,5 +439,5 @@ record ego.cte every time_step seconds after 3 seconds to RESULT_PATH+"/cte.npz"
 record ego.record_acc every time_step seconds after 3 seconds to RESULT_PATH+"/acc.npz"
 record ego.selected_maneuver every time_step seconds after 3 seconds to RESULT_PATH+"/maneuver.npz"
 record ego.speed every time_step seconds after 3 seconds to RESULT_PATH+"/speed.npz"
-record ego.
+record ego.controller_index every time_step seconds after 3 seconds to RESULT_PATH+"/controller_index.npz"
 #record ego.observations["front_rgb"] every time_step seconds after 3 seconds to RESULT_PATH+"/img/front_rgb_{time:.1f}.jpg"
