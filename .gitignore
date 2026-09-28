@@ -44,3 +44,4 @@ __pycache__/
 *.err
 
 *.ipynb
+CarlaUE4_restart.sh
