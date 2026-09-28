@@ -26,7 +26,7 @@ from scenic.simulators.carla.simulator import CarlaSimulator
 from alg_es import Weather, ContextSpace, get_reward
 
 CONTROLLERS = ['sport', 'aggressive', 'dynamic', 'balanced', 'comfort', 'conservative', 'defensive']
-SAVE_PATH =  f"safety_monitor_testing_03_07"
+SAVE_PATH =  f"safety_monitor_testing_09_01"
 
 
 
@@ -185,7 +185,7 @@ if __name__ == "__main__":
     parser.add_argument('--num_steps', help='number of steps per simulation',type=int,default=300)
     parser.add_argument('--threshold_invasions', help='number of steps per simulation',type=float,default=0.1)
     parser.add_argument("--results_dir", type=str, default="/home/luque/Documents/safety_monitor_testing")
-    parser.add_argument("--log_path", type=str, default="../../testing_monitor_03_07/")
+    parser.add_argument("--log_path", type=str, default="../../testing_monitor_09_01/")
     parser.add_argument('--n_steps', help='number of rounds per simulation',type=int,default=1001)
     parser.add_argument('--i_init', help='log data initial simulation for seed',type=int,default=0)
     parser.add_argument('--log_samples', help='number of steps per simulation',type=int,default=1000)

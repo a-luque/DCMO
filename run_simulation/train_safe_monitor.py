@@ -57,7 +57,7 @@ class BasicSystem(System):
                 print(f"Simulation failed for controller={controller}, run={t_step}: {e}", flush=True)
                 time.sleep(5)
 
-        return 1-safety_info["near_collision"]
+        return 1-safety_info["safety_violation"]
             
         
 
