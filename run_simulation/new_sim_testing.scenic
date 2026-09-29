@@ -321,7 +321,7 @@ behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_opp
         speed_error = target_speed - current_speed
 
         throttle = _lon_controller.run_step(speed_error)
-        self.record_acc = throttle
+        self.record_acc = max(min(throttle, 1.0), -1.0)
 
 
         current_steer_angle = _lat_controller.run_step(self.cte) 
