@@ -60,7 +60,7 @@ SAFETY_THRESHOLD = 0.8
 PERFORMANCE_MONITOR = "/home/luque/Documents/DCMO/main_alg_sim_es.npz"
 contexts = ContextSpace()
 MONITOR = Monitor(SAFETY_MONITOR, PERFORMANCE_MONITOR, SAFETY_THRESHOLD, contexts)
-LOSS_WEIGHTS = [0.3, 0.7]
+LOSS_WEIGHTS = [0.1, 0.9]
 
 #CONSTANTS
 EGO_MODEL = "vehicle.tesla.model3"
@@ -234,6 +234,7 @@ behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_opp
                 select_maneuver = Uniform(*current_lane.maneuvers)
             else:
                 take SetBrakeAction(1.0)
+                self.record_acc = -1.0
                 break
 
             # assumption: there always will be a maneuver
@@ -320,6 +321,7 @@ behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_opp
         speed_error = target_speed - current_speed
 
         throttle = _lon_controller.run_step(speed_error)
+        self.record_acc = throttle
 
 
         current_steer_angle = _lat_controller.run_step(self.cte) 
