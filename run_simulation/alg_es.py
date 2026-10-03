@@ -474,6 +474,7 @@ def get_reward(results_path: str, order: str, timestep: float = 0.1, tau: float 
     #if min_dist < 1.0 or lane_invasion > 30 or collision_happened:
     if min_dist < 0.1:
         collision_happened = 1
+        near_collision = 1
     elif min_dist < 1.0:
         near_collision = 1
     else:
