@@ -31,7 +31,6 @@ test/
 *.h5
 *.png
 
-
 __pycache__/
 *.pyc
 
@@ -44,3 +43,5 @@ __pycache__/
 *.err
 
 *.ipynb
+weights_1000.npy
+*.csv
