@@ -180,16 +180,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='modd',usage='later', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     ## arguments 
-    parser.add_argument('--num_steps', help='number of steps per simulation',type=int,default=300)
-    parser.add_argument('--threshold_invasions', help='number of steps per simulation',type=float,default=0.1)
     parser.add_argument("--results_dir", type=str, default="/home/luque/Documents/MoE_testing")
     parser.add_argument("--log_path", type=str, default="../../MoE_testing_03_07/")
-    parser.add_argument('--n_steps', help='number of rounds per simulation',type=int,default=1001)
     parser.add_argument('--i_init', help='log data initial simulation for seed',type=int,default=0)
     parser.add_argument('--log_samples', help='number of steps per simulation',type=int,default=1000)
-    parser.add_argument('--log_at', help='number of steps per simulation',type=int,default=25)
     parser.add_argument('--recompute_every', help='number of steps per simulation',type=int,default=25)
-    parser.add_argument('--initial_step', help='index of initial simulation',type=int,default=0)
     parser.add_argument('--moe_path', help='path to MoE weights',type=str,default="/home/luque/Documents/DCMO/run_simulation/MoE_results/moe_model_epoch_500.pt")
     parser.add_argument('--bias', help='bias for the MoE model',type=float,default=0.3)
     parser.add_argument('--seed_file', help='path to seed file',type=str,default="/home/luque/Downloads/sim_seed_context.npz")
@@ -197,8 +192,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
 
-    global THRESHOLD_INVASIONS
-    global NUM_STEPS 
     global RESULTS_DIR 
     global LOG_PATH 
     global BIAS
@@ -206,12 +199,8 @@ if __name__ == "__main__":
     global SEEDS
     global SAVE_PATH
 
-    THRESHOLD_INVASIONS = args.threshold_invasions
-    NUM_STEPS= args.num_steps
     RESULTS_DIR = args.results_dir
     LOG_PATH = args.log_path
-    n_steps = args.n_steps
-    log_at = args.log_at
     log_samples = args.log_samples
     recompute_every = args.recompute_every
     i_init = args.i_init
