@@ -43,5 +43,4 @@ __pycache__/
 *.err
 
 *.ipynb
-weights_1000.npy
-*.csv
+CarlaUE4_restart.sh

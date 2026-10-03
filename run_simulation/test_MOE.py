@@ -26,7 +26,6 @@ from scenic.simulators.carla.simulator import CarlaSimulator
 from alg_es import Weather, ContextSpace, get_reward
 
 CONTROLLERS = ['sport', 'aggressive', 'dynamic', 'balanced', 'comfort', 'conservative', 'defensive']
-SAVE_PATH =  f"safety_monitor_testing_09_01"
 
 
 
@@ -42,7 +41,7 @@ def simulate(cell, save_path: str, order: str, t: int, seed: int) -> np.ndarray:
     # sampled_weather, sampled_intersect, sampled_distance, sampled_speed = cell
     sampled_weather, sampled_distance, sampled_speed = cell
 
-    scenic_file_path = os.path.join(current_file_dir, "new_sim_testing.scenic")
+    scenic_file_path = os.path.join(current_file_dir, "new_sim_testing_MOE.scenic")
 
     #print(f"Simulated round {t} with controller {controller_path} at context {sampled_weather} {-1 * sampled_distance} {sampled_speed}. Results in {results_dir}")
 
@@ -55,9 +54,8 @@ def simulate(cell, save_path: str, order: str, t: int, seed: int) -> np.ndarray:
         #f"--param intersect {sampled_intersect} "
         f"--param car_dist {sampled_distance} "
         f"--param leader_speed {sampled_speed} "
-        f"--param safety_monitor {SAFETY_MONITOR_PATH} "
-        f"--param performance_monitor {PERFORMANCE_MONITOR_PATH} "
-        f"--param safety_threshold {SAFETY_THRESHOLD}"
+        f"--param moe_path {MOE_PATH} "
+        f"--param bias {BIAS} "
     )
 
     #rewards = get_reward(results_dir, controller_path)
@@ -182,50 +180,35 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='modd',usage='later', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     ## arguments 
-    parser.add_argument('--num_steps', help='number of steps per simulation',type=int,default=300)
-    parser.add_argument('--threshold_invasions', help='number of steps per simulation',type=float,default=0.1)
-    parser.add_argument("--results_dir", type=str, default="/home/luque/Documents/safety_monitor_testing")
-    parser.add_argument("--log_path", type=str, default="../../testing_monitor_09_01/")
-    parser.add_argument('--n_steps', help='number of rounds per simulation',type=int,default=1001)
+    parser.add_argument("--results_dir", type=str, default="/home/luque/Documents/MoE_testing")
+    parser.add_argument("--log_path", type=str, default="../../MoE_testing_05_05/")
     parser.add_argument('--i_init', help='log data initial simulation for seed',type=int,default=0)
     parser.add_argument('--log_samples', help='number of steps per simulation',type=int,default=1000)
-    parser.add_argument('--log_at', help='number of steps per simulation',type=int,default=25)
     parser.add_argument('--recompute_every', help='number of steps per simulation',type=int,default=25)
-    parser.add_argument('--initial_step', help='index of initial simulation',type=int,default=0)
-    parser.add_argument('--safety_monitor', help='path to safety monitor weights',type=str,default="/home/luque/Documents/safety_monitor_training/weights_1000.npy")
-    parser.add_argument('--performance_monitor', help='path to performance monitor weights',type=str,default="/home/luque/Documents/DCMO/main_alg_sim_es.npz")
-    parser.add_argument('--safety_threshold', help='number of steps per simulation',type=float,default=0.8)
+    parser.add_argument('--moe_path', help='path to MoE weights',type=str,default="/home/luque/Documents/DCMO/run_simulation/MoE_results/moe_model_epoch_500.pt")
+    parser.add_argument('--bias', help='bias for the MoE model',type=float,default=0.5)
     parser.add_argument('--seed_file', help='path to seed file',type=str,default="/home/luque/Downloads/sim_seed_context.npz")
     
     args = parser.parse_args()
 
 
-    global THRESHOLD_INVASIONS
-    global NUM_STEPS 
     global RESULTS_DIR 
     global LOG_PATH 
-    global SAFETY_MONITOR_PATH
-    global PERFORMANCE_MONITOR_PATH
-    global SAFETY_THRESHOLD
+    global BIAS
+    global MOE_PATH
     global SEEDS
-    global LOSS_WEIGHTS
+    global SAVE_PATH
 
-    THRESHOLD_INVASIONS = args.threshold_invasions
-    NUM_STEPS= args.num_steps
     RESULTS_DIR = args.results_dir
     LOG_PATH = args.log_path
-    n_steps = args.n_steps
-    log_at = args.log_at
     log_samples = args.log_samples
     recompute_every = args.recompute_every
     i_init = args.i_init
-    initial_step = args.initial_step
 
 
-    LOSS_WEIGHTS = np.array([0.7, 0.3])
-    SAFETY_MONITOR_PATH = args.safety_monitor
-    PERFORMANCE_MONITOR_PATH = args.performance_monitor
-    SAFETY_THRESHOLD = args.safety_threshold
+    BIAS = args.bias
+    MOE_PATH = args.moe_path
+    SAVE_PATH =  f"MoE_testing_{BIAS}_{1-BIAS}"
     
 
 

@@ -21,6 +21,41 @@ class Monitor:
 
         self.num_controllers = self.safety_monitor.shape[0]
 
+
+    def discretize_context(self, context):
+        """
+        Discretize a context for the system.
+
+        Parameters:
+        - context: The context for the system.
+
+        Returns:
+        - The discretized context for the system.
+        """
+        (weather, dist_car, speed) = context
+
+        if speed < 6:
+            speed = 4
+        elif speed < 10:
+            speed = 8
+        else:
+            speed = 12
+
+        if dist_car < 15:
+            dist_car = 6
+        elif dist_car < 25:
+            dist_car = 15
+        elif dist_car < 35:
+            dist_car = 25
+        elif dist_car < 55:
+            dist_car = 35
+        else:
+            dist_car = 100
+            speed = 0
+            
+        return (weather, dist_car, speed)
+
+
     def safe_controllers(self, context):
         """
         Get the safe controllers for a given context.
@@ -31,12 +66,16 @@ class Monitor:
         Returns:
         - The safe controllers for the given context.
         """
+        context = self.discretize_context(context)
+
         (weather, dist_car, speed) = context
 
         context = np.concatenate([np.array(Weather[weather].value), np.array([dist_car]), np.array([speed]), np.array([1.])])
         safety_probs = expit(np.dot(self.safety_monitor, context))
         safe_controllers = [i for i in range(self.num_controllers) if safety_probs[i] >= self.threshold_safety]
         return {i: safety_probs[i] for i in safe_controllers}
+
+
 
     def safe_pareto_front(self, context):
         """
@@ -48,6 +87,8 @@ class Monitor:
         Returns:
         - The safe pareto front for the given context. The output is a dictionary of pairs (controller_index: rewards)
         """
+        context = self.discretize_context(context)
+
         context_index = self.contextSpace.index(context)
         
         safe_controllers_dict = self.safe_controllers(context)
@@ -77,6 +118,8 @@ class Monitor:
         Returns:
         - The optimal controller for the given context and weights.
         """
+        context = self.discretize_context(context)
+
         pareto_safe_controllers_dict = self.safe_pareto_front(context)
         if pareto_safe_controllers_dict == {}:
             return None
@@ -90,29 +133,3 @@ class Monitor:
 
         return pareto_safe_controllers[optimal_index]
 
-
-    def step(self, index, x):
-        """
-        Execute the controller corresponding index in the system with context x.
-
-
-        Parameters:
-        - index: The index to be executed.
-        - x: The context for the system.
-
-        Returns:
-        - The reward for the executed index.
-        """
-
-        pass
-
-    def sample_context(self):
-        """
-        Sample a context for the system.
-
-        Sample a vector from scenic and return it. (Initial configuration of the system)
-
-        Returns:
-        - The context for the system.
-        """
-        pass

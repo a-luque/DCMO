@@ -18,25 +18,21 @@ IDM driving profiles (param ego_idm), ordered from most to least aggressive:
                      response -> maximally cautious.
 
 cmd:
-scenic new_sim_testing.scenic --2d -S --seed seed --count 1 --time 800  --param result_path "test_data" --param car_dist -30 --param leader_speed 8 --param weather "ClearNoon" --param safety_monitor path --param safety_threshold 0.8 --param performance_monitor path
+scenic gen_sim.scenic --2d -S --count 1 --time 800  --param result_path "test_data" --param car_dist -30 --param leader_speed 8 --param weather "ClearNoon" --param ego_idm "smooth"
 """
-import sys
-sys.path.append("../src")
-sys.path.append('..')
-sys.path.append('./')
 
+import random
 import carla
+import torch
+import torch.nn as nn
+import numpy as np
 
 from scenic.domains.driving.controllers import (
     PIDLateralController,
     PIDLongitudinalController,
 )
 
-from src.utils import ContextSpace, Weather
-
-
-
-CONTROLLERS = ['sport', 'aggressive', 'dynamic', 'balanced', 'comfort', 'conservative', 'defensive']
+CONTROLLER_NAMES = ['sport', 'aggressive', 'dynamic', 'balanced', 'comfort', 'conservative', 'defensive']
 
 param timeout = 30
 param map = localPath('carla_map/Town01.xodr')
@@ -47,25 +43,18 @@ param weather = globalParameters.weather
 
 model scenic.simulators.carla.model
 
-from src.monitor import Monitor
-
-
 #Passing parameters
 RESULT_PATH = globalParameters.result_path
 CAR_DISTANCE = globalParameters.car_dist
 LEADER_SPEED = globalParameters.leader_speed
-# EGO_IDM = globalParameters.ego_idm
-SAFETY_MONITOR = "/home/luque/Documents/safety_monitor_training/weights_1000.npy"
-SAFETY_THRESHOLD = 0.8
-PERFORMANCE_MONITOR = "/home/luque/Documents/DCMO/main_alg_sim_es.npz"
-contexts = ContextSpace()
-MONITOR = Monitor(SAFETY_MONITOR, PERFORMANCE_MONITOR, SAFETY_THRESHOLD, contexts)
-LOSS_WEIGHTS = [0.9, 0.1]
+LOSS_WEIGHTS = [globalParameters.weight_eff, globalParameters.weight_stab]
+
+EGO_IDM = "sport"
 
 #CONSTANTS
 EGO_MODEL = "vehicle.tesla.model3"
 EGO_SPEED = 18
-#GO_TO_LEADER = CAR_DISTANCE 
+#GO_TO_LEADER = CAR_DISTANCE
 if CAR_DISTANCE < 10:
     EGO_TO_LEADER = Range(CAR_DISTANCE, CAR_DISTANCE + 9)
 elif CAR_DISTANCE < 30:
@@ -148,7 +137,139 @@ IDM_PROFILES = {
 }
 
 
-behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_oppositeTraffic=False, leaderCar=None, no_leader=False): # , idm_profile="smooth"):
+class RewardPredictor(nn.Module):
+    """
+    forward() returns raw LOGITS of shape (batch, 3).
+    Use predict() (or torch.sigmoid) to get values in [0, 1]:
+        [:, 0] efficiency
+        [:, 1] stability
+        [:, 2] probability of safety violation
+    """
+
+    def __init__(
+        self,
+        num_controllers,
+        embedding_dim=4,
+        hidden_dim=32,
+        num_outputs=3,
+    ):
+        super().__init__()
+
+        self.controller_embedding = nn.Embedding(
+            num_controllers,
+            embedding_dim
+        )
+
+        input_dim = 2 + embedding_dim
+
+        # No Sigmoid here: the violation head is trained with
+        # BCEWithLogitsLoss, which is numerically more stable.
+        self.mlp = nn.Sequential(
+            nn.Linear(input_dim, hidden_dim),
+            nn.ReLU(),
+
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
+
+            nn.Linear(hidden_dim, num_outputs),
+        )
+
+    def forward(self, distance, speed, controller_id):
+        controller_embedding = self.controller_embedding(
+            controller_id
+        )
+
+        x = torch.cat(
+            [distance, speed, controller_embedding],
+            dim=1
+        )
+
+        return self.mlp(x)
+
+    @torch.no_grad()
+    def predict(self, distance, speed, controller_id):
+        """All three outputs in [0, 1]."""
+        return torch.sigmoid(
+            self.forward(distance, speed, controller_id)
+        )
+
+# Load model
+device = torch.device("cpu")
+
+checkpoint = torch.load(
+    "/proj/berzelius-2026-227/users/x_menwa/CMO_new/new_exp/run_simulations/n2n_data/n2n_model.pt",
+    map_location=device,
+    weights_only=False,
+)
+
+model_p = RewardPredictor(
+    num_controllers=checkpoint["num_controllers"],
+    embedding_dim=checkpoint["embedding_dim"],
+    hidden_dim=checkpoint["hidden_dim"],
+    num_outputs=checkpoint.get("num_outputs", 3),
+)
+
+getattr(model_p, 'to')(device)
+
+model_p.load_state_dict(checkpoint["model_state_dict"])
+model_p.eval()
+
+
+D_MEAN, D_STD = float(checkpoint["distance_mean"]), float(checkpoint["distance_std"])
+S_MEAN, S_STD = float(checkpoint["speed_mean"]), float(checkpoint["speed_std"])
+VIOLATION_THRESHOLD = float(checkpoint.get("violation_threshold", 0.5))
+#VIOLATION_THRESHOLD = 0.8
+N_CTRL = len(CONTROLLER_NAMES)
+
+
+NO_SAFE_CONTROLLER = -1
+
+
+def get_idm_from_nn(distance, speed, model_p=model_p, weights=LOSS_WEIGHTS,
+                    violation_threshold=VIOLATION_THRESHOLD):
+    """
+    Returns the index of the best controller predicted to be safe,
+    or NO_SAFE_CONTROLLER (-1) if every controller is predicted unsafe.
+
+    Model outputs (all in [0, 1]):
+        [:, 0] efficiency reward
+        [:, 1] stability reward
+        [:, 2] probability of safety violation (1 = unsafe)
+    """
+    d_norm = (float(distance) - D_MEAN) / D_STD
+    s_norm = (float(speed) - S_MEAN) / S_STD
+
+    n = N_CTRL
+
+    distance_tensor = torch.full((n, 1), d_norm, dtype=torch.float32, device=device)
+    speed_tensor = torch.full((n, 1), s_norm, dtype=torch.float32, device=device)
+    controller_tensor = torch.arange(n, dtype=torch.long, device=device)
+
+    # predict() applies the sigmoid -> all three outputs in [0, 1]
+    predictions = model_p.predict(distance_tensor, speed_tensor, controller_tensor)
+    predictions = predictions.cpu().numpy().astype(np.float64)   # (n, 3)
+
+    reward_weights = np.asarray(weights, dtype=np.float64)        # (2,)
+
+    assert predictions.shape == (n, 3), f"predictions shape {predictions.shape}"
+    assert reward_weights.shape == (2,), f"weights shape {reward_weights.shape}"
+
+    rewards = predictions[:, :2]        # efficiency, stability
+    p_unsafe = predictions[:, 2]        # violation probability
+
+    combined_rewards = np.matmul(rewards, reward_weights)
+
+    safe_mask = p_unsafe < violation_threshold
+
+    if not safe_mask.any():
+        return NO_SAFE_CONTROLLER
+
+    # best weighted reward among the controllers predicted safe
+    masked_rewards = np.where(safe_mask, combined_rewards, -np.inf)
+    return int(np.argmax(masked_rewards))
+
+
+behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_oppositeTraffic=False, leaderCar=None, no_leader=False, idm_profile="smooth"):
     """ 
     Follow's the lane on which the vehicle is at, unless the laneToFollow is specified.
     Once the vehicle reaches an intersection, by default, the vehicle will take the straight route.
@@ -234,7 +355,6 @@ behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_opp
                 select_maneuver = Uniform(*current_lane.maneuvers)
             else:
                 take SetBrakeAction(1.0)
-                self.record_acc = -1.0
                 break
 
             # assumption: there always will be a maneuver
@@ -321,22 +441,22 @@ behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_opp
         speed_error = target_speed - current_speed
 
         throttle = _lon_controller.run_step(speed_error)
-        self.record_acc = max(min(throttle, 1.0), -1.0)
 
 
-        current_steer_angle = _lat_controller.run_step(self.cte) 
+        current_steer_angle = _lat_controller.run_step(self.cte)
+        now_distance = 0.0 
 
-        self.distance_to_leader = distance to leaderCar if leaderCar is not None else 100
-        self.leader_speed = leaderCar.speed if leaderCar is not None else 0
+        if leaderCar:
+            now_distance = (distance from self to leaderCar) # we didn't subtract the car length here because the NN was trained on raw distances too
+        else:
+            if no_leader:
+                now_distance = 110.0 # no leader, so set a large distance
 
         if leaderCar or no_leader:
-
-            context = (globalParameters.weather, self.distance_to_leader, self.leader_speed)
-            self.controller_index = MONITOR.optimal_controller(context, LOSS_WEIGHTS)
-            if self.controller_index is None:   
-                self.controller_index = -1
-            if self.controller_index != -1:
-                idm_profile = CONTROLLERS[self.controller_index]
+            c_idx = get_idm_from_nn(distance=now_distance, speed=current_speed)
+            self.c_idx = c_idx
+            if c_idx != NO_SAFE_CONTROLLER:
+                idm_profile = CONTROLLER_NAMES[c_idx]
                 _idm = IDM_PROFILES[idm_profile]
                 # --- IDM Parameters ---
                 IDM_V0      = target_speed   # desired speed (m/s)
@@ -380,11 +500,11 @@ behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_opp
                 else:
                     throttle = 0.0
                     brake_cmd = min(abs(idm_accel) / MAX_BRAKE, 1.0)
-                    self.record_acc = -brake_cmd
                     take SetBrakeAction(brake_cmd)
+                    self.record_acc = -brake_cmd
             else:
-                self.record_acc = max(min(throttle, 1.0), -1.0)  # keep record_acc live even if no safe controller is found    
-                #print(throttle, brake_cmd, self.record_acc)
+                self.record_acc = max(min(throttle, 1.0), -1.0)  # keep record_acc live even if no safe controller is found
+            #print(throttle, brake_cmd, self.record_acc)
         take RegulatedControlAction(throttle, current_steer_angle, past_steer_angle)
         past_steer_angle = current_steer_angle
         past_speed = current_speed
@@ -392,10 +512,9 @@ behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_opp
 
 lane = Uniform(*network.lanes)
 start = new OrientedPoint on lane.centerline
-"""
+
 attrs = {"image_size_x": 640,
          "image_size_y": 320}
-"""
 
 if CAR_DISTANCE <= 40:
 
@@ -403,31 +522,25 @@ if CAR_DISTANCE <= 40:
                 with blueprint EGO_MODEL,
                 with select_maneuver 1,
                 with initialPos (0,0,0),
-                with behavior FollowLaneBehaviorModified(target_speed=LEADER_SPEED),
-                with color Color(0,0,0)
+                with behavior FollowLaneBehaviorModified(target_speed=LEADER_SPEED)
 
     ego = new Car following roadDirection from leader.position for -1*EGO_TO_LEADER,
                 with blueprint EGO_MODEL,
-                with behavior FollowLaneBehaviorModified(target_speed=EGO_SPEED, leaderCar=leader),#, idm_profile=EGO_IDM),
+                with behavior FollowLaneBehaviorModified(target_speed=EGO_SPEED, leaderCar=leader, idm_profile=EGO_IDM),
                 with cte 0,
-                with distance_to_leader 0,
-                with leader_speed 0,
-                with controller_index None,
                 with selected_maneuver 1,
+                with c_idx None,
                 with visibleDistance 60,
                 with record_acc 0.0
-                #with sensors {"front_rgb": RGBSensor(offset=(0, 2, 1), attributes=attrs)} 
 else:
     ego = new Car following roadDirection from start for -5,
                 with blueprint EGO_MODEL,
-                with behavior FollowLaneBehaviorModified(target_speed=EGO_SPEED, no_leader=True),#, idm_profile=EGO_IDM),
+                with behavior FollowLaneBehaviorModified(target_speed=EGO_SPEED, no_leader=True, idm_profile=EGO_IDM),
                 with cte 0,
-                with distance_to_leader 0,
-                with controller_index None,
                 with selected_maneuver 1,
+                with c_idx None,
                 with record_acc 0.0,
                 with leader_speed EGO_SPEED
-                #with sensors {"front_rgb": RGBSensor(offset=(0, 2, 1), attributes=attrs)} 
 
 time_step = 0.1
 
@@ -437,11 +550,9 @@ if CAR_DISTANCE <= 40:
 else:
     record ego.leader_speed every time_step seconds after 3 seconds to RESULT_PATH+"/leader_speed.npz"
 
-#record ego.position.x every time_step seconds after 3 seconds to RESULT_PATH+"/ego_pos.npz"
+record EGO_TO_LEADER every time_step seconds after 3 seconds to RESULT_PATH+"/initial_dist.npz"
 record ego.distanceToClosest(Car) every time_step seconds after 3 seconds to RESULT_PATH+"/dist.npz"
 record ego.cte every time_step seconds after 3 seconds to RESULT_PATH+"/cte.npz"
 record ego.record_acc every time_step seconds after 3 seconds to RESULT_PATH+"/acc.npz"
 record ego.selected_maneuver every time_step seconds after 3 seconds to RESULT_PATH+"/maneuver.npz"
 record ego.speed every time_step seconds after 3 seconds to RESULT_PATH+"/speed.npz"
-record ego.controller_index every time_step seconds after 3 seconds to RESULT_PATH+"/controller_index.npz"
-#record ego.observations["front_rgb"] every time_step seconds after 3 seconds to RESULT_PATH+"/img/front_rgb_{time:.1f}.jpg"

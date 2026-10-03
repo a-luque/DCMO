@@ -26,6 +26,7 @@ sys.path.append('..')
 sys.path.append('./')
 
 import carla
+import torch
 
 from scenic.domains.driving.controllers import (
     PIDLateralController,
@@ -47,7 +48,8 @@ param weather = globalParameters.weather
 
 model scenic.simulators.carla.model
 
-from src.monitor import Monitor
+from src.idm_moe import BasicMOE
+
 
 
 #Passing parameters
@@ -55,12 +57,14 @@ RESULT_PATH = globalParameters.result_path
 CAR_DISTANCE = globalParameters.car_dist
 LEADER_SPEED = globalParameters.leader_speed
 # EGO_IDM = globalParameters.ego_idm
-SAFETY_MONITOR = "/home/luque/Documents/safety_monitor_training/weights_1000.npy"
-SAFETY_THRESHOLD = 0.8
-PERFORMANCE_MONITOR = "/home/luque/Documents/DCMO/main_alg_sim_es.npz"
-contexts = ContextSpace()
-MONITOR = Monitor(SAFETY_MONITOR, PERFORMANCE_MONITOR, SAFETY_THRESHOLD, contexts)
-LOSS_WEIGHTS = [0.9, 0.1]
+BIAS = globalParameters.bias
+MOE_PATH = globalParameters.moe_path
+LOSS_WEIGHTS = [BIAS, 1-BIAS]
+
+
+
+moe = BasicMOE()
+moe.load_state_dict(torch.load(MOE_PATH))
 
 #CONSTANTS
 EGO_MODEL = "vehicle.tesla.model3"
@@ -296,6 +300,8 @@ behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_opp
                     # [-1, 1] to match the sign convention used in the IDM branch
                     # (positive = throttle fraction, negative = braking fraction).
                     self.record_acc = max(min(throttle, 1.0), -1.0)
+                    self.distance_to_leader = distance to leaderCar if leaderCar is not None else 100
+                    self.leader_speed = leaderCar.speed if leaderCar is not None else 0
 
                     take RegulatedControlAction(throttle, current_steer_angle, past_steer_angle)
                     past_steer_angle = current_steer_angle
@@ -330,61 +336,27 @@ behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_opp
         self.leader_speed = leaderCar.speed if leaderCar is not None else 0
 
         if leaderCar or no_leader:
+            # --- MoE Controller ---
+            x = torch.tensor([[current_speed, self.leader_speed, self.distance_to_leader, BIAS, self.record_acc]], dtype=torch.float32)
+            moe_accel = float(moe(x).detach().numpy())
 
-            context = (globalParameters.weather, self.distance_to_leader, self.leader_speed)
-            self.controller_index = MONITOR.optimal_controller(context, LOSS_WEIGHTS)
-            if self.controller_index is None:   
-                self.controller_index = -1
-            if self.controller_index != -1:
-                idm_profile = CONTROLLERS[self.controller_index]
-                _idm = IDM_PROFILES[idm_profile]
-                # --- IDM Parameters ---
-                IDM_V0      = target_speed   # desired speed (m/s)
-                IDM_T     = _idm["IDM_T"]
-                IDM_S0    = _idm["IDM_S0"]
-                IDM_A     = _idm["IDM_A"]
-                IDM_B     = _idm["IDM_B"]
-                IDM_DELTA = _idm["IDM_DELTA"]
-                MAX_BRAKE     = _idm["MAX_BRAKE"]
-                ACTUATOR_TAU  = _idm["ACTUATOR_TAU"]
-                v = current_speed
+            dt = simulation().timestep
 
-                if no_leader:
-                    # Free-road driving: no vehicle ahead, so drop the gap/interaction
-                    # term entirely and just accelerate smoothly toward target_speed.
-                    # (Using a fake far-away "virtual leader" here instead can cause
-                    # premature braking at high speed / large IDM_T, since the desired
-                    # gap s_star can exceed the fake gap and trigger unwanted braking.)
-                    idm_accel = IDM_A * (1 - (v / IDM_V0) ** IDM_DELTA)
-                else:
-                    gap         = (distance from self to leaderCar) - 4.5  # 4.5m = approx car length
-                    gap         = max(gap, 0.1)                             # avoid division by zero
-                    delta_v     = v - (leaderCar.speed if leaderCar.speed else 0)
-                    s_star      = IDM_S0 + max(0, v * IDM_T + (v * delta_v) / (2 * (IDM_A * IDM_B) ** 0.5))
-                    idm_accel   = IDM_A * (1 - (v / IDM_V0) ** IDM_DELTA - (s_star / gap) ** 2)
+            # First-order actuator lag: smooths the raw IDM command toward a more
+            # realistic, gradually-responding acceleration instead of an instant jump.
+            filtered_accel += (dt / 0.25) * (moe_accel - filtered_accel)
 
-                idm_accel = max(min(idm_accel, IDM_A), -MAX_BRAKE)  # clamp to physical accel/brake limits
-
-                dt = simulation().timestep
-
-                # First-order actuator lag: smooths the raw IDM command toward a more
-                # realistic, gradually-responding acceleration instead of an instant jump.
-                filtered_accel += (dt / ACTUATOR_TAU) * (idm_accel - filtered_accel)
-
-                idm_accel = filtered_accel
-
-                if idm_accel >= 0:
-                    throttle = min(idm_accel / IDM_A, 1.0)
-                    brake_cmd = 0.0
-                    self.record_acc = throttle
-                else:
-                    throttle = 0.0
-                    brake_cmd = min(abs(idm_accel) / MAX_BRAKE, 1.0)
-                    self.record_acc = -brake_cmd
-                    take SetBrakeAction(brake_cmd)
+            idm_accel = filtered_accel
+            
+            if idm_accel >= 0:
+                throttle = min(idm_accel, 1.0)
+                brake_cmd = 0.0
+                self.record_acc = throttle
             else:
-                self.record_acc = max(min(throttle, 1.0), -1.0)  # keep record_acc live even if no safe controller is found    
-                #print(throttle, brake_cmd, self.record_acc)
+                throttle = 0.0
+                brake_cmd = min(abs(idm_accel), 1.0)
+                self.record_acc = -brake_cmd
+                take SetBrakeAction(brake_cmd)
         take RegulatedControlAction(throttle, current_steer_angle, past_steer_angle)
         past_steer_angle = current_steer_angle
         past_speed = current_speed
@@ -410,7 +382,7 @@ if CAR_DISTANCE <= 40:
                 with blueprint EGO_MODEL,
                 with behavior FollowLaneBehaviorModified(target_speed=EGO_SPEED, leaderCar=leader),#, idm_profile=EGO_IDM),
                 with cte 0,
-                with distance_to_leader 0,
+                with distance_to_leader 100,
                 with leader_speed 0,
                 with controller_index None,
                 with selected_maneuver 1,
@@ -422,7 +394,7 @@ else:
                 with blueprint EGO_MODEL,
                 with behavior FollowLaneBehaviorModified(target_speed=EGO_SPEED, no_leader=True),#, idm_profile=EGO_IDM),
                 with cte 0,
-                with distance_to_leader 0,
+                with distance_to_leader 100,
                 with controller_index None,
                 with selected_maneuver 1,
                 with record_acc 0.0,
