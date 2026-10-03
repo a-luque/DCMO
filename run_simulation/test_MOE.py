@@ -181,12 +181,12 @@ if __name__ == "__main__":
 
     ## arguments 
     parser.add_argument("--results_dir", type=str, default="/home/luque/Documents/MoE_testing")
-    parser.add_argument("--log_path", type=str, default="../../MoE_testing_03_07/")
+    parser.add_argument("--log_path", type=str, default="../../MoE_testing_05_05/")
     parser.add_argument('--i_init', help='log data initial simulation for seed',type=int,default=0)
     parser.add_argument('--log_samples', help='number of steps per simulation',type=int,default=1000)
     parser.add_argument('--recompute_every', help='number of steps per simulation',type=int,default=25)
     parser.add_argument('--moe_path', help='path to MoE weights',type=str,default="/home/luque/Documents/DCMO/run_simulation/MoE_results/moe_model_epoch_500.pt")
-    parser.add_argument('--bias', help='bias for the MoE model',type=float,default=0.3)
+    parser.add_argument('--bias', help='bias for the MoE model',type=float,default=0.5)
     parser.add_argument('--seed_file', help='path to seed file',type=str,default="/home/luque/Downloads/sim_seed_context.npz")
     
     args = parser.parse_args()
@@ -204,7 +204,6 @@ if __name__ == "__main__":
     log_samples = args.log_samples
     recompute_every = args.recompute_every
     i_init = args.i_init
-    initial_step = args.initial_step
 
 
     BIAS = args.bias
