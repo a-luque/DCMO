@@ -23,10 +23,43 @@ from scenic.simulators.newtonian import NewtonianSimulator
 from scenic.simulators.carla.simulator import CarlaSimulator
 
 from alg_es import Weather, ContextSpace, get_reward
-from rq0_all import simulate
 
 CONTROLLERS = ['sport', 'aggressive', 'dynamic', 'balanced', 'comfort', 'conservative', 'defensive']
 SAVE_PATH =  f"safety_monitor_2"
+
+
+def simulate(cell, controller_path: str, save_path: str, order: str, t: int) -> np.ndarray:
+    current_file_dir = os.path.dirname(os.path.abspath(__file__))
+
+    #results_dir = f"sim_results/{t}/"
+    results_dir = os.path.join(current_file_dir, f"{save_path}/{t}/")
+    if os.path.exists(results_dir):
+        shutil.rmtree(results_dir)
+    os.makedirs(results_dir, exist_ok=True)
+    # sampled_weather, sampled_intersect, sampled_distance, sampled_speed = cell
+    sampled_weather, sampled_distance, sampled_speed = cell
+
+    scenic_file_path = os.path.join(current_file_dir, "new_sim.scenic")
+    
+
+    os.system(
+        f"scenic -S {scenic_file_path} --count 1 --time 300 --2d "
+        f"--param result_path {results_dir} "
+        #f"--param controller_path {controller_path} "
+        f"--param ego_idm {controller_path} "
+        f"--param weather {sampled_weather} "
+        #f"--param intersect {sampled_intersect} "
+        f"--param car_dist {sampled_distance} "
+        f"--param leader_speed {sampled_speed}"
+    )
+
+    #rewards = get_reward(results_dir, controller_path)
+    [reward_e, reward_s, safety_info] = get_reward(results_dir, order)
+    rewards = [reward_e, reward_s]
+    return np.array(rewards), safety_info
+
+
+
 
 class BasicSystem(System):
 
@@ -185,6 +218,7 @@ if __name__ == "__main__":
     parser.add_argument('--log_at', help='number of steps per simulation',type=int,default=25)
     parser.add_argument('--recompute_every', help='number of steps per simulation',type=int,default=25)
     parser.add_argument('--initial_step', help='index of initial simulation',type=int,default=0)
+    parser.add_argument('--use_wavg', help='use weighted average as controller',type=int,default=1)
     
     args = parser.parse_args()
 
@@ -205,7 +239,12 @@ if __name__ == "__main__":
     recompute_every = args.recompute_every
     i_init = args.i_init
     initial_step = args.initial_step
-    
+    use_wavg = args.use_wavg
+
+    if use_wavg:
+        CONTROLLERS.append("wavg_efficiency")
+        CONTROLLERS.append("wavg_balanced")
+        CONTROLLERS.append("wavg_comfort")
 
 
     contexts = ContextSpace()
