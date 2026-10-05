@@ -36,7 +36,7 @@ from src.utils import ContextSpace, Weather
 
 
 
-CONTROLLERS = ['sport', 'aggressive', 'dynamic', 'balanced', 'comfort', 'conservative', 'defensive']
+CONTROLLERS = ['sport', 'aggressive', 'dynamic', 'balanced', 'comfort', 'conservative', 'defensive', "wavg_efficiency", "wavg_balanced", "wavg_comfort"]
 
 param timeout = 30
 param map = localPath('carla_map/Town01.xodr')
@@ -55,12 +55,13 @@ RESULT_PATH = globalParameters.result_path
 CAR_DISTANCE = globalParameters.car_dist
 LEADER_SPEED = globalParameters.leader_speed
 # EGO_IDM = globalParameters.ego_idm
-SAFETY_MONITOR = "/home/luque/Documents/safety_monitor_training/weights_1000.npy"
+SAFETY_MONITOR = "/home/luque/Documents/safety_monitor_with_wavg/weights_1000.npy"
 SAFETY_THRESHOLD = 0.8
-PERFORMANCE_MONITOR = "/home/luque/Documents/DCMO/main_alg_sim_es.npz"
+BIAS = globalParameters.bias
+PERFORMANCE_MONITOR = "/home/luque/Documents/DCMO/run_simulation/main_alg_sim_es_with_wavg.npz"
 contexts = ContextSpace()
 MONITOR = Monitor(SAFETY_MONITOR, PERFORMANCE_MONITOR, SAFETY_THRESHOLD, contexts)
-LOSS_WEIGHTS = [0.9, 0.1]
+LOSS_WEIGHTS = [BIAS, 1-BIAS]
 
 #CONSTANTS
 EGO_MODEL = "vehicle.tesla.model3"
@@ -73,6 +74,48 @@ elif CAR_DISTANCE < 30:
 else:
     EGO_TO_LEADER = Range(CAR_DISTANCE, CAR_DISTANCE + 20)
 
+IDM_WEIGHTS_EFF = {
+    "sport": 0.7519,
+    "aggressive": 0.7391,
+    "dynamic": 0.7274,
+    "balanced": 0.7121,
+    "comfort": 0.6997,
+    "conservative": 0.6779,
+    "defensive": 0.6552
+}
+
+IDM_WEIGHTS_COMF = {
+    "sport": 0.3972,
+    "aggressive": 0.4697,
+    "dynamic": 0.5513,
+    "balanced": 0.6104,
+    "comfort": 0.6535,
+    "conservative": 0.6923,
+    "defensive": 0.7300
+}
+
+IDM_WEIGHTS_BAL = {k: (IDM_WEIGHTS_EFF[k] + IDM_WEIGHTS_COMF[k]) / 2 for k in IDM_WEIGHTS_EFF.keys()}
+
+
+IDM_WEIGHTS = {
+    "wavg_efficiency": IDM_WEIGHTS_EFF,
+    "wavg_comfort": IDM_WEIGHTS_COMF,
+    "wavg_balanced": IDM_WEIGHTS_BAL
+}
+
+IDM_WEIGHTS["wavg_efficiency"] = {k: v / sum(IDM_WEIGHTS["wavg_efficiency"].values()) for k, v in IDM_WEIGHTS["wavg_efficiency"].items()}
+IDM_WEIGHTS["wavg_comfort"] = {k: v / sum(IDM_WEIGHTS["wavg_comfort"].values()) for k, v in IDM_WEIGHTS["wavg_comfort"].items()}
+IDM_WEIGHTS["wavg_balanced"] = {k: v / sum(IDM_WEIGHTS["wavg_balanced"].values()) for k, v in IDM_WEIGHTS["wavg_balanced"].items()}
+
+IDM_PROFILE_ORDER = [
+    "sport",
+    "aggressive",
+    "dynamic",
+    "balanced",
+    "comfort",
+    "conservative",
+    "defensive",
+]
 
 IDM_PROFILES = {
 
@@ -337,51 +380,111 @@ behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_opp
                 self.controller_index = -1
             if self.controller_index != -1:
                 idm_profile = CONTROLLERS[self.controller_index]
-                _idm = IDM_PROFILES[idm_profile]
-                # --- IDM Parameters ---
-                IDM_V0      = target_speed   # desired speed (m/s)
-                IDM_T     = _idm["IDM_T"]
-                IDM_S0    = _idm["IDM_S0"]
-                IDM_A     = _idm["IDM_A"]
-                IDM_B     = _idm["IDM_B"]
-                IDM_DELTA = _idm["IDM_DELTA"]
-                MAX_BRAKE     = _idm["MAX_BRAKE"]
-                ACTUATOR_TAU  = _idm["ACTUATOR_TAU"]
-                v = current_speed
+                if idm_profile not in ["wavg_efficiency", "wavg_comfort", "wavg_balanced"]:
+                    _idm = IDM_PROFILES[idm_profile]
+                    # --- IDM Parameters ---
+                    IDM_V0      = target_speed   # desired speed (m/s)
+                    IDM_T     = _idm["IDM_T"]
+                    IDM_S0    = _idm["IDM_S0"]
+                    IDM_A     = _idm["IDM_A"]
+                    IDM_B     = _idm["IDM_B"]
+                    IDM_DELTA = _idm["IDM_DELTA"]
+                    MAX_BRAKE     = _idm["MAX_BRAKE"]
+                    ACTUATOR_TAU  = _idm["ACTUATOR_TAU"]
+                    v = current_speed
 
-                if no_leader:
-                    # Free-road driving: no vehicle ahead, so drop the gap/interaction
-                    # term entirely and just accelerate smoothly toward target_speed.
-                    # (Using a fake far-away "virtual leader" here instead can cause
-                    # premature braking at high speed / large IDM_T, since the desired
-                    # gap s_star can exceed the fake gap and trigger unwanted braking.)
-                    idm_accel = IDM_A * (1 - (v / IDM_V0) ** IDM_DELTA)
+                    if no_leader:
+                        # Free-road driving: no vehicle ahead, so drop the gap/interaction
+                        # term entirely and just accelerate smoothly toward target_speed.
+                        # (Using a fake far-away "virtual leader" here instead can cause
+                        # premature braking at high speed / large IDM_T, since the desired
+                        # gap s_star can exceed the fake gap and trigger unwanted braking.)
+                        idm_accel = IDM_A * (1 - (v / IDM_V0) ** IDM_DELTA)
+                    else:
+                        gap         = (distance from self to leaderCar) - 4.5  # 4.5m = approx car length
+                        gap         = max(gap, 0.1)                             # avoid division by zero
+                        delta_v     = v - (leaderCar.speed if leaderCar.speed else 0)
+                        s_star      = IDM_S0 + max(0, v * IDM_T + (v * delta_v) / (2 * (IDM_A * IDM_B) ** 0.5))
+                        idm_accel   = IDM_A * (1 - (v / IDM_V0) ** IDM_DELTA - (s_star / gap) ** 2)
+
+                    idm_accel = max(min(idm_accel, IDM_A), -MAX_BRAKE)  # clamp to physical accel/brake limits
+
+                    dt = simulation().timestep
+
+                    # First-order actuator lag: smooths the raw IDM command toward a more
+                    # realistic, gradually-responding acceleration instead of an instant jump.
+                    filtered_accel += (dt / ACTUATOR_TAU) * (idm_accel - filtered_accel)               
+                    
+                    idm_accel = filtered_accel
+
+                    if idm_accel >= 0:
+                        throttle = min(idm_accel / IDM_A, 1.0)
+                        brake_cmd = 0.0
+                        self.record_acc = throttle
+                    else:
+                        throttle = 0.0
+                        brake_cmd = min(abs(idm_accel) / MAX_BRAKE, 1.0)
+                        self.record_acc = -brake_cmd
+                        take SetBrakeAction(brake_cmd)
                 else:
-                    gap         = (distance from self to leaderCar) - 4.5  # 4.5m = approx car length
-                    gap         = max(gap, 0.1)                             # avoid division by zero
-                    delta_v     = v - (leaderCar.speed if leaderCar.speed else 0)
-                    s_star      = IDM_S0 + max(0, v * IDM_T + (v * delta_v) / (2 * (IDM_A * IDM_B) ** 0.5))
-                    idm_accel   = IDM_A * (1 - (v / IDM_V0) ** IDM_DELTA - (s_star / gap) ** 2)
+                    idm_weights = list(IDM_WEIGHTS[idm_profile].values())
+                    IDM_V0      = target_speed   # desired speed (m/s)
+                    v = current_speed
+                    dt = simulation().timestep
+                    if not no_leader:
+                        gap = (distance from self to leaderCar) - 4.5  # 4.5m = approx car length
+                        gap = max(gap, 0.1)                             # avoid division by zero
+                        delta_v = v - (leaderCar.speed if leaderCar.speed else 0)
+                    
+                    combined_accel = 0.0
+                    weighted_max_accel = 0.0
+                    weighted_max_brake = 0.0
+                    for profile_name, weight in zip(IDM_PROFILE_ORDER, idm_weights):
+                        if weight == 0:
+                            continue
+                        
+                        _idm = IDM_PROFILES[profile_name]
+                        IDM_T = _idm["IDM_T"]
+                        IDM_S0 = _idm["IDM_S0"]
+                        IDM_A = _idm["IDM_A"]
+                        IDM_B = _idm["IDM_B"]
+                        IDM_DELTA = _idm["IDM_DELTA"]
+                        MAX_BRAKE = _idm["MAX_BRAKE"]
+                        ACTUATOR_TAU = _idm["ACTUATOR_TAU"]
+                        if no_leader:
+                            # Free-road driving: no vehicle ahead, so drop the gap/interaction
+                            # term entirely and just accelerate smoothly toward target_speed.
+                            # (Using a fake far-away "virtual leader" here instead can cause
+                            # premature braking at high speed / large IDM_T, since the desired
+                            # gap s_star can exceed the fake gap and trigger unwanted braking.)
+                            idm_accel = IDM_A * (1 - (v / IDM_V0) ** IDM_DELTA)      
+                        else:
+                            s_star = IDM_S0 + max(0, v * IDM_T + (v * delta_v) / (2 * (IDM_A * IDM_B) ** 0.5))
+                            idm_accel = IDM_A * (1 - (v / IDM_V0) ** IDM_DELTA - (s_star / gap) ** 2)
+                        idm_accel = max(min(idm_accel, IDM_A), -MAX_BRAKE)  # clamp to physical accel/brake limits
+                        # First-order actuator lag: smooths the raw IDM command toward a more
+                        # realistic, gradually-responding acceleration instead of an instant jump.
+                        filtered_accel_by_profile[profile_name] += (dt / ACTUATOR_TAU) * (
+                            idm_accel - filtered_accel_by_profile[profile_name]
+                        )
+                        combined_accel += weight * filtered_accel_by_profile[profile_name]
+                        weighted_max_accel += weight * IDM_A
+                        weighted_max_brake += weight * MAX_BRAKE 
+                    
+                    idm_accel = combined_accel
+                    IDM_A_FINAL = weighted_max_accel if weighted_max_accel > 0 else 1.0
+                    MAX_BRAKE_FINAL = weighted_max_brake if weighted_max_brake > 0 else 1.0
+                    if idm_accel >= 0:
+                        throttle = min(idm_accel / IDM_A_FINAL, 1.0)
+                        brake_cmd = 0.0
+                        self.record_acc = throttle
+                    else:
+                        throttle = 0.0
+                        brake_cmd = min(abs(idm_accel) / MAX_BRAKE_FINAL, 1.0)
+                        take SetBrakeAction(brake_cmd)
+                        self.record_acc = -brake_cmd
 
-                idm_accel = max(min(idm_accel, IDM_A), -MAX_BRAKE)  # clamp to physical accel/brake limits
 
-                dt = simulation().timestep
-
-                # First-order actuator lag: smooths the raw IDM command toward a more
-                # realistic, gradually-responding acceleration instead of an instant jump.
-                filtered_accel += (dt / ACTUATOR_TAU) * (idm_accel - filtered_accel)
-
-                idm_accel = filtered_accel
-
-                if idm_accel >= 0:
-                    throttle = min(idm_accel / IDM_A, 1.0)
-                    brake_cmd = 0.0
-                    self.record_acc = throttle
-                else:
-                    throttle = 0.0
-                    brake_cmd = min(abs(idm_accel) / MAX_BRAKE, 1.0)
-                    self.record_acc = -brake_cmd
-                    take SetBrakeAction(brake_cmd)
             else:
                 self.record_acc = max(min(throttle, 1.0), -1.0)  # keep record_acc live even if no safe controller is found    
                 #print(throttle, brake_cmd, self.record_acc)

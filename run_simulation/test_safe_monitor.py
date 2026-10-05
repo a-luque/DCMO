@@ -25,8 +25,7 @@ from scenic.simulators.carla.simulator import CarlaSimulator
 
 from alg_es import Weather, ContextSpace, get_reward
 
-CONTROLLERS = ['sport', 'aggressive', 'dynamic', 'balanced', 'comfort', 'conservative', 'defensive']
-SAVE_PATH =  f"safety_monitor_testing_09_01"
+CONTROLLERS = ['sport', 'aggressive', 'dynamic', 'balanced', 'comfort', 'conservative', 'defensive', "wavg_efficiency", "wavg_balanced", "wavg_comfort"]
 
 
 
@@ -57,7 +56,8 @@ def simulate(cell, save_path: str, order: str, t: int, seed: int) -> np.ndarray:
         f"--param leader_speed {sampled_speed} "
         f"--param safety_monitor {SAFETY_MONITOR_PATH} "
         f"--param performance_monitor {PERFORMANCE_MONITOR_PATH} "
-        f"--param safety_threshold {SAFETY_THRESHOLD}"
+        f"--param safety_threshold {SAFETY_THRESHOLD} "
+        f"--param bias {BIAS}"
     )
 
     #rewards = get_reward(results_dir, controller_path)
@@ -161,7 +161,7 @@ class BasicLogger(Logger):
             
             # print(self.log, flush=True)
             if i == 0 or i % 10 == 0 or i == (self.log_samples - 1):
-                pd.DataFrame.from_dict(self.log).to_csv(f"{LOG_PATH}_log_loss_{i}.csv")
+                pd.DataFrame.from_dict(self.log).to_csv(f"{LOG_PATH}log_loss_{i}.csv")
             res_reward_e += reward_e
             res_reward_s += reward_s
             res_safety += safety
@@ -172,7 +172,7 @@ class BasicLogger(Logger):
 
         if os.path.exists(f"{LOG_PATH}_log_loss.csv"):
             os.remove(f"{LOG_PATH}_log_loss.csv")
-        pd.DataFrame.from_dict(self.log).to_csv(f"{LOG_PATH}_log_loss.csv")
+        pd.DataFrame.from_dict(self.log).to_csv(f"{LOG_PATH}log_loss.csv")
         # self.log["expected_reward"].append(res_reward)
 
 
@@ -182,26 +182,20 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='modd',usage='later', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     ## arguments 
-    parser.add_argument('--num_steps', help='number of steps per simulation',type=int,default=300)
-    parser.add_argument('--threshold_invasions', help='number of steps per simulation',type=float,default=0.1)
-    parser.add_argument("--results_dir", type=str, default="/home/luque/Documents/safety_monitor_testing")
-    parser.add_argument("--log_path", type=str, default="../../testing_monitor_09_01/")
-    parser.add_argument('--n_steps', help='number of rounds per simulation',type=int,default=1001)
+    parser.add_argument("--results_dir", type=str, default="/home/luque/Documents/with_wavg_testing_01_09")
+    parser.add_argument("--log_path", type=str, default="../../with_wavg_testing_01_09/")
     parser.add_argument('--i_init', help='log data initial simulation for seed',type=int,default=0)
     parser.add_argument('--log_samples', help='number of steps per simulation',type=int,default=1000)
-    parser.add_argument('--log_at', help='number of steps per simulation',type=int,default=25)
     parser.add_argument('--recompute_every', help='number of steps per simulation',type=int,default=25)
-    parser.add_argument('--initial_step', help='index of initial simulation',type=int,default=0)
-    parser.add_argument('--safety_monitor', help='path to safety monitor weights',type=str,default="/home/luque/Documents/safety_monitor_training/weights_1000.npy")
-    parser.add_argument('--performance_monitor', help='path to performance monitor weights',type=str,default="/home/luque/Documents/DCMO/main_alg_sim_es.npz")
-    parser.add_argument('--safety_threshold', help='number of steps per simulation',type=float,default=0.8)
+    parser.add_argument('--safety_monitor', help='path to safety monitor weights',type=str,default="/home/luque/Documents/safety_monitor_with_wavg/weights_1000.npy")
+    parser.add_argument('--performance_monitor', help='path to performance monitor weights',type=str,default="/home/luque/Documents/DCMO/run_simulation/main_alg_sim_es_with_wavg.npz")
+    parser.add_argument('--bias', help='bias for the MoE model',type=float,default=0.1)
     parser.add_argument('--seed_file', help='path to seed file',type=str,default="/home/luque/Downloads/sim_seed_context.npz")
+    parser.add_argument('--safety_threshold', help='number of steps per simulation',type=float,default=0.8)
     
     args = parser.parse_args()
 
 
-    global THRESHOLD_INVASIONS
-    global NUM_STEPS 
     global RESULTS_DIR 
     global LOG_PATH 
     global SAFETY_MONITOR_PATH
@@ -209,23 +203,22 @@ if __name__ == "__main__":
     global SAFETY_THRESHOLD
     global SEEDS
     global LOSS_WEIGHTS
+    global SAVE_PATH
 
-    THRESHOLD_INVASIONS = args.threshold_invasions
-    NUM_STEPS= args.num_steps
     RESULTS_DIR = args.results_dir
     LOG_PATH = args.log_path
-    n_steps = args.n_steps
-    log_at = args.log_at
     log_samples = args.log_samples
     recompute_every = args.recompute_every
     i_init = args.i_init
-    initial_step = args.initial_step
-
-
-    LOSS_WEIGHTS = np.array([0.7, 0.3])
     SAFETY_MONITOR_PATH = args.safety_monitor
     PERFORMANCE_MONITOR_PATH = args.performance_monitor
     SAFETY_THRESHOLD = args.safety_threshold
+
+
+    BIAS = args.bias
+    SAVE_PATH =  f"with_wavg_testing_{BIAS}_{1-BIAS}"
+
+    LOSS_WEIGHTS = np.array([BIAS, 1-BIAS])
     
 
 

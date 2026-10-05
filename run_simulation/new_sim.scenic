@@ -42,7 +42,6 @@ RESULT_PATH = globalParameters.result_path
 CAR_DISTANCE = globalParameters.car_dist
 LEADER_SPEED = globalParameters.leader_speed
 EGO_IDM = globalParameters.ego_idm
-BIAS = globalParameters.bias
 
 #CONSTANTS
 EGO_MODEL = "vehicle.tesla.model3"
@@ -189,6 +188,7 @@ behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_opp
     past_steer_angle = 0
     past_speed = 0 # making an assumption here that the agent starts from zero speed
     filtered_accel = 0.0 # actuator-lag state for the IDM low-pass filter; must persist across steps
+    filtered_accel_by_profile = {name: 0.0 for name in IDM_PROFILE_ORDER}
     if laneToFollow is None:
         current_lane = self.lane
     else:
@@ -397,7 +397,7 @@ behavior FollowLaneBehaviorModified(target_speed = 12, laneToFollow=None, is_opp
                     self.record_acc = -brake_cmd
         else:
             if leaderCar or no_leader:
-                idm_weights = IDM_WEIGHTS[idm_profile]
+                idm_weights = list(IDM_WEIGHTS[idm_profile].values())
                 IDM_V0      = target_speed   # desired speed (m/s)
                 v = current_speed
                 dt = simulation().timestep
