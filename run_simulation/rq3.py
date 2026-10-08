@@ -4,7 +4,14 @@ import os
 import sys
 import numpy as np
 import time
-from alg_es import Weather, ContextSpace, get_reward
+import sys
+
+sys.path.append("../src")
+sys.path.append('..')
+sys.path.append('./')
+
+from src.utils import Weather, ContextSpace
+from alg_es import get_reward
 
 
 # All (distance, speed) context cells we have per-controller ensemble
@@ -462,6 +469,8 @@ if __name__ == "__main__":
                          help="Weight on (bias-adjusted) efficiency in the scalarized score.")
     parser.add_argument("--alpha-comf", type=float, default=0.5,
                          help="Weight on (bias-adjusted) comfort in the scalarized score.")
+    parser.add_argument("--base_dir", type=str, default="")
+    parser.add_argument("--alg_npz_path", type=str, default="")
 
     args = parser.parse_args()
 
@@ -472,12 +481,12 @@ if __name__ == "__main__":
 
     # Directory holding the per-controller, per-context ensemble reward
     # files, e.g. rq0_6_4_aggressive.npz, rq0_6_4_comfort.npz, ...
-    base_dir = "/cephyr/users/mengyuan/Alvis/Desktop/mimer_naiss2025-22-1298/CMO/new_exp/run_simulations"
+    base_dir = args.base_dir 
     npz_dir = os.path.join(base_dir, "rq3_ensemble_rewards")
 
     weights = get_controller_weights(npz_dir, alphas)
 
-    alg_npz_path = "/cephyr/users/mengyuan/Alvis/Desktop/mimer_naiss2025-22-1298/CMO/new_exp/main_alg_sim_es.npz"
+    alg_npz_path = args.alg_npz_path
     ctx = ContextSpace()
     mu_hat, names = load_checkpoint(alg_npz_path)
     if names is None:

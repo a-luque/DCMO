@@ -4,7 +4,8 @@ import time
 import numpy as np
 from enum import Enum
 from scipy.special import expit
-from alg_es import Weather, ContextSpace, get_reward
+from src.utils import Weather, ContextSpace
+from alg_es import get_reward
 import shutil
 
 # ----------------------------------------------------------------------

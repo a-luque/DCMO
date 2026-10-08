@@ -17,7 +17,7 @@ sys.path.append('..')
 sys.path.append('./')
 from src.idm_moe import BasicMOE
 
-def get_dataloaders(data_file="/home/luque/Documents/DCMO/run_simulation/train_idm_moe.npy", batch_size=32, num_workers=4):
+def get_dataloaders(data_file="./train_idm_moe.npy", batch_size=32, num_workers=4):
     train_data = np.load(data_file, allow_pickle=True)
 
     split_test_size = 0.1
@@ -62,12 +62,9 @@ def test_moe_training():
         model.train()
         running_loss = 0.0
         for step, batch in enumerate(train_loader):
-            # generate random input data
-            # x = torch.randn(batch_size, seq_len, hidden_dim)
             x = batch[:,:-1]
             x.to(device)
             
-            # target = torch.randn(batch_size, seq_len, hidden_dim)
             target = batch[:,-1]
             target.to(device)
             

@@ -8,7 +8,7 @@ from alg_es import get_reward, CONTROLLER_NAMES
 
 global SEEDS
 
-seed_file_path = "/proj/berzelius-2026-227/users/x_menwa/CMO_new/new_exp/run_simulations/sim_seed_context.npz"
+seed_file_path = "./sim_seed_context.npz"
 SEEDS = np.load(seed_file_path, allow_pickle=True)
 
 def simulate(cell, weights, save_path, run_id, seed) -> tuple:

@@ -23,7 +23,8 @@ import scenic
 from scenic.simulators.newtonian import NewtonianSimulator
 from scenic.simulators.carla.simulator import CarlaSimulator
 
-from alg_es import Weather, ContextSpace, get_reward
+from alg_es import Weather, ContextSpace
+from alg_es import get_reward
 
 CONTROLLERS = ['sport', 'aggressive', 'dynamic', 'balanced', 'comfort', 'conservative', 'defensive', "wavg_efficiency", "wavg_balanced", "wavg_comfort"]
 
@@ -33,25 +34,19 @@ CONTROLLERS = ['sport', 'aggressive', 'dynamic', 'balanced', 'comfort', 'conserv
 def simulate(cell, save_path: str, order: str, t: int, seed: int) -> np.ndarray:
     current_file_dir = os.path.dirname(os.path.abspath(__file__))
 
-    #results_dir = f"sim_results/{t}/"
     results_dir = os.path.join(current_file_dir, f"{save_path}/{t}/")
     if os.path.exists(results_dir):
         shutil.rmtree(results_dir)
     os.makedirs(results_dir, exist_ok=True)
-    # sampled_weather, sampled_intersect, sampled_distance, sampled_speed = cell
     sampled_weather, sampled_distance, sampled_speed = cell
 
     scenic_file_path = os.path.join(current_file_dir, "new_sim_testing.scenic")
 
-    #print(f"Simulated round {t} with controller {controller_path} at context {sampled_weather} {-1 * sampled_distance} {sampled_speed}. Results in {results_dir}")
 
     os.system(
         f"scenic -S {scenic_file_path} --count 1 --time 300 --2d --seed {int(seed)} "
         f"--param result_path {results_dir} "
-        #f"--param controller_path {controller_path} "
-        # f"--param ego_idm {controller_path} "
         f"--param weather {sampled_weather} "
-        #f"--param intersect {sampled_intersect} "
         f"--param car_dist {sampled_distance} "
         f"--param leader_speed {sampled_speed} "
         f"--param safety_monitor {SAFETY_MONITOR_PATH} "
@@ -60,7 +55,6 @@ def simulate(cell, save_path: str, order: str, t: int, seed: int) -> np.ndarray:
         f"--param bias {BIAS}"
     )
 
-    #rewards = get_reward(results_dir, controller_path)
     [reward_e, reward_s, safety_info] = get_reward(results_dir, order)
     rewards = [reward_e, reward_s]
     return reward_e, reward_s, 1-safety_info["safety_violation"]
@@ -87,12 +81,8 @@ class BasicSystem(System):
         context = SEEDS["cells"][t_step]
 
 
-        # if controller_index is None:
-        #     print(f"No safe controller found for context {context} at step {t_step}. Skipping this step.", flush=True)
-        #     return 0, 0, 1
 
         (weather, dist_car, speed) = context
-        # controller = CONTROLLERS[controller_index]
 
         print(weather, dist_car, speed, flush=True)
 
@@ -173,7 +163,6 @@ class BasicLogger(Logger):
         if os.path.exists(f"{LOG_PATH}_log_loss.csv"):
             os.remove(f"{LOG_PATH}_log_loss.csv")
         pd.DataFrame.from_dict(self.log).to_csv(f"{LOG_PATH}log_loss.csv")
-        # self.log["expected_reward"].append(res_reward)
 
 
 if __name__ == "__main__":
@@ -182,15 +171,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='modd',usage='later', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     ## arguments 
-    parser.add_argument("--results_dir", type=str, default="/home/luque/Documents/with_wavg_testing_01_09")
+    parser.add_argument("--results_dir", type=str, default="./monitor_testing")
     parser.add_argument("--log_path", type=str, default="../../with_wavg_testing_01_09/")
     parser.add_argument('--i_init', help='log data initial simulation for seed',type=int,default=0)
     parser.add_argument('--log_samples', help='number of steps per simulation',type=int,default=1000)
     parser.add_argument('--recompute_every', help='number of steps per simulation',type=int,default=25)
-    parser.add_argument('--safety_monitor', help='path to safety monitor weights',type=str,default="/home/luque/Documents/safety_monitor_with_wavg/weights_1000.npy")
-    parser.add_argument('--performance_monitor', help='path to performance monitor weights',type=str,default="/home/luque/Documents/DCMO/run_simulation/main_alg_sim_es_with_wavg.npz")
+    parser.add_argument('--safety_monitor', help='path to safety monitor weights',type=str,default="./safety_monitor_weights.npy")
+    parser.add_argument('--performance_monitor', help='path to performance monitor weights',type=str,default="./performance_monitor_weights.npz")
     parser.add_argument('--bias', help='bias for the MoE model',type=float,default=0.1)
-    parser.add_argument('--seed_file', help='path to seed file',type=str,default="/home/luque/Downloads/sim_seed_context.npz")
+    parser.add_argument('--seed_file', help='path to seed file',type=str,default="")
     parser.add_argument('--safety_threshold', help='number of steps per simulation',type=float,default=0.8)
     
     args = parser.parse_args()
@@ -226,7 +215,6 @@ if __name__ == "__main__":
 
     contexts = ContextSpace()
     
-    # MONITOR = Monitor(args.safety_monitor, args.performance_monitor, args.safety_threshold, contexts)
     
     system = BasicSystem(controllers=CONTROLLERS, scenic=['follow_lane.scenic', 'follow_lane_car.scenic'], contexts=contexts)
     
@@ -239,9 +227,6 @@ if __name__ == "__main__":
     system.weights_file = ""
 
     
-    # _, log = trainer.train(logger=logger, initial=initial_step, n_steps=n_steps)
 
     logger.log_data(explorer, system, i_init=i_init)
     
-    # if log is not None:
-    #     pd.DataFrame.from_dict(log).to_csv(LOG_PATH)

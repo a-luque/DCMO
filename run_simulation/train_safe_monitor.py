@@ -22,10 +22,11 @@ import scenic
 from scenic.simulators.newtonian import NewtonianSimulator
 from scenic.simulators.carla.simulator import CarlaSimulator
 
-from alg_es import Weather, ContextSpace, get_reward
+from src.utils import Weather, ContextSpace
+from alg_es import get_reward
 
 CONTROLLERS = ['sport', 'aggressive', 'dynamic', 'balanced', 'comfort', 'conservative', 'defensive']
-SAVE_PATH =  f"safety_monitor_with_wavg"
+SAVE_PATH =  f"safety_monitor"
 
 
 def simulate(cell, controller_path: str, save_path: str, order: str, t: int) -> np.ndarray:
@@ -45,15 +46,12 @@ def simulate(cell, controller_path: str, save_path: str, order: str, t: int) -> 
     os.system(
         f"scenic -S {scenic_file_path} --count 1 --time 300 --2d "
         f"--param result_path {results_dir} "
-        #f"--param controller_path {controller_path} "
         f"--param ego_idm {controller_path} "
         f"--param weather {sampled_weather} "
-        #f"--param intersect {sampled_intersect} "
         f"--param car_dist {sampled_distance} "
         f"--param leader_speed {sampled_speed}"
     )
 
-    #rewards = get_reward(results_dir, controller_path)
     [reward_e, reward_s, safety_info] = get_reward(results_dir, order)
     rewards = [reward_e, reward_s]
     return np.array(rewards), safety_info
@@ -140,13 +138,10 @@ class BasicTrainer(Trainer):
                     uncertainties += [
                         np.sqrt(np.dot(np.dot(X, self.bandit_alg.arm_hessians_inv[index]), X.T))
                     ]
-                # (c, i, dc, dp) = random.choice(contexts_product)
                 index_context = random.choice([i for i in range(len(uncertainties)) if uncertainties[i] == max(uncertainties)])
-                # index_context = np.argmax(uncertainties)
                 (w, dc, s) = product_contexts[index_context]
             x = np.concatenate([np.array(Weather[w].value), np.array([dc]), np.array([s]), np.array([1.])])
             index = self.bandit_alg.act(x)
-            # index = random.randrange(15)
             reward = self.system.step(index, [w, dc, s], t_step)
             self.bandit_alg.update(index, x, reward)
             if t_step % self.bandit_alg.recompute_every == 0 and t_step > 0: 
@@ -201,8 +196,6 @@ class BasicLogger(Logger):
         res_reward /= self.log_samples
 
         self.log["t"].append(t)
-        # self.log["expected_reward"].append(res_reward)
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='modd',usage='later', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -210,7 +203,7 @@ if __name__ == "__main__":
     ## arguments 
     parser.add_argument('--num_steps', help='number of steps per simulation',type=int,default=300)
     parser.add_argument('--threshold_invasions', help='number of steps per simulation',type=float,default=0.1)
-    parser.add_argument("--results_dir", type=str, default="/home/luque/Documents/safety_monitor_with_wavg")
+    parser.add_argument("--results_dir", type=str, default="./safety_monitor")
     parser.add_argument("--log_path", type=str, default="../../log.csv")
     parser.add_argument('--n_steps', help='number of steps per simulation',type=int,default=1001)
     parser.add_argument('--i_init', help='log data initial simulation for seed',type=int,default=0)
