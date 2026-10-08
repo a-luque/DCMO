@@ -186,7 +186,7 @@ if __name__ == "__main__":
     parser.add_argument('--i_init', help='log data initial simulation for seed',type=int,default=0)
     parser.add_argument('--log_samples', help='number of steps per simulation',type=int,default=1000)
     parser.add_argument('--recompute_every', help='number of steps per simulation',type=int,default=25)
-    parser.add_argument('--moe_path', help='path to MoE weights',type=str,default="./moe_model_epoch_500.pt")
+    parser.add_argument('--moe_path', help='path to MoE weights',type=str,default="../MoE_results/moe_model_epoch_500.pt")
     parser.add_argument('--bias', help='bias for the MoE model',type=float,default=0.5)
     parser.add_argument('--seed_file', help='path to seed file',type=str,default="./sim_seed_context.npz")
     

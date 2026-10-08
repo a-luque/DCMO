@@ -477,7 +477,7 @@ if __name__ == "__main__":
     beta, eps      = 5.0, 0.3 # 4.5, 4.0, 3.0
     n_controllers  = 7
 
-    pi_path = "/mimer/NOBACKUP/groups/naiss2024-22-1336/DCMO_alj/safety_monitor_reduced_1/weights_1000.npy"
+    pi_path = "./safety_monitor.npy"
     with open(pi_path, "rb") as f:
         pi = np.load(f)
 
